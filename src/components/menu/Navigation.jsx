@@ -4,7 +4,7 @@ const Navigation = () => {
             <li><a href="../">Home</a></li>
             <li><a href="./">Trait Planner</a></li>
             <li><a href="./community">Community Builds</a></li>
-            <li><a href="https://discord.gg/S42Bgaz" target="_blank">Discord</a></li>
+            <li><a href="https://discord.gg/S42Bgaz" target="_blank" rel="noreferrer">Discord</a></li>
         </ul>
     )
 }
