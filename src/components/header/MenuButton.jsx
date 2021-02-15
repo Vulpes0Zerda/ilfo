@@ -1,14 +1,25 @@
 import MenuLogo from "./MenuLogo";
+import { motion } from "framer-motion"
 
-const MenuButton = () => {
+
+
+const MenuButton = ({ animation, setAnimation, background, iconColor }) => {
+  
   return (
-    <button
+    <motion.button
       type="button"
       id="menu"
-      onClick="toggleBox('nav', 'navSlide', 'navBox', '-130%')"
+      // onClick = {{/*pick up here: Framer Motion Animation Variants*/}}
+      onMouseEnter = {() => setAnimation(true)}
+      onMouseLeave = {() => setAnimation(false)}
     >
-      <MenuLogo />
-    </button>
+      <motion.div
+        className = "toggleButton"
+        animate = {animation ? "on":"off"}
+        variants = {background}
+      />
+      <MenuLogo animation={animation} iconColor={iconColor}/>
+    </motion.button>
   );
 };
 

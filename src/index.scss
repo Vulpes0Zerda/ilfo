@@ -135,6 +135,17 @@ button{
         width: 4vh;
     }
 }
+.toggleButton{
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(221, 221, 221);
+    width: 0%;
+    height: 0%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 10% 10% rgba(0,0,0,1);
+}
 
 #menu{
     position: relative;

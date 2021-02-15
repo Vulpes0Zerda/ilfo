@@ -127,6 +127,20 @@ button {
   width: 4vh;
 }
 
+.toggleButton {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #dddddd;
+  width: 0%;
+  height: 0%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-shadow: 10% 10% black;
+          box-shadow: 10% 10% black;
+}
+
 #menu {
   position: relative;
   padding: 0;

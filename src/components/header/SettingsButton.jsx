@@ -1,14 +1,23 @@
 import SettingsSvg from "./SettingsSvg";
+import { motion } from "framer-motion"
 
-const SettingsButton = () => {
+const SettingsButton = ({ animation, setAnimation, background, iconColor }) => {
   return (
-    <button
+    <motion.button
       type="button"
       id="settings"
-      onClick="toggleBox('modal', 'modalSlide', 'modalBox', '130%')"
+      // onClick=""
+      onMouseEnter = {() => setAnimation(true)}
+      onMouseLeave = {() => setAnimation(false)}
     >
-      <SettingsSvg />
-    </button>
+      <motion.div
+        className = "toggleButton"
+        animate = {animation ? "on":"off"}
+        variants = {background}
+        //white point still visible (with and height never reach 0) -> make it invis or select different ease effect
+      />
+      <SettingsSvg animation={animation} iconColor={iconColor}/>
+    </motion.button>
   );
 };
 

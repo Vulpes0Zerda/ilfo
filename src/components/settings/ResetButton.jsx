@@ -1,6 +1,6 @@
 const ResetButton = () => {
     return (
-        <button id="resetsettings" onclick="resetSettings()">Reset Settings</button>
+        <button id="resetsettings" onclick="resetSettings()">Reset</button>
     )
 }
 
