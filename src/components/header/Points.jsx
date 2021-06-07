@@ -1,9 +1,9 @@
 const Points = ({ ptsSpend, ptsSum }) => {
   return (
-    <div id="pts">
-      Available: <span id="ptsSum">{ptsSum}</span>
+    <div className="header__pts">
+      Available: <span>{ptsSum}</span>
       <br />
-      Spent: <span id="ptsSpend">{ptsSpend}</span>
+      Spent: <span>{ptsSpend}</span>
     </div>
   );
 };

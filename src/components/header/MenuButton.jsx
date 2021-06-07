@@ -2,23 +2,23 @@ import MenuLogo from "./MenuLogo";
 import { motion } from "framer-motion"
 
 
-
-const MenuButton = ({ animation, setAnimation, background, iconColor }) => {
-  
+const MenuButton = ({ hoverState, setHoverState, clickState, setClickState, background, iconColor }) => {
   return (
     <motion.button
       type="button"
-      id="menu"
-      // onClick = {{/*pick up here: Framer Motion Animation Variants*/}}
-      onMouseEnter = {() => setAnimation(true)}
-      onMouseLeave = {() => setAnimation(false)}
+      className="header__btn"
+      onClick = {() => {clickState ? setClickState(false) : setClickState(true)}}
+      onMouseOver = {() => setHoverState(true)}
+      onMouseLeave = {() => setHoverState(false)}
     >
       <motion.div
-        className = "toggleButton"
-        animate = {animation ? "on":"off"}
+        className = "header__bg"
+        animate = {clickState || hoverState ? "on" : "off" }
         variants = {background}
+        initial = {false}
+        transition = {{duration: 0.35,/*  ease: "anticipate", */ type: "spring", stiffness: 0}}
       />
-      <MenuLogo animation={animation} iconColor={iconColor}/>
+      <MenuLogo hoverState={hoverState} clickState={clickState} iconColor={iconColor} />
     </motion.button>
   );
 };

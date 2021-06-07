@@ -1,18 +1,15 @@
 import CloseButton from './settings/CloseButton'
-import Header from './settings/Header'
+import Caption from './settings/Caption'
 import Options from './settings/Options'
 import ResetButton from "./settings/ResetButton"
 import SaveButton from "./settings/SaveButton"
 
 const Settings = () => {
     return (
-        <div id="modal">
-        <div id="modalSlide" class="slide">
-        </div>
-        <div id="modalBox">
+        <div className="settings">
             <CloseButton />
-            <div id="modalInner">
-                <Header />
+            <div className="settings__bar">
+                <Caption />
                 <Options />
                 <SaveButton />
                 <ResetButton />

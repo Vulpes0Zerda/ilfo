@@ -1,18 +1,28 @@
 import CloseButton from './menu/CloseButton'
 import Navigation from './menu/Navigation'
 import UpToDate from './menu/UpToDate'
+import { motion } from "framer-motion"
 
-const Menu = () => {
+const Menu = ({clickState, setClickState}) => {
     return (
-        <div id="nav">
-            <div id="navSlide" class="slide">
-            </div>
-            <div id="navBox">
+        <motion.div
+            className="nav"
+        >
+            <motion.div
+                className="nav__bg"
+                /* animate = {clickState}
+                variants = {background}
+                initial = {false}
+                transition = {{duration: 0.35,  ease: "anticipate",  type: "spring", stiffness: 0}} */
+            />
+            <motion.nav
+                className="nav__bar"
+            >
                 <CloseButton />
                 <Navigation />
                 <UpToDate />
-            </div>
-        </div>
+            </motion.nav>
+        </motion.div>
     )
 }
 

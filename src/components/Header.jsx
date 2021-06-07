@@ -3,13 +3,11 @@ import Points from "./header/Points";
 import SettingsButton from "./header/SettingsButton";
 import { useState } from "react";
 
-const Header = () => {
-  const [isOn, setIsOn] = useState(false)
-  //need new isOn State for settings Button (both buttons fire simultaneously [BUG])
-  const background = {
-    on: {height: '90%', width: '90%'},
-    off: {height: '0%', width: '0%'}
-  }
+const Header = ({menuState, setStateMenu, settingsState, setStateSettings, background}) => {
+  const [hoverSettings, setHoverSettings] = useState(false)
+  const [hoverMenu, setHoverMenu] = useState(false)
+
+
   
   const iconColor = {
     on: {fill: "rgb(22, 22, 22)"},
@@ -17,10 +15,10 @@ const Header = () => {
   }
 
   return (
-    <div id="header">
-      <MenuButton animation={isOn} setAnimation = {setIsOn} background={background} iconColor={iconColor}/>
+    <div className="header">
+      <MenuButton hoverState={hoverMenu} setHoverState={setHoverMenu} clickState={menuState} setClickState={setStateMenu} background={background} iconColor={iconColor}/>
       <Points />
-      <SettingsButton animation={isOn} setAnimation = {setIsOn} background={background} iconColor={iconColor}/>
+      <SettingsButton hoverState={hoverSettings} setHoverState={setHoverSettings} clickState={settingsState} setClickState={setStateSettings} background={background} iconColor={iconColor}/>
     </div>
   );
 };

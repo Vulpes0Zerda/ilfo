@@ -1,22 +1,23 @@
 import SettingsSvg from "./SettingsSvg";
 import { motion } from "framer-motion"
 
-const SettingsButton = ({ animation, setAnimation, background, iconColor }) => {
+const SettingsButton = ({ hoverState, setHoverState, clickState, setClickState, background, iconColor }) => {
   return (
     <motion.button
       type="button"
-      id="settings"
-      // onClick=""
-      onMouseEnter = {() => setAnimation(true)}
-      onMouseLeave = {() => setAnimation(false)}
+      className="header__dialogBtn"
+      onClick = {() => {clickState ? setClickState(false) : setClickState(true)}}
+      onMouseEnter = {() => setHoverState(true)}
+      onMouseLeave = {() => setHoverState(false)}
     >
       <motion.div
         className = "toggleButton"
-        animate = {animation ? "on":"off"}
+        animate = {hoverState || clickState ? "on" : "off"}
         variants = {background}
-        //white point still visible (with and height never reach 0) -> make it invis or select different ease effect
+        initial = {false}
+        transition = {{times: [0, 0.01, 0.99, 1], duration: 0.35, ease: "anticipate", type: "spring", stiffness: 0}}
       />
-      <SettingsSvg animation={animation} iconColor={iconColor}/>
+      <SettingsSvg hoverState={hoverState} iconColor={iconColor} clickState={clickState}/>
     </motion.button>
   );
 };
