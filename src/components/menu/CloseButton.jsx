@@ -2,7 +2,7 @@ import React from 'react'
 
 const CloseButton = () => {
     return (
-    <button class="nav__bar__close" onclick="toggleBox('nav', 'navSlide', 'navBox', '-130%')">
+    <button className="nav__bar__close" onClick="toggleBox('nav', 'navSlide', 'navBox', '-130%')">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fillRule="evenodd"

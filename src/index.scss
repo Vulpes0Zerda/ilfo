@@ -185,162 +185,132 @@ button{
 }
 Does not longer exist! Moved to nav__bg for easier animation*/
 
-//settings
+//Settings
 
-#settings{
+.settings{
     position: absolute;
     z-index: 5;
     display: none;
     top: 0%;
     left: 0%;
-    background-color: transparent;
+    background-color: color(bg);
     width: 100vw;
     height: 100vh;
     &__bar{
-        
-        &__links{
-
+        display: grid;
+        position: absolute;
+        grid-template-columns: minmax(40vw, 48vw) minmax(40vw, 48vw);
+        grid-template-rows:auto 1.25fr auto 1.25fr auto auto;
+        gap: size(reg);
+        align-items: center;
+        justify-items: center;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        color: color(txt);
+        *{
+            font-family: 'Rubik', sans-serif; 
+        }
+        label, input, select, span{
+            font-size: size(popup-txt);
+        }
+        h2{
+            margin: 0;
+            font-size: size(popup-header);
+            align-self: center;
+            justify-self: center;
+            grid-area: 1 / 1 / 2 / 3;
+        }
+        button{
+            position: relative;
+            align-self: center;
+            grid-column: 1 / 3;
+            font-size: size(popup-button);
+            background-color: color(bg-highlight);
+            border-radius: size(small);
+            width: calc(50px + 25vw + 15vh);
+        }
+        &__options{
+            display: grid;
+            position: relative;
+            align-items: center;
+            grid-template-columns: auto auto;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-area: 3 / 1 / 4 / 3;
+            row-gap: size(larg);
+            column-gap: size(reg);
+            padding: 2vh 0;
+            &--left{
+                justify-self: end;
+                text-align: right;
+            }
+            &--right{
+                justify-self: start;
+                border: none;
+                color: color(txt);
+                border-color: color(bg);
+                background-color: color(bg-highlight);
+                font-size: 2.8vh;
+                text-align: center;
+                border-radius: size(small);
+                height: size(popup-txt);
+            }
+            &__lang{
+                line-height: size(popup-txt);
+                height: auto;
+                padding: calc(3px + 0.5vh + 0.25vw);
+                box-sizing: border-box;
+                > option{
+                    height: size(popup-txt-small);
+                    font-size: size(popup-txt-small);
+                    background-color: color(bg-highlight);
+                }
+            }
+            &__lvl{
+                padding: calc(3px + 0.5vh + 0.25vw) 0;
+                height: size(popup-txt);
+                appearance: textfield;
+                width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
+            }
+            &__tooltip{
+                position: relative;
+                grid-area: 3/2/3/3;
+                height: size(popup-txt);
+                width: size(popup-txt);
+                @include no-focus-outline;
+                &__lbl{
+                    color: color(txt);
+                    background-color: color(bg-highlight);
+                    height: size(popup-txt);
+                    width: size(popup-txt);
+                    padding: calc(3px + 0.5vh + 0.25vw);
+                    grid-area: 3/2/3/3;
+                    > *{
+                        opacity: 0;
+                    }
+                }
+                &:checked + .settings__bar__options__tooltip__lbl{
+                    color: color(txt);
+                    background-color: color(fg-highlight);
+                    > *{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        &__reset{
+            grid-row: 5/6;
+        }
+        &__save{
+            grid-row: 6/7;
         }
         &__close{
-
+            right: 0%;
         }
     }
-    &__bg{
-
-    }
-}
-
-#modalBox{
-    position: absolute;
-    display: block;
-    background-color: color(bg);
-    top: 0%;
-    left: 130%;
-    width: 100vw;
-    height: 100vh;
-    box-shadow: -12px 0px 37px 33px rgba(0,0,0,0.89);
-    .close{
-        right: 0%;
-    }
-}
-
-#modalInner{
-    display: grid;
-    position: absolute;
-    grid-template-columns: minmax(40vw, 48vw) minmax(40vw, 48vw);
-    grid-template-rows:auto 1.25fr auto 1.25fr auto auto;
-    gap: size(reg);
-    align-items: center;
-    justify-items: center;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    color: color(txt);
-    *{
-        font-family: 'Rubik', sans-serif; 
-    }
-    label, input, select, span{
-        font-size: size(popup-txt);
-    }
-    h2{
-        margin: 0;
-        font-size: size(popup-header);
-        align-self: center;
-        justify-self: center;
-        grid-area: 1 / 1 / 2 / 3;
-    }
-    button{
-        position: relative;
-        align-self: center;
-        grid-column: 1 / 3;
-        font-size: size(popup-button);
-        background-color: color(bg-highlight);
-        border-radius: size(small);
-        width: calc(50px + 25vw + 15vh);
-    }
-    #options{
-        display: grid;
-        position: relative;
-        align-items: center;
-        grid-template-columns: auto auto;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-area: 3 / 1 / 4 / 3;
-        row-gap: size(larg);
-        column-gap: size(reg);
-        padding: 2vh 0;
-    }
-}
-
-.left-colum{
-    justify-self: end;
-    text-align: right;
-}
-
-.right-colum{
-    justify-self: start;
-    border: none;
-    color: color(txt);
-    border-color: color(bg);
-    background-color: color(bg-highlight);
-    font-size: 2.8vh;
-    text-align: center;
-    border-radius: size(small);
-    height: size(popup-txt);
-}
-
-#lang{
-    line-height: size(popup-txt);
-    height: auto;
-    padding: calc(3px + 0.5vh + 0.25vw);
-    box-sizing: border-box;
-    > option{
-        height: size(popup-txt-small);
-        font-size: size(popup-txt-small);
-        background-color: color(bg-highlight);
-    }
-}
-
-#settingsLevel{
-    padding: calc(3px + 0.5vh + 0.25vw) 0;
-    height: size(popup-txt);
-    -moz-appearance: textfield;
-    width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
-}
-
-#settingsTooltipsLbl{
-    display: flex;
-    text-align: center;
-    @include no-focus-outline;
-    padding: 0;
-    margin: 0;
-    color: color(txt);
-    background-color: color(bg-highlight);
-    height: size(popup-txt);
-    width: size(popup-txt);
-    padding: calc(3px + 0.5vh + 0.25vw);
-    > *{
-        position: relative;
-        opacity: 0;
-        align-self: center;
-        justify-self: center;
-        width: 100%;
-    }
-}
-
-#settingsTooltips:checked + #settingsTooltipsLbl{
-    color: color(txt);
-    background-color: color(fg-highlight);
-    > *{
-        opacity: 1;
-    }
-}
-
-#resetsettings{
-    grid-row: 5/6;
-}
-
-#savesettings{
-    grid-row: 6/7;
+    /*&__bg{
+        placeholder
+    }*/
 }
 
 .nav{

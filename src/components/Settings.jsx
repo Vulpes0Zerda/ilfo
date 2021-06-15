@@ -14,8 +14,9 @@ const Settings = () => {
                 <SaveButton />
                 <ResetButton />
             </div>
+            <div className="settings__bg">
+            </div>
         </div>
-    </div>
     )
 }
 

@@ -1,6 +1,6 @@
 const CloseButton = () => {
     return (
-        <button class="close" onclick="toggleBox('modal', 'modalSlide', 'modalBox', '130%')">
+        <button className="close" onClick="toggleBox('modal', 'modalSlide', 'modalBox', '130%')">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fillRule="evenodd"

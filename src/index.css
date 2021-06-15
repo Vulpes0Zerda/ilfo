@@ -141,34 +141,21 @@ button:focus {
     box-shadow: 10% 10% rgba(0,0,0,1);
 }
 Does not longer exist! Moved to nav__bg for easier animation*/
-#settings {
+.settings {
   position: absolute;
   z-index: 5;
   display: none;
   top: 0%;
   left: 0%;
-  background-color: transparent;
-  width: 100vw;
-  height: 100vh;
-}
-
-#modalBox {
-  position: absolute;
-  display: block;
   background-color: #161616;
-  top: 0%;
-  left: 130%;
   width: 100vw;
   height: 100vh;
-  -webkit-box-shadow: -12px 0px 37px 33px rgba(0, 0, 0, 0.89);
-          box-shadow: -12px 0px 37px 33px rgba(0, 0, 0, 0.89);
+  /*&__bg{
+        placeholder
+    }*/
 }
 
-#modalBox .close {
-  right: 0%;
-}
-
-#modalInner {
+.settings__bar {
   display: -ms-grid;
   display: grid;
   position: absolute;
@@ -188,15 +175,15 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   color: #dddddd;
 }
 
-#modalInner * {
+.settings__bar * {
   font-family: 'Rubik', sans-serif;
 }
 
-#modalInner label, #modalInner input, #modalInner select, #modalInner span {
+.settings__bar label, .settings__bar input, .settings__bar select, .settings__bar span {
   font-size: calc(9px + 1.75vh + 0.25vw);
 }
 
-#modalInner h2 {
+.settings__bar h2 {
   margin: 0;
   font-size: calc(14px + 2.5vh + 0.75vw);
   -ms-flex-item-align: center;
@@ -211,7 +198,7 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   grid-area: 1 / 1 / 2 / 3;
 }
 
-#modalInner button {
+.settings__bar button {
   position: relative;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -225,7 +212,7 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   width: calc(50px + 25vw + 15vh);
 }
 
-#modalInner #options {
+.settings__bar__options {
   display: -ms-grid;
   display: grid;
   position: relative;
@@ -247,13 +234,13 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   padding: 2vh 0;
 }
 
-.left-colum {
+.settings__bar__options--left {
   -ms-grid-column-align: end;
       justify-self: end;
   text-align: right;
 }
 
-.right-colum {
+.settings__bar__options--right {
   -ms-grid-column-align: start;
       justify-self: start;
   border: none;
@@ -266,7 +253,7 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   height: calc(9px + 1.75vh + 0.25vw);
 }
 
-#lang {
+.settings__bar__options__lang {
   line-height: calc(9px + 1.75vh + 0.25vw);
   height: auto;
   padding: calc(3px + 0.5vh + 0.25vw);
@@ -274,67 +261,74 @@ Does not longer exist! Moved to nav__bg for easier animation*/
           box-sizing: border-box;
 }
 
-#lang > option {
+.settings__bar__options__lang > option {
   height: calc(5px + 1.25vh + 0.15vw);
   font-size: calc(5px + 1.25vh + 0.15vw);
   background-color: #353535;
 }
 
-#settingsLevel {
+.settings__bar__options__lvl {
   padding: calc(3px + 0.5vh + 0.25vw) 0;
   height: calc(9px + 1.75vh + 0.25vw);
-  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
   width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
 }
 
-#settingsTooltipsLbl {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  text-align: center;
-  padding: 0;
-  margin: 0;
+.settings__bar__options__tooltip {
+  position: relative;
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-area: 3/2/3/3;
+  height: calc(9px + 1.75vh + 0.25vw);
+  width: calc(9px + 1.75vh + 0.25vw);
+}
+
+.settings__bar__options__tooltip:focus {
+  outline: 0px;
+}
+
+.settings__bar__options__tooltip__lbl {
   color: #dddddd;
   background-color: #353535;
   height: calc(9px + 1.75vh + 0.25vw);
   width: calc(9px + 1.75vh + 0.25vw);
   padding: calc(3px + 0.5vh + 0.25vw);
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-area: 3/2/3/3;
 }
 
-#settingsTooltipsLbl:focus {
-  outline: 0px;
-}
-
-#settingsTooltipsLbl > * {
-  position: relative;
+.settings__bar__options__tooltip__lbl > * {
   opacity: 0;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  -ms-grid-column-align: center;
-      justify-self: center;
-  width: 100%;
 }
 
-#settingsTooltips:checked + #settingsTooltipsLbl {
+.settings__bar__options__tooltip:checked + .settings__bar__options__tooltip__lbl {
   color: #dddddd;
   background-color: #b65015;
 }
 
-#settingsTooltips:checked + #settingsTooltipsLbl > * {
+.settings__bar__options__tooltip:checked + .settings__bar__options__tooltip__lbl > * {
   opacity: 1;
 }
 
-#resetsettings {
+.settings__bar__reset {
   -ms-grid-row: 5;
   -ms-grid-row-span: 1;
   grid-row: 5/6;
 }
 
-#savesettings {
+.settings__bar__save {
   -ms-grid-row: 6;
   -ms-grid-row-span: 1;
   grid-row: 6/7;
+}
+
+.settings__bar__close {
+  right: 0%;
 }
 
 .nav {

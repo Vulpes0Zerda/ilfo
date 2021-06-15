@@ -1,6 +1,6 @@
 const ResetButton = () => {
     return (
-        <button id="resetsettings" onclick="resetSettings()">Reset</button>
+        <button className="settings__bar__reset" onClick="resetSettings()">Reset</button>
     )
 }
 
