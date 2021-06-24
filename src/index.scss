@@ -7,7 +7,7 @@ $colors: (
     txt: rgb(221, 221, 221),
     dim: rgba(48, 48, 48, 0.671),
     bg-highlight: rgb(53, 53, 53),
-    fg-highlight: rgb(182, 80, 21)
+    fg-highlight: rgb(182, 80, 21),
 );
 
 $sizes: (
@@ -19,7 +19,7 @@ $sizes: (
     popup-txt-small: calc(5px + 1.25vh + 0.15vw),
     popup-header: calc(14px + 2.5vh + 0.75vw),
     popup-button: calc(8px + 1.8vh + 0.4vw),
-    sizing-header: calc(8px + 1.5vh + 0.5vw)
+    sizing-header: calc(8px + 1.5vh + 0.5vw),
 );
 
 //
@@ -32,17 +32,8 @@ $sizes: (
 //Mix-ins
 //
 
-@mixin no-select {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */;
-}
-
 @mixin no-focus-outline {
-    &:focus{
+    &:focus {
         outline: 0px;
     }
 }
@@ -51,21 +42,22 @@ $sizes: (
 //Map functions
 //
 
-@function color($color-name){
-    @return map-get($colors, $color-name)
-};
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
 
-@function size($size-name){
-    @return map-get($sizes, $size-name)
-};
+@function size($size-name) {
+    @return map-get($sizes, $size-name);
+}
 
 //
-//Classes and attributes 
+//Classes and attributes
 //
 
 //Body preset
 
-html, body{
+html,
+body {
     margin: 0;
     border: none;
     padding: 0;
@@ -80,7 +72,7 @@ html, body{
 
 //Body grid structure
 
-body{
+body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 8% 87% 5%;
@@ -92,24 +84,25 @@ body{
 
 //Presets
 
-h1{
+h1 {
     font-family: 'Rubik', sans-serif;
 }
 
-h2{
+h2 {
     font-family: 'Rubik', sans-serif;
     font-size: 4vh;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
-select, input{
+select,
+input {
     appearance: none;
 }
 
-button{
+button {
     border: none;
     padding: 1vh;
     background-color: transparent;
@@ -120,7 +113,7 @@ button{
 
 //Header
 
-.header{
+.header {
     z-index: 1;
     background-color: color(bg);
     display: grid;
@@ -132,13 +125,13 @@ button{
     height: 100%;
     width: 100%;
     max-height: 100%;
-    button{
+    button {
         position: relative;
         padding: 0;
         height: 100%;
         width: 100%;
         @include no-focus-outline;
-        svg{
+        svg {
             left: 0%;
             top: 0%;
             height: 4vh;
@@ -148,14 +141,15 @@ button{
             //transform: translate(-50%,-50%);
         }
     }
-    &__pts{
+    &__pts {
         position: relative;
         align-self: center;
         justify-self: center;
         font-size: 2.5vh;
         color: color(txt);
         text-align: center;
-        &::selection, ::selection {
+        &::selection,
+        ::selection {
             background-color: color(txt);
             color: color(bg);
         }
@@ -164,14 +158,254 @@ button{
 
 //Footer
 
-#footer{
+#footer {
     z-index: 1;
     background-color: color(bg);
     overflow: hidden;
     //prob. not needed, but here for placeholding
 }
 
-/* .toggleButton{
+//Navigation
+
+.nav {
+    position: absolute;
+    z-index: 5;
+    display: block;
+    top: 0%;
+    left: 0%;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    &__bar {
+        position: absolute;
+        display: block;
+        z-index: 6;
+        top: 50%;
+        left: 50%;
+        height: 50vh;
+        width: 50vh;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        clip-path: circle(50%);
+        &__links {
+            display: flex;
+            position: relative;
+            float: left;
+            a:link {
+                text-decoration: none;
+            }
+            li {
+                font-size: size(popup-txt);
+                text-align: center;
+            }
+            & > * {
+                display: block;
+                position: absolute;
+                float: right;
+            }
+        }
+        &__close {
+            position: relative;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            @include no-focus-outline;
+            svg {
+                left: 0%;
+                top: 0%;
+                height: 4vh;
+                width: 4vh;
+                position: absolute;
+                padding: 2vh;
+                //transform: translate(-50%,-50%);
+            }
+        }
+        &__version {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto;
+            align-items: center;
+            justify-items: center;
+            gap: size(small);
+            max-width: 100vw;
+            padding: size(small);
+            bottom: 95%;
+            right: 0%;
+            overflow: visible;
+            font-size: size(popup-txt-small);
+            svg {
+                position: relative;
+                justify-self: end;
+                padding: 0;
+                margin: 0;
+                width: size(popup-txt);
+            }
+            div {
+                padding: size(popup-txt-small) 0 0 0;
+                position: relative;
+                justify-self: start;
+            }
+        }
+    }
+    &__bg {
+        position: absolute;
+        display: block;
+        z-index: 5;
+        top: 50%;
+        left: 50%;
+        height: 50vh;
+        width: 50vh;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: white;
+        //Config for onclick
+    }
+}
+
+//Settings
+
+.settings {
+    position: absolute;
+    z-index: 5;
+    display: none;
+    top: 0%;
+    left: 0%;
+    background-color: color(bg);
+    width: 100vw;
+    height: 100vh;
+    &__bar {
+        display: grid;
+        position: absolute;
+        grid-template-columns: minmax(40vw, 48vw) minmax(40vw, 48vw);
+        grid-template-rows: auto 1.25fr auto 1.25fr auto auto;
+        gap: size(reg);
+        align-items: center;
+        justify-items: center;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        color: color(txt);
+        * {
+            font-family: 'Rubik', sans-serif;
+        }
+        label,
+        input,
+        select,
+        span {
+            font-size: size(popup-txt);
+        }
+        h2 {
+            margin: 0;
+            font-size: size(popup-header);
+            align-self: center;
+            justify-self: center;
+            grid-area: 1 / 1 / 2 / 3;
+        }
+        button {
+            position: relative;
+            align-self: center;
+            grid-column: 1 / 3;
+            font-size: size(popup-button);
+            background-color: color(bg-highlight);
+            border-radius: size(small);
+            width: calc(50px + 25vw + 15vh);
+        }
+        &__options {
+            display: grid;
+            position: relative;
+            align-items: center;
+            grid-template-columns: auto auto;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-area: 3 / 1 / 4 / 3;
+            row-gap: size(larg);
+            column-gap: size(reg);
+            padding: 2vh 0;
+            &--left {
+                justify-self: end;
+                text-align: right;
+            }
+            &--right {
+                justify-self: start;
+                border: none;
+                color: color(txt);
+                border-color: color(bg);
+                background-color: color(bg-highlight);
+                font-size: 2.8vh;
+                text-align: center;
+                border-radius: size(small);
+                height: size(popup-txt);
+            }
+            &__lang {
+                line-height: size(popup-txt);
+                height: auto;
+                padding: calc(3px + 0.5vh + 0.25vw);
+                box-sizing: border-box;
+                > option {
+                    height: size(popup-txt-small);
+                    font-size: size(popup-txt-small);
+                    background-color: color(bg-highlight);
+                }
+            }
+            &__lvl {
+                padding: calc(3px + 0.5vh + 0.25vw) 0;
+                height: size(popup-txt);
+                appearance: textfield;
+                width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
+            }
+            &__tooltip {
+                position: relative;
+                grid-area: 3/2/3/3;
+                height: size(popup-txt);
+                width: size(popup-txt);
+                @include no-focus-outline;
+                &__lbl {
+                    color: color(txt);
+                    background-color: color(bg-highlight);
+                    height: size(popup-txt);
+                    width: size(popup-txt);
+                    padding: calc(3px + 0.5vh + 0.25vw);
+                    grid-area: 3/2/3/3;
+                    > * {
+                        opacity: 0;
+                    }
+                }
+                &:checked + .settings__bar__options__tooltip__lbl {
+                    color: color(txt);
+                    background-color: color(fg-highlight);
+                    > * {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        &__reset {
+            grid-row: 5/6;
+        }
+        &__save {
+            grid-row: 6/7;
+        }
+        &__close {
+            right: 0%;
+        }
+    }
+    &__bg {
+        position: absolute;
+        display: none;
+        z-index: 5;
+        top: 50%;
+        left: 0%;
+        height: 200vh;
+        width: 200vh;
+        transform: translate(-80%, -50%);
+        border-radius: 50%;
+        background-color: white;
+    }
+}
+
+/*
+!Does not longer exist! Moved to nav__bg for easier animation
+.toggleButton{
     position: absolute;
     border-radius: 50%;
     background-color: color(txt);
@@ -183,253 +417,30 @@ button{
     transform: translate(-50%, -50%);
     box-shadow: 10% 10% rgba(0,0,0,1);
 }
-Does not longer exist! Moved to nav__bg for easier animation*/
+*/
 
-//Settings
-
-.settings{
+/*
+Fallback for UpToDate:
+.version{
     position: absolute;
-    z-index: 5;
-    display: none;
-    top: 0%;
+    display: block;
+    padding: size(small);
+    bottom: 0%;
     left: 0%;
-    background-color: color(bg);
-    width: 100vw;
-    height: 100vh;
-    &__bar{
+    margin: 0 calc(1% + 10px);
+    overflow: visible;
+    div{
+        position: relative;
         display: grid;
-        position: absolute;
-        grid-template-columns: minmax(40vw, 48vw) minmax(40vw, 48vw);
-        grid-template-rows:auto 1.25fr auto 1.25fr auto auto;
-        gap: size(reg);
+        grid-template-columns: auto auto;
         align-items: center;
         justify-items: center;
+        gap: size(small);
+        max-width: 100vw;
+        font-size: size(popup-txt-small);
         transform: translate(-50%, -50%);
         top: 50%;
         left: 50%;
-        color: color(txt);
-        *{
-            font-family: 'Rubik', sans-serif; 
-        }
-        label, input, select, span{
-            font-size: size(popup-txt);
-        }
-        h2{
-            margin: 0;
-            font-size: size(popup-header);
-            align-self: center;
-            justify-self: center;
-            grid-area: 1 / 1 / 2 / 3;
-        }
-        button{
-            position: relative;
-            align-self: center;
-            grid-column: 1 / 3;
-            font-size: size(popup-button);
-            background-color: color(bg-highlight);
-            border-radius: size(small);
-            width: calc(50px + 25vw + 15vh);
-        }
-        &__options{
-            display: grid;
-            position: relative;
-            align-items: center;
-            grid-template-columns: auto auto;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-area: 3 / 1 / 4 / 3;
-            row-gap: size(larg);
-            column-gap: size(reg);
-            padding: 2vh 0;
-            &--left{
-                justify-self: end;
-                text-align: right;
-            }
-            &--right{
-                justify-self: start;
-                border: none;
-                color: color(txt);
-                border-color: color(bg);
-                background-color: color(bg-highlight);
-                font-size: 2.8vh;
-                text-align: center;
-                border-radius: size(small);
-                height: size(popup-txt);
-            }
-            &__lang{
-                line-height: size(popup-txt);
-                height: auto;
-                padding: calc(3px + 0.5vh + 0.25vw);
-                box-sizing: border-box;
-                > option{
-                    height: size(popup-txt-small);
-                    font-size: size(popup-txt-small);
-                    background-color: color(bg-highlight);
-                }
-            }
-            &__lvl{
-                padding: calc(3px + 0.5vh + 0.25vw) 0;
-                height: size(popup-txt);
-                appearance: textfield;
-                width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
-            }
-            &__tooltip{
-                position: relative;
-                grid-area: 3/2/3/3;
-                height: size(popup-txt);
-                width: size(popup-txt);
-                @include no-focus-outline;
-                &__lbl{
-                    color: color(txt);
-                    background-color: color(bg-highlight);
-                    height: size(popup-txt);
-                    width: size(popup-txt);
-                    padding: calc(3px + 0.5vh + 0.25vw);
-                    grid-area: 3/2/3/3;
-                    > *{
-                        opacity: 0;
-                    }
-                }
-                &:checked + .settings__bar__options__tooltip__lbl{
-                    color: color(txt);
-                    background-color: color(fg-highlight);
-                    > *{
-                        opacity: 1;
-                    }
-                }
-            }
-        }
-        &__reset{
-            grid-row: 5/6;
-        }
-        &__save{
-            grid-row: 6/7;
-        }
-        &__close{
-            right: 0%;
-        }
-    }
-    /*&__bg{
-        placeholder
-    }*/
-}
-
-.nav{
-    position: absolute;
-    z-index: 5;
-    display: none;
-    top: 0%;
-    left: 0%;
-    background-color: transparent;
-    width: 100vw;
-    height: 100vh;
-    &__bar{
-        position: absolute;
-        display: block;
-        z-index: 6;
-        top: 50%;
-        left: 0%;
-        height: 200vh;
-        width: 200vh;
-        transform: translate(-80%, -50%);
-        border-radius: 50%;
-        clip-path: circle(50%);
-        &__links{
-            display: flex;
-            position: relative;
-            float: left;
-            a:link{
-                text-decoration: none;
-            }
-            li{
-                font-size: size(popup-txt);
-                text-align: center;
-            }
-            &>*{
-                display: block;
-                position: absolute;
-                float: right;
-            }
-        }
-        &__close{
-            position: relative;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            @include no-focus-outline;
-            svg{
-                left: 0%;
-                top: 0%;
-                height: 4vh;
-                width: 4vh;
-                position: absolute;
-                padding: 2vh;
-                //transform: translate(-50%,-50%);
-            }
-        }
-        &__version{
-            position: absolute;
-            display: grid;
-            grid-template-columns: auto auto;
-            align-items: center;
-            justify-items: center;
-            gap: size(small);
-            max-width: 100vw;
-            padding: size(small);
-            bottom: 0%;
-            left: 0%;
-            overflow: visible;
-            font-size: size(popup-txt-small);
-            svg{
-                position: relative;
-                justify-self: end;
-                padding: 0;
-                margin: 0;
-                width: size(popup-txt);
-            };
-            div{
-                padding: size(popup-txt-small) 0 0 0;
-                position: relative;
-                justify-self: start;
-            }
-        }
-    }
-    &__bg{
-        position: absolute;
-        display: none;
-        z-index: 5;
-        top: 50%;
-        left: 0%;
-        height: 200vh;
-        width: 200vh;
-        transform: translate(-80%, -50%);
-        border-radius: 50%;
-        background-color: white;
-        //Config for onclick
-    }
-}
-
-
-/* Fallback for UpToDate:
-.version{
-position: absolute;
-display: block;
-padding: size(small);
-bottom: 0%;
-left: 0%;
-margin: 0 calc(1% + 10px);
-overflow: visible;
-div{
-    position: relative;
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    justify-items: center;
-    gap: size(small);
-    max-width: 100vw;
-    font-size: size(popup-txt-small);
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
     svg{
         position: relative;
         justify-self: end;
@@ -443,4 +454,4 @@ div{
         justify-self: start;
     }
 };
-    */
+*/

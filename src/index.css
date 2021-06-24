@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;1,500&display=swap");
-html, body {
+html,
+body {
   margin: 0;
   border: none;
   padding: 0;
@@ -43,7 +44,8 @@ ul {
   list-style-type: none;
 }
 
-select, input {
+select,
+input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -112,12 +114,14 @@ button:focus {
   text-align: center;
 }
 
-.header__pts::-moz-selection, .header__pts ::-moz-selection {
+.header__pts::-moz-selection,
+.header__pts ::-moz-selection {
   background-color: #dddddd;
   color: #161616;
 }
 
-.header__pts::selection, .header__pts ::selection {
+.header__pts::selection,
+.header__pts ::selection {
   background-color: #dddddd;
   color: #161616;
 }
@@ -128,19 +132,126 @@ button:focus {
   overflow: hidden;
 }
 
-/* .toggleButton{
-    position: absolute;
-    border-radius: 50%;
-    background-color: color(txt);
-    width: 0%;
-    height: 0%;
-    opacity: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 10% 10% rgba(0,0,0,1);
+.nav {
+  position: absolute;
+  z-index: 5;
+  display: block;
+  top: 0%;
+  left: 0%;
+  background-color: transparent;
+  width: 100vw;
+  height: 100vh;
 }
-Does not longer exist! Moved to nav__bg for easier animation*/
+
+.nav__bar {
+  position: absolute;
+  display: block;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 50vh;
+  width: 50vh;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 50%;
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+}
+
+.nav__bar__links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  float: left;
+}
+
+.nav__bar__links a:link {
+  text-decoration: none;
+}
+
+.nav__bar__links li {
+  font-size: calc(9px + 1.75vh + 0.25vw);
+  text-align: center;
+}
+
+.nav__bar__links > * {
+  display: block;
+  position: absolute;
+  float: right;
+}
+
+.nav__bar__close {
+  position: relative;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.nav__bar__close:focus {
+  outline: 0px;
+}
+
+.nav__bar__close svg {
+  left: 0%;
+  top: 0%;
+  height: 4vh;
+  width: 4vh;
+  position: absolute;
+  padding: 2vh;
+}
+
+.nav__bar__version {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  gap: calc(1px + 0.3vh + 0.1vw);
+  max-width: 100vw;
+  padding: calc(1px + 0.3vh + 0.1vw);
+  bottom: 95%;
+  right: 0%;
+  overflow: visible;
+  font-size: calc(5px + 1.25vh + 0.15vw);
+}
+
+.nav__bar__version svg {
+  position: relative;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  padding: 0;
+  margin: 0;
+  width: calc(9px + 1.75vh + 0.25vw);
+}
+
+.nav__bar__version div {
+  padding: calc(5px + 1.25vh + 0.15vw) 0 0 0;
+  position: relative;
+  -ms-grid-column-align: start;
+      justify-self: start;
+}
+
+.nav__bg {
+  position: absolute;
+  display: block;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  height: 50vh;
+  width: 50vh;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: white;
+}
+
 .settings {
   position: absolute;
   z-index: 5;
@@ -150,9 +261,6 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   background-color: #161616;
   width: 100vw;
   height: 100vh;
-  /*&__bg{
-        placeholder
-    }*/
 }
 
 .settings__bar {
@@ -179,7 +287,10 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   font-family: 'Rubik', sans-serif;
 }
 
-.settings__bar label, .settings__bar input, .settings__bar select, .settings__bar span {
+.settings__bar label,
+.settings__bar input,
+.settings__bar select,
+.settings__bar span {
   font-size: calc(9px + 1.75vh + 0.25vw);
 }
 
@@ -331,111 +442,7 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   right: 0%;
 }
 
-.nav {
-  position: absolute;
-  z-index: 5;
-  display: none;
-  top: 0%;
-  left: 0%;
-  background-color: transparent;
-  width: 100vw;
-  height: 100vh;
-}
-
-.nav__bar {
-  position: absolute;
-  display: block;
-  z-index: 6;
-  top: 50%;
-  left: 0%;
-  height: 200vh;
-  width: 200vh;
-  -webkit-transform: translate(-80%, -50%);
-          transform: translate(-80%, -50%);
-  border-radius: 50%;
-  -webkit-clip-path: circle(50%);
-          clip-path: circle(50%);
-}
-
-.nav__bar__links {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  float: left;
-}
-
-.nav__bar__links a:link {
-  text-decoration: none;
-}
-
-.nav__bar__links li {
-  font-size: calc(9px + 1.75vh + 0.25vw);
-  text-align: center;
-}
-
-.nav__bar__links > * {
-  display: block;
-  position: absolute;
-  float: right;
-}
-
-.nav__bar__close {
-  position: relative;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.nav__bar__close:focus {
-  outline: 0px;
-}
-
-.nav__bar__close svg {
-  left: 0%;
-  top: 0%;
-  height: 4vh;
-  width: 4vh;
-  position: absolute;
-  padding: 2vh;
-}
-
-.nav__bar__version {
-  position: absolute;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: auto auto;
-      grid-template-columns: auto auto;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  justify-items: center;
-  gap: calc(1px + 0.3vh + 0.1vw);
-  max-width: 100vw;
-  padding: calc(1px + 0.3vh + 0.1vw);
-  bottom: 0%;
-  left: 0%;
-  overflow: visible;
-  font-size: calc(5px + 1.25vh + 0.15vw);
-}
-
-.nav__bar__version svg {
-  position: relative;
-  -ms-grid-column-align: end;
-      justify-self: end;
-  padding: 0;
-  margin: 0;
-  width: calc(9px + 1.75vh + 0.25vw);
-}
-
-.nav__bar__version div {
-  padding: calc(5px + 1.25vh + 0.15vw) 0 0 0;
-  position: relative;
-  -ms-grid-column-align: start;
-      justify-self: start;
-}
-
-.nav__bg {
+.settings__bg {
   position: absolute;
   display: none;
   z-index: 5;
@@ -449,27 +456,43 @@ Does not longer exist! Moved to nav__bg for easier animation*/
   background-color: white;
 }
 
-/* Fallback for UpToDate:
-.version{
-position: absolute;
-display: block;
-padding: size(small);
-bottom: 0%;
-left: 0%;
-margin: 0 calc(1% + 10px);
-overflow: visible;
-div{
-    position: relative;
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    justify-items: center;
-    gap: size(small);
-    max-width: 100vw;
-    font-size: size(popup-txt-small);
-    transform: translate(-50%, -50%);
+/*
+!Does not longer exist! Moved to nav__bg for easier animation
+.toggleButton{
+    position: absolute;
+    border-radius: 50%;
+    background-color: color(txt);
+    width: 0%;
+    height: 0%;
+    opacity: 0;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 10% 10% rgba(0,0,0,1);
+}
+*/
+/*
+Fallback for UpToDate:
+.version{
+    position: absolute;
+    display: block;
+    padding: size(small);
+    bottom: 0%;
+    left: 0%;
+    margin: 0 calc(1% + 10px);
+    overflow: visible;
+    div{
+        position: relative;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-items: center;
+        gap: size(small);
+        max-width: 100vw;
+        font-size: size(popup-txt-small);
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
     svg{
         position: relative;
         justify-self: end;
@@ -483,5 +506,5 @@ div{
         justify-self: start;
     }
 };
-    */
+*/
 /*# sourceMappingURL=index.css.map */
