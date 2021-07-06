@@ -11,15 +11,15 @@ const Content = () => {
                 onClick={() => {
                     console.log(state.menuState)
                     switch (state.menuState) {
-                        case 'MENU-NONE':
+                        case 'NONE':
                             return dispatch({
                                 type: 'MENU-HOVER',
                             })
-                        case 'MENU-HOVER':
+                        case 'HOVER':
                             return dispatch({
                                 type: 'MENU-CLICK',
                             })
-                        case 'MENU-CLICK':
+                        case 'CLICK':
                             return dispatch({
                                 type: 'MENU-NONE',
                             })
@@ -33,15 +33,15 @@ const Content = () => {
             <button
                 onClick={() => {
                     switch (state.settingsState) {
-                        case 'SETTINGS-NONE':
+                        case 'NONE':
                             return dispatch({
                                 type: 'SETTINGS-HOVER',
                             })
-                        case 'SETTINGS-HOVER':
+                        case 'HOVER':
                             return dispatch({
                                 type: 'SETTINGS-CLICK',
                             })
-                        case 'SETTINGS-CLICK':
+                        case 'CLICK':
                             return dispatch({
                                 type: 'SETTINGS-NONE',
                             })

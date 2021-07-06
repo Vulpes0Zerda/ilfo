@@ -11,22 +11,50 @@ const initialState = {
     settingsState: 'NONE',
 }
 
-function animationReducer(state, action) { 
+function animationReducer(state, action) {
     switch (action.type) {
         case 'MENU-NONE':
-            return (state.menuState = !'CLICK' ? (state.menuState = 'NONE') : state.menuState)
+            return {
+                ...state,
+                menuState:
+                    state.menuState !== 'CLICK'
+                        ? (state.menuState = 'NONE')
+                        : state.menuState,
+            }
         case 'MENU-HOVER':
-            return (state.menuState = !'CLICK' ? (state.menuState = 'HOVER') : state.menuState)
+            return {
+                ...state,
+                menuState:
+                    state.menuState !== 'CLICK'
+                        ? (state.menuState = 'HOVER')
+                        : state.menuState,
+            }
         case 'MENU-CLICK':
-            return (state.menuState = 'CLICK')
+            return { ...state, menuState: (state.menuState = 'CLICK') }
+        case 'MENU-CLOSE':
+            return { ...state, menuState: (state.menuState = 'NONE') }
         case 'SETTINGS-NONE':
-            return (state.settingsState = !'CLICK' ? (state.settingsState = 'NONE') : state.settingsState)
+            return {
+                ...state,
+                settingsState:
+                    state.settingsState !== 'CLICK'
+                        ? (state.settingsState = 'NONE')
+                        : state.settingsState,
+            }
         case 'SETTINGS-HOVER':
-            return (state.settingsState = !'CLICK' ? (state.settingsState = 'HOVER') : state.settingsState)
+            return {
+                ...state,
+                settingsState:
+                    state.settingsState !== 'CLICK'
+                        ? (state.settingsState = 'HOVER')
+                        : state.settingsState,
+            }
         case 'SETTINGS-CLICK':
-            return (state.settingsState = 'CLICK')
+            return { ...state, settingsState: (state.settingsState = 'CLICK') }
+        case 'SETTINGS-CLOSE':
+            return { ...state, settingsState: (state.settingsState = 'NONE') }
         default:
-            return (...state)
+            return state
     }
 }
 
