@@ -3,36 +3,49 @@ import Content from './components/Content'
 import Footer from './components/Footer'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
-import { useState } from 'react'
+import { useReducer } from 'react'
+import { AnimationContext } from './GlobalHooks'
+
+const initialState = {
+    menuState: 'NONE',
+    settingsState: 'NONE',
+}
+
+function animationReducer(state, action) { 
+    switch (action.type) {
+        case 'MENU-NONE':
+            return (state.menuState = !'CLICK' ? (state.menuState = 'NONE') : state.menuState)
+        case 'MENU-HOVER':
+            return (state.menuState = !'CLICK' ? (state.menuState = 'HOVER') : state.menuState)
+        case 'MENU-CLICK':
+            return (state.menuState = 'CLICK')
+        case 'SETTINGS-NONE':
+            return (state.settingsState = !'CLICK' ? (state.settingsState = 'NONE') : state.settingsState)
+        case 'SETTINGS-HOVER':
+            return (state.settingsState = !'CLICK' ? (state.settingsState = 'HOVER') : state.settingsState)
+        case 'SETTINGS-CLICK':
+            return (state.settingsState = 'CLICK')
+        default:
+            return (...state)
+    }
+}
 
 const App = () => {
-    const background = {
-        click: { height: '75%', width: '75%', top: '50%', left: '-30%' },
-        hover: { height: '2%', width: '2%' },
-        off: { height: '0%', width: '0%' },
-    }
-    const [menuState, setStateMenu] = useState(false)
-    const [settingsState, setStateSettings] = useState(false)
+    const [state, dispatch] = useReducer(animationReducer, initialState)
     return (
         <div className="App">
-            <Menu
-                clickState={menuState}
-                setClickState={setStateMenu}
-                background={background}
-            />
-            <Settings
-                clickState={settingsState}
-                setClickState={setStateSettings}
-            />
-            <Header
-                menuState={menuState}
-                setStateMenu={setStateMenu}
-                settingsState={settingsState}
-                setStateSettings={setStateSettings}
-                background={background}
-            />
-            <Content />
-            <Footer />
+            <AnimationContext.Provider
+                value={{
+                    state,
+                    dispatch,
+                }}
+            >
+                <Menu />
+                <Settings />
+                <Header />
+                <Content />
+                <Footer />
+            </AnimationContext.Provider>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import Navigation from './menu/Navigation'
 import UpToDate from './menu/UpToDate'
 import { motion } from 'framer-motion'
 
-const Menu = ({ clickState, setClickState }) => {
+const Menu = () => {
     return (
         <motion.div className="nav">
             <motion.div

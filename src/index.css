@@ -135,7 +135,7 @@ button:focus {
 .nav {
   position: absolute;
   z-index: 5;
-  display: block;
+  display: none;
   top: 0%;
   left: 0%;
   background-color: transparent;
@@ -240,12 +240,12 @@ button:focus {
 
 .nav__bg {
   position: absolute;
-  display: block;
+  display: inherit;
   z-index: 5;
-  top: 50%;
-  left: 50%;
-  height: 50vh;
-  width: 50vh;
+  top: 50vh;
+  left: -50vw;
+  height: 200vw;
+  width: 200vw;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   border-radius: 50%;
