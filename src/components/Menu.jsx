@@ -2,8 +2,14 @@ import CloseButton from './menu/CloseButton'
 import Navigation from './menu/Navigation'
 import UpToDate from './menu/UpToDate'
 import { motion } from 'framer-motion'
+import { useContext } from 'react'
+import { AnimationContext } from '../GlobalHooks'
 
 const Menu = () => {
+    const {
+        state: { menuState, settingsState },
+        dispatch,
+    } = useContext(AnimationContext)
     return (
         <motion.div className="nav">
             <motion.div

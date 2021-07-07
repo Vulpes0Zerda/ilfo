@@ -7,59 +7,38 @@ import { useReducer } from 'react'
 import { AnimationContext } from './GlobalHooks'
 
 const initialState = {
-    menuState: 'NONE',
-    settingsState: 'NONE',
+    menuHoverState: false,
+    menuClickState: false,
+    settingsHoverState: false,
+    settingsClickState: false,
 }
 
 function animationReducer(state, action) {
     switch (action.type) {
-        case 'MENU-NONE':
+        case 'MENU-HOVER-TOGGLE':
             return {
                 ...state,
-                menuState:
-                    state.menuState !== 'CLICK'
-                        ? (state.menuState = 'NONE')
-                        : state.menuState,
+                menuHoverState: !state.menuHoverState,
             }
-        case 'MENU-HOVER':
+        case 'MENU-CLICK-TOGGLE':
+            return { ...state, menuClickState: !state.menuClickState }
+        case 'SETTINGS-HOVER-TOGGLE':
             return {
                 ...state,
-                menuState:
-                    state.menuState !== 'CLICK'
-                        ? (state.menuState = 'HOVER')
-                        : state.menuState,
+                settingsHoverState: !state.settingsHoverState,
             }
-        case 'MENU-CLICK':
-            return { ...state, menuState: (state.menuState = 'CLICK') }
-        case 'MENU-CLOSE':
-            return { ...state, menuState: (state.menuState = 'NONE') }
-        case 'SETTINGS-NONE':
-            return {
-                ...state,
-                settingsState:
-                    state.settingsState !== 'CLICK'
-                        ? (state.settingsState = 'NONE')
-                        : state.settingsState,
-            }
-        case 'SETTINGS-HOVER':
-            return {
-                ...state,
-                settingsState:
-                    state.settingsState !== 'CLICK'
-                        ? (state.settingsState = 'HOVER')
-                        : state.settingsState,
-            }
-        case 'SETTINGS-CLICK':
-            return { ...state, settingsState: (state.settingsState = 'CLICK') }
-        case 'SETTINGS-CLOSE':
-            return { ...state, settingsState: (state.settingsState = 'NONE') }
+        case 'SETTINGS-CLICK-TOGGLE':
+            return { ...state, settingsClickState: !state.settingsClickState }
         default:
             return state
     }
 }
 
+/* const  */
+
 const App = () => {
     const [state, dispatch] = useReducer(animationReducer, initialState)
+
     return (
         <div className="App">
             <AnimationContext.Provider

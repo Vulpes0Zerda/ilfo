@@ -5,6 +5,10 @@ import { useContext } from 'react'
 import { AnimationContext } from '../GlobalHooks'
 
 const Header = () => {
+    const {
+        state: { menuState, settingsState },
+        dispatch,
+    } = useContext(AnimationContext)
     return (
         <div className="header">
             <MenuButton />
