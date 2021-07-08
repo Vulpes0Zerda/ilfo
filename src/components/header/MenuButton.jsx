@@ -15,10 +15,10 @@ const MenuButton = () => {
             onClick={() => {
                 dispatch({ type: 'MENU-CLICK-TOGGLE' })
             }}
-            onMouseOver={() => {
+            onHoverStart={() => {
                 dispatch({ type: 'MENU-HOVER-TOGGLE' })
             }}
-            onMouseLeave={() => {
+            onHoverEnd={() => {
                 dispatch({ type: 'MENU-HOVER-TOGGLE' })
             }}
         >

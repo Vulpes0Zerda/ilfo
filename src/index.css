@@ -64,8 +64,7 @@ button:focus {
 }
 
 .header {
-  z-index: 1;
-  background-color: #161616;
+  z-index: 10;
   display: -ms-grid;
   display: grid;
   position: relative;
@@ -135,7 +134,7 @@ button:focus {
 .nav {
   position: absolute;
   z-index: 5;
-  display: none;
+  display: block;
   top: 0%;
   left: 0%;
   background-color: transparent;
@@ -242,14 +241,16 @@ button:focus {
   position: absolute;
   display: inherit;
   z-index: 5;
-  top: 50vh;
-  left: -50vw;
-  height: 200vw;
-  width: 200vw;
+  top: 4vh;
+  left: 4vh;
+  height: 8vh;
+  width: 8vh;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  -webkit-transform-origin: center;
+          transform-origin: center;
   border-radius: 50%;
-  background-color: white;
+  background-color: #dddddd;
 }
 
 .settings {

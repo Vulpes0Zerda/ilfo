@@ -3,7 +3,7 @@ import { AnimationContext } from '../GlobalHooks'
 
 const Content = () => {
     const {
-        state: { menuHoverState, menuClickState },
+        state: { menuState, menuHoverState, menuClickState },
         dispatch,
     } = useContext(AnimationContext)
     return (
@@ -14,7 +14,7 @@ const Content = () => {
                     console.log(menuHoverState)
                 }}
             >
-                HOVER
+                {menuState}
             </button>
             <button
                 onClick={() => {
@@ -22,7 +22,7 @@ const Content = () => {
                     console.log(menuClickState)
                 }}
             >
-                CLICK
+                {menuState}
             </button>
         </div>
     )

@@ -114,8 +114,7 @@ button {
 //Header
 
 .header {
-    z-index: 1;
-    background-color: color(bg);
+    z-index: 10;
     display: grid;
     position: relative;
     justify-items: stretch;
@@ -170,7 +169,7 @@ button {
 .nav {
     position: absolute;
     z-index: 5;
-    display: none;
+    display: block;
     top: 0%;
     left: 0%;
     background-color: transparent;
@@ -252,14 +251,15 @@ button {
         position: absolute;
         display: inherit;
         z-index: 5;
-        top: 50vh;
-        left: -50vw;
-        height: 200vw;
-        width: 200vw;
+        top: 4vh;
+        left: 4vh;
+        height: 8vh;
+        width: 8vh;
         transform: translate(-50%, -50%);
+        transform-origin: center;
         border-radius: 50%;
-        background-color: white;
-        //Config for onclick
+        background-color: color(txt);
+        //Config for Hover
     }
 }
 
