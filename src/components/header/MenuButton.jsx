@@ -4,10 +4,7 @@ import { useContext } from 'react'
 import { AnimationContext } from '../../GlobalHooks'
 
 const MenuButton = () => {
-    const {
-        state: { menuHoverState, menuClickState },
-        dispatch,
-    } = useContext(AnimationContext)
+    const { dispatch } = useContext(AnimationContext)
     return (
         <motion.button
             type="button"

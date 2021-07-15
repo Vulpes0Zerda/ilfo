@@ -1,25 +1,27 @@
-import SettingsSvg from "./SettingsSvg";
-import { motion } from "framer-motion"
+import SettingsSvg from './SettingsSvg'
+import { motion } from 'framer-motion'
+import { useContext } from 'react'
+import { AnimationContext } from '../../GlobalHooks'
 
-const SettingsButton = ({ hoverState, setHoverState, clickState, setClickState, background, iconColor }) => {
-  return (
-    <motion.button
-      type="button"
-      className="header__dialogBtn"
-      onClick = {() => {clickState ? setClickState(false) : setClickState(true)}}
-      onMouseEnter = {() => setHoverState(true)}
-      onMouseLeave = {() => setHoverState(false)}
-    >
-      <motion.div
-        className = "toggleButton"
-        animate = {hoverState || clickState ? "on" : "off"}
-        variants = {background}
-        initial = {false}
-        transition = {{times: [0, 0.01, 0.99, 1], duration: 0.35, ease: "anticipate", type: "spring", stiffness: 0}}
-      />
-      <SettingsSvg hoverState={hoverState} iconColor={iconColor} clickState={clickState}/>
-    </motion.button>
-  );
-};
+const SettingsButton = () => {
+    const { dispatch } = useContext(AnimationContext)
+    return (
+        <motion.button
+            type="button"
+            className="header__btn"
+            onClick={() => {
+                dispatch({ type: 'SETTINGS-CLICK-TOGGLE' })
+            }}
+            onHoverStart={() => {
+                dispatch({ type: 'SETTINGS-HOVER-TOGGLE' })
+            }}
+            onHoverEnd={() => {
+                dispatch({ type: 'SETTINGS-HOVER-TOGGLE' })
+            }}
+        >
+            <SettingsSvg />
+        </motion.button>
+    )
+}
 
-export default SettingsButton;
+export default SettingsButton

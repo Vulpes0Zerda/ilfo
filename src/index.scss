@@ -75,7 +75,7 @@ body {
 body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 8% 87% 5%;
+    grid-template-rows: 8% auto 5%;
     justify-items: stretch;
     align-items: stretch;
     justify-content: stretch;
@@ -137,13 +137,13 @@ button {
             width: 4vh;
             position: absolute;
             padding: 2vh;
-            //transform: translate(-50%,-50%);
         }
     }
     &__pts {
         position: relative;
         align-self: center;
         justify-self: center;
+        z-index: 4;
         font-size: 2.5vh;
         color: color(txt);
         text-align: center;
@@ -155,13 +155,10 @@ button {
     }
 }
 
-//Footer
+//Content
 
-#footer {
-    z-index: 1;
-    background-color: color(bg);
-    overflow: hidden;
-    //prob. not needed, but here for placeholding
+.content {
+    position: absolute;
 }
 
 //Navigation
@@ -170,24 +167,22 @@ button {
     position: absolute;
     z-index: 5;
     display: block;
-    top: 0%;
-    left: 0%;
-    background-color: transparent;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     &__bar {
         position: absolute;
-        display: block;
+        display: grid;
         z-index: 6;
-        top: 50%;
-        left: 50%;
+        top: 50vh;
+        left: 0;
         height: 50vh;
         width: 50vh;
         transform: translate(-50%, -50%);
         border-radius: 50%;
-        clip-path: circle(50%);
         &__links {
-            display: flex;
+            display: grid;
             position: relative;
             float: left;
             a:link {
@@ -253,13 +248,12 @@ button {
         z-index: 5;
         top: 4vh;
         left: 4vh;
-        height: 8vh;
-        width: 8vh;
+        height: 0;
+        width: 0;
         transform: translate(-50%, -50%);
         transform-origin: center;
         border-radius: 50%;
         background-color: color(txt);
-        //Config for Hover
     }
 }
 
@@ -268,10 +262,9 @@ button {
 .settings {
     position: absolute;
     z-index: 5;
-    display: none;
+    display: block;
     top: 0%;
     left: 0%;
-    background-color: color(bg);
     width: 100vw;
     height: 100vh;
     &__bar {
@@ -391,33 +384,18 @@ button {
     }
     &__bg {
         position: absolute;
-        display: none;
+        display: inherit;
         z-index: 5;
-        top: 50%;
-        left: 0%;
-        height: 200vh;
-        width: 200vh;
-        transform: translate(-80%, -50%);
+        top: 4vh;
+        right: 4vh;
+        height: 0;
+        width: 0;
+        transform: translate(50%, -50%);
+        transform-origin: center;
         border-radius: 50%;
-        background-color: white;
+        background-color: color(txt);
     }
 }
-
-/*
-!Does not longer exist! Moved to nav__bg for easier animation
-.toggleButton{
-    position: absolute;
-    border-radius: 50%;
-    background-color: color(txt);
-    width: 0%;
-    height: 0%;
-    opacity: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 10% 10% rgba(0,0,0,1);
-}
-*/
 
 /*
 Fallback for UpToDate:
