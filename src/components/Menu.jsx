@@ -9,12 +9,19 @@ const Menu = () => {
         state: { menuState },
         dialog,
         menuBg,
+        menuBtnState,
     } = useContext(AnimationContext)
     return (
         <div className="nav">
             <motion.div
-                className="nav__bg"
+                className="header__btn__bg header__btn__bg--left"
                 variants={menuBg}
+                animate={menuState}
+                initial="NONE"
+            ></motion.div>
+            <motion.div
+                className="nav__bg"
+                variants={menuBtnBg}
                 animate={menuState}
                 initial="NONE"
             ></motion.div>

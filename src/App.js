@@ -15,16 +15,33 @@ const initialState = {
     settingsClickState: false,
 }
 const menuBg = {
-    NONE: { width: '0vh', height: '0vh' },
-    HOVER: { width: '6vh', height: '6vh' },
-    CLICK: {
-        width: '10000vh',
-        height: '10000vh',
-        top: '50vh',
-        left: '-4950vh',
+    NONE: {
+        width: '0vh',
+        height: '0vh',
+        left: '4vh',
+        transition: {
+            type: 'easeOut',
+            duration: 0.2,
+        },
+    },
+    HOVER: {
+        width: '6vh',
+        height: '6vh',
+        left: '4vh',
         transition: {
             type: 'spring',
-            stiffness: 50,
+            bounce: 0.6,
+            duration: 0.4,
+        },
+    },
+    CLICK: {
+        width: '6vh',
+        height: '6vh',
+        left: '-10vh',
+        transition: {
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
         },
     },
 }
@@ -32,31 +49,92 @@ const settingsBg = {
     NONE: {
         width: '0vh',
         height: '0vh',
-        top: '4vh',
         right: '4vh',
         transition: {
-            type: 'easeInOut',
-            duration: 0.3,
+            type: 'easeOut',
+            duration: 0.2,
         },
     },
     HOVER: {
         width: '6vh',
         height: '6vh',
-        top: '4vh',
         right: '4vh',
         transition: {
-            type: 'easeInOut',
-            duration: 0.3,
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
         },
     },
     CLICK: {
-        width: '1000vh',
-        height: '1000vh',
-        top: '50vh',
-        right: '-450vh',
+        width: '6vh',
+        height: '6vh',
+        right: '-10vh',
         transition: {
-            type: 'easeInOut',
-            duration: 0.3,
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
+        },
+    },
+}
+const menuBtnBg = {
+    NONE: {
+        width: '0vh',
+        height: '0vh',
+        left: '4vh',
+        transition: {
+            type: 'easeOut',
+            duration: 0.2,
+        },
+    },
+    HOVER: {
+        width: '6vh',
+        height: '6vh',
+        left: '4vh',
+        transition: {
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
+        },
+    },
+    CLICK: {
+        width: '6vh',
+        height: '6vh',
+        left: '-10vh',
+        transition: {
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
+        },
+    },
+}
+const settingsBtnBg = {
+    NONE: {
+        width: '0vh',
+        height: '0vh',
+        right: '4vh',
+        transition: {
+            type: 'easeOut',
+            duration: 0.2,
+        },
+    },
+    HOVER: {
+        width: '6vh',
+        height: '6vh',
+        right: '4vh',
+        transition: {
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
+        },
+    },
+    CLICK: {
+        width: '6vh',
+        height: '6vh',
+        right: '-10vh',
+        transition: {
+            type: 'spring',
+            bounce: 0.6,
+            duration: 0.4,
         },
     },
 }
@@ -130,6 +208,8 @@ const App = () => {
                     iconFill,
                     menuBg,
                     settingsBg,
+                    menuBtnBg,
+                    settingsBtnBg,
                 }}
             >
                 <Menu />
