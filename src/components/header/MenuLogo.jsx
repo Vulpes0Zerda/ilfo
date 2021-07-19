@@ -11,6 +11,7 @@ const MenuLogo = () => {
         <motion.svg
             className="header__menuButton__icon"
             viewBox="0 0 1500 1500"
+            preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
             fillRule="evenodd"
             clipRule="evenodd"

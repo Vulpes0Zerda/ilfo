@@ -14,130 +14,7 @@ const initialState = {
     settingsHoverState: false,
     settingsClickState: false,
 }
-const menuBg = {
-    NONE: {
-        width: '0vh',
-        height: '0vh',
-        left: '4vh',
-        transition: {
-            type: 'easeOut',
-            duration: 0.2,
-        },
-    },
-    HOVER: {
-        width: '6vh',
-        height: '6vh',
-        left: '4vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-    CLICK: {
-        width: '6vh',
-        height: '6vh',
-        left: '-10vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-}
-const settingsBg = {
-    NONE: {
-        width: '0vh',
-        height: '0vh',
-        right: '4vh',
-        transition: {
-            type: 'easeOut',
-            duration: 0.2,
-        },
-    },
-    HOVER: {
-        width: '6vh',
-        height: '6vh',
-        right: '4vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-    CLICK: {
-        width: '6vh',
-        height: '6vh',
-        right: '-10vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-}
-const menuBtnBg = {
-    NONE: {
-        width: '0vh',
-        height: '0vh',
-        left: '4vh',
-        transition: {
-            type: 'easeOut',
-            duration: 0.2,
-        },
-    },
-    HOVER: {
-        width: '6vh',
-        height: '6vh',
-        left: '4vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-    CLICK: {
-        width: '6vh',
-        height: '6vh',
-        left: '-10vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-}
-const settingsBtnBg = {
-    NONE: {
-        width: '0vh',
-        height: '0vh',
-        right: '4vh',
-        transition: {
-            type: 'easeOut',
-            duration: 0.2,
-        },
-    },
-    HOVER: {
-        width: '6vh',
-        height: '6vh',
-        right: '4vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-    CLICK: {
-        width: '6vh',
-        height: '6vh',
-        right: '-10vh',
-        transition: {
-            type: 'spring',
-            bounce: 0.6,
-            duration: 0.4,
-        },
-    },
-}
+
 const dialog = {
     NONE: { opacity: 0 },
     HOVER: { opacity: 0 },
@@ -194,6 +71,8 @@ function animationReducer(state, action) {
         default:
             return state
     }
+    //! Still needs Focus state
+    //With case 'XYZ-FOCUS-TOGGLE'
 }
 
 const App = () => {
@@ -206,10 +85,6 @@ const App = () => {
                     dispatch,
                     dialog,
                     iconFill,
-                    menuBg,
-                    settingsBg,
-                    menuBtnBg,
-                    settingsBtnBg,
                 }}
             >
                 <Menu />

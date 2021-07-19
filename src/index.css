@@ -103,7 +103,7 @@ button:focus {
 
 .header__btn__bg {
   position: absolute;
-  display: inherit;
+  display: block;
   z-index: 5;
   top: 4vh;
   height: 0;
@@ -258,16 +258,12 @@ button:focus {
 
 .nav__bg {
   position: absolute;
-  display: inherit;
+  display: block;
   z-index: 5;
-  top: 4vh;
-  left: 4vh;
-  height: 0;
-  width: 0;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-transform-origin: center;
-          transform-origin: center;
+  top: 50%;
+  left: -5010vh;
+  width: 5000vh;
+  height: 5000vh;
   border-radius: 50%;
   background-color: #dddddd;
 }
