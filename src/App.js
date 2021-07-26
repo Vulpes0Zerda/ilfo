@@ -1,6 +1,5 @@
 import Header from './components/Header'
 import Content from './components/Content'
-import Footer from './components/Footer'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
 import { useReducer } from 'react'
@@ -21,9 +20,23 @@ const dialog = {
     CLICK: { opacity: 1 },
 }
 const iconFill = {
-    NONE: { fill: 'rgb(221, 221, 221)' },
-    HOVER: { fill: 'rgb(22, 22, 22)' },
-    CLICK: { fill: 'rgb(22, 22, 22)' },
+    NONE: {
+        fill: '#dedede',
+        transition: {
+            duration: 0.2,
+            type: 'linear',
+        },
+    },
+    HOVER: {
+        fill: '#161616',
+        transition: {
+            duration: 0.25,
+            type: 'linear',
+        },
+    },
+    CLICK: {
+        fill: '#161616',
+    },
 }
 
 function animationReducer(state, action) {
@@ -91,7 +104,6 @@ const App = () => {
                 <Settings />
                 <Header />
                 <Content />
-                <Footer />
             </AnimationContext.Provider>
         </div>
     )

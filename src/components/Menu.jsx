@@ -1,35 +1,39 @@
-import Navigation from './menu/Navigation'
-import UpToDate from './menu/UpToDate'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useContext } from 'react'
 import { AnimationContext } from '../GlobalHooks'
+import Navigation from './menu/Navigation'
+import UpToDate from './menu/UpToDate'
 
 const menuBg = {
     NONE: {
         x: '-50%',
         y: '-50%',
-        left: '-5200vh',
+        scale: 1,
+        left: '-5050vh',
     },
     HOVER: {
         x: '-50%',
         y: '-50%',
         scale: 1,
-        left: '-5200vh',
+        left: '-5050vh',
         transition: {
             type: 'spring',
-            duration: 0.2,
-            bounce: 0.3,
+            duration: 2,
+            bounce: 0,
         },
     },
     CLICK: {
         scale: 2,
-        left: '-4970vh',
+        left: '-4960vh',
         x: '-50%',
         y: '-50%',
         transition: {
             type: 'spring',
-            duration: 0.4,
-            bounce: 0.16,
+            duration: 0.3,
+            bounce: 0,
+            /*             damping: 30,
+            mass: 1,
+            stiffness: 300, */
         },
     },
 }
@@ -40,8 +44,8 @@ const menuBtnBg = {
         height: '0vh',
         left: '4vh',
         transition: {
-            type: 'easeOut',
-            duration: 0.2,
+            type: 'spring',
+            duration: 0.25,
         },
     },
     HOVER: {
@@ -72,29 +76,41 @@ const Menu = () => {
         dialog,
     } = useContext(AnimationContext)
     return (
-        <div className="nav">
-            <motion.div
-                className="header__btn__bg header__btn__bg--left"
-                variants={menuBtnBg}
-                animate={menuState}
-                initial="NONE"
-            ></motion.div>
-            <motion.div
-                className="nav__bg"
-                variants={menuBg}
-                animate={menuState}
-                initial="NONE"
-            ></motion.div>
-            <motion.nav
-                className="nav__bar"
-                variants={dialog}
-                animate={menuState}
-                initial="NONE"
-            >
-                <Navigation />
-                <UpToDate />
-            </motion.nav>
-        </div>
+        <AnimatePresence>
+            {menuState === 'HOVER' && (
+                <motion.div
+                    className="header__btn__bg header__btn__bg--left"
+                    key="headerBtnMenu"
+                    variants={menuBtnBg}
+                    animate={menuState}
+                    initial={false}
+                    exit="CLICK"
+                ></motion.div>
+            )}
+            {menuState === 'CLICK' && (
+                <div className="nav">
+                    <motion.div
+                        className="nav__bg"
+                        key="navBg"
+                        variants={menuBg}
+                        animate={menuState}
+                        initial="NONE"
+                        exit="HOVER"
+                    ></motion.div>
+                    <motion.nav
+                        className="nav__bar"
+                        key="navBar"
+                        variants={dialog}
+                        animate={menuState}
+                        initial={false}
+                        exit="NONE"
+                    >
+                        <Navigation />
+                        <UpToDate />
+                    </motion.nav>
+                </div>
+            )}
+        </AnimatePresence>
     )
 }
 

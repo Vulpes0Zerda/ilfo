@@ -4,7 +4,6 @@ import { AnimationContext } from '../GlobalHooks'
 const Content = () => {
     const {
         state: { menuState, settingsState },
-        dispatch,
     } = useContext(AnimationContext)
     return (
         <div className="content">

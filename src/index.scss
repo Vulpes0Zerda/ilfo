@@ -75,7 +75,7 @@ body {
 body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 8% auto 5%;
+    grid-template-rows: 8% auto;
     justify-items: stretch;
     align-items: stretch;
     justify-content: stretch;
@@ -143,10 +143,10 @@ button {
         &__bg {
             position: absolute;
             display: block;
-            z-index: 5;
+            z-index: 10;
             top: 4vh;
-            height: 0;
             width: 0;
+            height: 0;
             border-radius: 50%;
             background-color: color(txt);
             &--left {
@@ -263,11 +263,11 @@ button {
         }
     }
     &__bg {
+        display: none;
         position: absolute;
-        display: block;
         z-index: 5;
         top: 50%;
-        left: -5010vh;
+        left: -5050vh;
         width: 5000vh;
         height: 5000vh;
         border-radius: 50%;
@@ -281,8 +281,8 @@ button {
     position: absolute;
     z-index: 5;
     display: block;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    right: 0;
     width: 100vw;
     height: 100vh;
     &__bar {
@@ -402,14 +402,11 @@ button {
     }
     &__bg {
         position: absolute;
-        display: inherit;
         z-index: 5;
-        top: 4vh;
-        right: 4vh;
-        height: 0;
-        width: 0;
-        transform: translate(50%, -50%);
-        transform-origin: center;
+        top: 50%;
+        right: -5010vh;
+        width: 5000vh;
+        height: 5000vh;
         border-radius: 50%;
         background-color: color(txt);
     }
