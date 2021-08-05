@@ -9,9 +9,13 @@ const initialState = {
     menuState: 'NONE',
     menuHoverState: false,
     menuClickState: false,
+    menuPressState: false,
+    menuFocusState: false,
     settingsState: 'NONE',
     settingsHoverState: false,
     settingsClickState: false,
+    settingsPressState: false,
+    settingsFocusState: false,
 }
 
 const dialog = {
@@ -42,6 +46,16 @@ const iconFill = {
 function animationReducer(state, action) {
     switch (action.type) {
         case 'MENU-HOVER-TOGGLE':
+            return {
+                ...state,
+                menuHoverState: !state.menuHoverState,
+                menuState: !state.menuClickState
+                    ? state.menuHoverState
+                        ? (state.menuState = 'NONE')
+                        : (state.menuState = 'HOVER')
+                    : state.menuState,
+            }
+        case 'MENU-PRESS-TOGGLE':
             return {
                 ...state,
                 menuHoverState: !state.menuHoverState,

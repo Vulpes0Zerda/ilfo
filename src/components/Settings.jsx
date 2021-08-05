@@ -7,32 +7,34 @@ import SaveButton from './settings/SaveButton'
 
 const settingsBg = {
     NONE: {
-        x: '50%',
+        x: '0%',
         y: '-50%',
-        scale: 1,
-        right: '-5200vh',
+        width: '40vw',
+        height: '100%',
+        right: '-50vw',
     },
     HOVER: {
-        x: '50%',
+        x: '0%',
         y: '-50%',
-        scale: 1,
-        right: '-5200vh',
+        width: '40vw',
+        height: '100%',
+        right: '-50vw',
         transition: {
             type: 'spring',
-            duration: 0.2,
+            duration: 0.4,
             bounce: 0.3,
         },
     },
     CLICK: {
-        scale: 2,
-        right: '-4960vh',
-        x: '50%',
+        x: '0%',
         y: '-50%',
+        width: '40vw',
+        height: '100%',
+        right: '0vw',
         transition: {
             type: 'spring',
-            damping: 30,
-            mass: 1,
-            stiffness: 300,
+            duration: 0.4,
+            bounce: 0.3,
         },
     },
 }
@@ -43,8 +45,8 @@ const settingsBtnBg = {
         height: '0vh',
         right: '4vh',
         transition: {
-            type: 'easeOut',
-            duration: 0.2,
+            type: 'spring',
+            duration: 0.3,
         },
     },
     HOVER: {
@@ -53,7 +55,7 @@ const settingsBtnBg = {
         right: '4vh',
         transition: {
             type: 'spring',
-            bounce: 0.6,
+            bounce: 0.5,
             duration: 0.4,
         },
     },
@@ -69,46 +71,60 @@ const settingsBtnBg = {
     },
 }
 
+const testS2 = {
+    NONE: {
+        backgroundColor: 'rgb(182, 80, 21),',
+    },
+    HOVER: {
+        backgroundColor: 'rgb(182, 80, 21),',
+    },
+    CLICK: {
+        backgroundColor: 'rgb(182, 80, 21),',
+    },
+}
+
 const Settings = () => {
     const {
         state: { settingsState },
         dialog,
     } = useContext(AnimationContext)
     return (
-        <AnimatePresence>
+        <>
             <motion.div
                 className="header__btn__bg header__btn__bg--right"
                 key="headerBtnSettings"
-                variants={settingsBtnBg}
+                variants={testS2 /* , settingsBtnBg */}
                 animate={settingsState}
                 initial="NONE"
                 exit="CLICK"
             ></motion.div>
-            {settingsState === 'CLICK' && (
-                <div className="settings">
-                    <motion.div
-                        className="settings__bg"
-                        key="settingsBg"
-                        variants={settingsBg}
-                        animate={settingsState}
-                        initial="NONE"
-                        exit="NONE"
-                    ></motion.div>
-                    <motion.div
-                        key="settingsBar"
-                        className="settings__bar"
-                        variants={dialog}
-                        animate={settingsState}
-                        initial="NONE"
-                        exit="NONE"
-                    >
-                        <Options />
-                        <SaveButton />
-                        <ResetButton />
-                    </motion.div>
-                </div>
-            )}
-        </AnimatePresence>
+            <AnimatePresence>
+                {settingsState === 'CLICK' && (
+                    <div className="settings">
+                        <motion.div
+                            className="settings__bg"
+                            key="settingsBg"
+                            variants={settingsBg}
+                            animate={settingsState}
+                            initial="NONE"
+                            exit="NONE"
+                        ></motion.div>
+                        <motion.div
+                            key="settingsBar"
+                            className="settings__bar"
+                            variants={dialog}
+                            animate={settingsState}
+                            initial="NONE"
+                            exit="NONE"
+                        >
+                            <Options />
+                            <SaveButton />
+                            <ResetButton />
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }
 

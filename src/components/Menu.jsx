@@ -6,34 +6,34 @@ import UpToDate from './menu/UpToDate'
 
 const menuBg = {
     NONE: {
-        x: '-50%',
+        x: '0%',
         y: '-50%',
-        scale: 1,
-        left: '-5050vh',
+        width: '40vw',
+        height: '100%',
+        left: '-50vw',
     },
     HOVER: {
-        x: '-50%',
+        x: '0%',
         y: '-50%',
-        scale: 1,
-        left: '-5050vh',
+        width: '40vw',
+        height: '100%',
+        left: '-50vw',
         transition: {
             type: 'spring',
-            duration: 2,
-            bounce: 0,
+            duration: 0.4,
+            bounce: 0.3,
         },
     },
     CLICK: {
-        scale: 2,
-        left: '-4960vh',
-        x: '-50%',
+        x: '0%',
         y: '-50%',
+        width: '40vw',
+        height: '100%',
+        left: '0vw',
         transition: {
             type: 'spring',
-            duration: 0.3,
-            bounce: 0,
-            /*             damping: 30,
-            mass: 1,
-            stiffness: 300, */
+            duration: 0.4,
+            bounce: 0.3,
         },
     },
 }
@@ -45,7 +45,7 @@ const menuBtnBg = {
         left: '4vh',
         transition: {
             type: 'spring',
-            duration: 0.25,
+            duration: 0.3,
         },
     },
     HOVER: {
@@ -54,7 +54,7 @@ const menuBtnBg = {
         left: '4vh',
         transition: {
             type: 'spring',
-            bounce: 0.6,
+            bounce: 0.5,
             duration: 0.4,
         },
     },
@@ -76,41 +76,40 @@ const Menu = () => {
         dialog,
     } = useContext(AnimationContext)
     return (
-        <AnimatePresence>
-            {menuState === 'HOVER' && (
-                <motion.div
-                    className="header__btn__bg header__btn__bg--left"
-                    key="headerBtnMenu"
-                    variants={menuBtnBg}
-                    animate={menuState}
-                    initial={false}
-                    exit="CLICK"
-                ></motion.div>
-            )}
-            {menuState === 'CLICK' && (
-                <div className="nav">
-                    <motion.div
-                        className="nav__bg"
-                        key="navBg"
-                        variants={menuBg}
-                        animate={menuState}
-                        initial="NONE"
-                        exit="HOVER"
-                    ></motion.div>
-                    <motion.nav
-                        className="nav__bar"
-                        key="navBar"
-                        variants={dialog}
-                        animate={menuState}
-                        initial={false}
-                        exit="NONE"
-                    >
-                        <Navigation />
-                        <UpToDate />
-                    </motion.nav>
-                </div>
-            )}
-        </AnimatePresence>
+        <>
+            <motion.div
+                className="header__btn__bg header__btn__bg--left"
+                variants={menuBtnBg}
+                animate={menuState}
+                initial="NONE"
+            ></motion.div>
+            <AnimatePresence>
+                {menuState === 'CLICK' && (
+                    <div className="nav">
+                        <motion.div
+                            className="nav__bg"
+                            key="navBg"
+                            variants={menuBg}
+                            animate={menuState}
+                            initial="NONE"
+                            exit="HOVER"
+                        >
+                            <motion.nav
+                                className="nav__bar"
+                                key="navBar"
+                                variants={dialog}
+                                animate={menuState}
+                                initial={false}
+                                exit="NONE"
+                            >
+                                <Navigation />
+                                <UpToDate />
+                            </motion.nav>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }
 

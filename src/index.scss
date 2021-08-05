@@ -54,7 +54,7 @@ $sizes: (
 //Classes and attributes
 //
 
-//Body preset
+//HTML preset
 
 html,
 body {
@@ -67,15 +67,25 @@ body {
     height: 100vh;
     width: 100vw;
     font-family: 'Rubik', sans-serif;
+    font-size: 62.5%;
     background-color: color(bg);
 }
 
-//Body grid structure
+//Body preset
 
 body {
+    font-size: 1.4rem;
+}
+
+//Body / App grid structure
+
+.App {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 8% auto;
+    grid-template-rows: 8vh auto;
     justify-items: stretch;
     align-items: stretch;
     justify-content: stretch;
@@ -86,11 +96,12 @@ body {
 
 h1 {
     font-family: 'Rubik', sans-serif;
+    font-size: 2.4rem;
 }
 
 h2 {
     font-family: 'Rubik', sans-serif;
-    font-size: 4vh;
+    font-size: 2.2rem;
 }
 
 ul {
@@ -109,6 +120,17 @@ button {
     color: color(txt);
     margin: 0;
     @include no-focus-outline();
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+//Fix for Firefox
+
+input[type='number'] {
+    -moz-appearance: textfield;
 }
 
 //Header
@@ -145,16 +167,16 @@ button {
             display: block;
             z-index: 10;
             top: 4vh;
-            width: 0;
-            height: 0;
             border-radius: 50%;
             background-color: color(txt);
+            width: 6vh;
+            height: 6vh;
             &--left {
-                left: 4vh;
+                left: -10vh;
                 transform: translate(-50%, -50%);
             }
             &--right {
-                right: 4vh;
+                right: -10vh;
                 transform: translate(50%, -50%);
             }
         }
@@ -178,7 +200,7 @@ button {
 //Content
 
 .content {
-    position: absolute;
+    position: relative;
 }
 
 //Navigation
@@ -192,46 +214,39 @@ button {
     width: 100vw;
     height: 100vh;
     &__bar {
-        position: absolute;
         display: grid;
+        position: fixed;
+        grid-template-columns: auto;
+        grid-template-rows: 90fr 10fr;
+        align-items: center;
+        justify-items: left;
+        padding-inline-start: 2.5vw;
         z-index: 6;
-        top: 50vh;
+        top: 0;
         left: 0;
-        height: 50vh;
-        width: 50vh;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
+        width: 26.5vw;
+        height: 100%;
         &__links {
             display: grid;
             position: relative;
-            float: left;
+            grid-template-columns: 1fr;
+            gap: size(reg);
+            width: 100%;
+            height: auto;
+            justify-items: left;
+            padding-inline-start: 0;
             a:link {
                 text-decoration: none;
             }
             li {
+                position: relative;
                 font-size: size(popup-txt);
-                text-align: center;
+                text-align: left;
             }
             & > * {
                 display: block;
                 position: absolute;
                 float: right;
-            }
-        }
-        &__close {
-            position: relative;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            @include no-focus-outline;
-            svg {
-                left: 0%;
-                top: 0%;
-                height: 4vh;
-                width: 4vh;
-                position: absolute;
-                padding: 2vh;
-                //transform: translate(-50%,-50%);
             }
         }
         &__version {
@@ -241,11 +256,8 @@ button {
             grid-template-rows: auto;
             align-items: center;
             justify-items: center;
-            gap: size(small);
+            gap: size(reg);
             max-width: 100vw;
-            padding: size(small);
-            bottom: 95%;
-            right: 0%;
             overflow: visible;
             font-size: size(popup-txt-small);
             svg {
@@ -256,22 +268,20 @@ button {
                 width: size(popup-txt);
             }
             div {
-                padding: size(popup-txt-small) 0 0 0;
+                padding: 1.5vh 0 0 0;
                 position: relative;
                 justify-self: start;
             }
         }
     }
     &__bg {
-        display: none;
+        display: block;
         position: absolute;
         z-index: 5;
         top: 50%;
-        left: -5050vh;
-        width: 5000vh;
-        height: 5000vh;
-        border-radius: 50%;
+        height: 100%;
         background-color: color(txt);
+        padding: 0 0 0 10vw;
     }
 }
 
@@ -297,6 +307,7 @@ button {
         top: 50%;
         left: 50%;
         color: color(txt);
+        z-index: 6;
         * {
             font-family: 'Rubik', sans-serif;
         }
@@ -361,8 +372,8 @@ button {
             &__lvl {
                 padding: calc(3px + 0.5vh + 0.25vw) 0;
                 height: size(popup-txt);
-                appearance: textfield;
-                width: calc(calc(5px + 1.5vh + 0.5vw) * 3);
+                appearance: none;
+                width: auto;
             }
             &__tooltip {
                 position: relative;
@@ -401,50 +412,13 @@ button {
         }
     }
     &__bg {
+        display: block;
         position: absolute;
         z-index: 5;
         top: 50%;
-        right: -5010vh;
-        width: 5000vh;
-        height: 5000vh;
-        border-radius: 50%;
+        right: -90vw;
+        width: 70vw;
+        height: 100%;
         background-color: color(txt);
     }
 }
-
-/*
-Fallback for UpToDate:
-.version{
-    position: absolute;
-    display: block;
-    padding: size(small);
-    bottom: 0%;
-    left: 0%;
-    margin: 0 calc(1% + 10px);
-    overflow: visible;
-    div{
-        position: relative;
-        display: grid;
-        grid-template-columns: auto auto;
-        align-items: center;
-        justify-items: center;
-        gap: size(small);
-        max-width: 100vw;
-        font-size: size(popup-txt-small);
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-    svg{
-        position: relative;
-        justify-self: end;
-        padding: 0;
-        margin: 0;
-        width: size(popup-txt);
-    };
-    div{
-        padding: size(popup-txt-small) 0 0 0;
-        position: relative;
-        justify-self: start;
-    }
-};
-*/

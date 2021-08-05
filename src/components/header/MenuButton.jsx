@@ -18,6 +18,19 @@ const MenuButton = () => {
             onHoverEnd={() => {
                 dispatch({ type: 'MENU-HOVER-TOGGLE' })
             }}
+            onMouseDown={() => {
+                dispatch({ type: 'MENU-PRESS-SET-ON' })
+            }}
+            onMouseUp={() => {
+                dispatch({ type: 'MENU-PRESS-SET-OFF' })
+            }}
+            /* onFocus={() => {
+                dispatch({ type: 'MENU-FOCUS-SET-ON' })
+            }}
+            onBlur={() => {
+                dispatch({ type: 'MENU-FOCUS-SET-OFF' })
+            }}
+            !Later for A11y*/
         >
             <motion.div className="header__bg" />
             <MenuLogo />
