@@ -11,14 +11,14 @@ const settingsBg = {
         y: '-50%',
         width: '40vw',
         height: '100%',
-        right: '-50vw',
+        right: '-40vw',
     },
     HOVER: {
         x: '0%',
         y: '-50%',
         width: '40vw',
         height: '100%',
-        right: '-50vw',
+        right: '-40vw',
         transition: {
             type: 'spring',
             duration: 0.4,
@@ -118,8 +118,13 @@ const Settings = () => {
                             exit="NONE"
                         >
                             <Options />
-                            <SaveButton />
-                            <ResetButton />
+                            <div
+                                key="settingsBarButtons"
+                                className="settings__bar__buttons"
+                            >
+                                <SaveButton />
+                                <ResetButton />
+                            </div>
                         </motion.div>
                     </div>
                 )}
