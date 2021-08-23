@@ -9,14 +9,12 @@ const settingsBg = {
     NONE: {
         x: '0%',
         y: '-50%',
-        width: '40vw',
         height: '100%',
         right: '-40vw',
     },
     HOVER: {
         x: '0%',
         y: '-50%',
-        width: '40vw',
         height: '100%',
         right: '-40vw',
         transition: {
@@ -28,7 +26,6 @@ const settingsBg = {
     CLICK: {
         x: '0%',
         y: '-50%',
-        width: '40vw',
         height: '100%',
         right: '0vw',
         transition: {
@@ -38,7 +35,6 @@ const settingsBg = {
         },
     },
 }
-
 const settingsBtnBg = {
     NONE: {
         width: '0vh',
@@ -71,18 +67,6 @@ const settingsBtnBg = {
     },
 }
 
-const testS2 = {
-    NONE: {
-        backgroundColor: 'rgb(182, 80, 21),',
-    },
-    HOVER: {
-        backgroundColor: 'rgb(182, 80, 21),',
-    },
-    CLICK: {
-        backgroundColor: 'rgb(182, 80, 21),',
-    },
-}
-
 const Settings = () => {
     const {
         state: { settingsState },
@@ -93,38 +77,39 @@ const Settings = () => {
             <motion.div
                 className="header__btn__bg header__btn__bg--right"
                 key="headerBtnSettings"
-                variants={testS2 /* , settingsBtnBg */}
+                variants={settingsBtnBg}
                 animate={settingsState}
                 initial="NONE"
                 exit="CLICK"
             ></motion.div>
             <AnimatePresence>
                 {settingsState === 'CLICK' && (
-                    <div className="settings">
+                    <div className="settings sb">
                         <motion.div
-                            className="settings__bg"
+                            className="settings__bg sb__bg"
                             key="settingsBg"
                             variants={settingsBg}
                             animate={settingsState}
                             initial="NONE"
                             exit="NONE"
-                        ></motion.div>
-                        <motion.div
-                            key="settingsBar"
-                            className="settings__bar"
-                            variants={dialog}
-                            animate={settingsState}
-                            initial="NONE"
-                            exit="NONE"
                         >
-                            <Options />
-                            <div
-                                key="settingsBarButtons"
-                                className="settings__bar__buttons"
+                            <motion.div
+                                key="settingsBar"
+                                className="settings__bar sb__bar noselect"
+                                variants={dialog}
+                                animate={settingsState}
+                                initial="NONE"
+                                exit="NONE"
                             >
-                                <SaveButton />
-                                <ResetButton />
-                            </div>
+                                <Options />
+                                <div
+                                    key="settingsBarButtons"
+                                    className="settings__bar__buttons"
+                                >
+                                    <SaveButton />
+                                    <ResetButton />
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </div>
                 )}

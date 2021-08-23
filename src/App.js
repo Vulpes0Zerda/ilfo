@@ -98,8 +98,8 @@ function animationReducer(state, action) {
         default:
             return state
     }
-    //! Still needs Focus state
-    //With case 'XYZ-FOCUS-TOGGLE'
+    //TODO Still needs Focus state
+    //With case 'XYZ-FOCUS-TOGGLE'%
 }
 
 const App = () => {

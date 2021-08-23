@@ -1,19 +1,17 @@
 import PropTypes from 'prop-types'
-
-const Options = ({ minLvl, maxLvl, currentLvl }) => {
+const Options = ({ minLvl, maxLvl, currentLvl, lang }) => {
     return (
         <div className="settings__bar__options">
             <label className="settings__bar__options--left">Language</label>
             <select
-                className="settings__bar__options--right settings__bar__options__lang"
+                className="settings__bar__options--right settings__bar__options__lang settings__bar__options__form"
                 name="lang"
             >
-                <option value="EN" id="lang-en">
-                    En
-                </option>
-                <option value="DE" id="lang-de">
-                    De
-                </option>
+                {lang.map((language) => (
+                    <option value={language.langCode} key={language.langCode}>
+                        {language.long}
+                    </option>
+                ))}
             </select>
             <label className="settings__bar__options--left">
                 Character Level
@@ -21,7 +19,7 @@ const Options = ({ minLvl, maxLvl, currentLvl }) => {
             <input
                 type="number"
                 name="level"
-                className="settings__bar__options--right settings__bar__options__lvl"
+                className="settings__bar__options--right settings__bar__options__lvl settings__bar__options__form"
                 min={minLvl}
                 max={maxLvl}
                 defaultValue={currentLvl}
@@ -35,10 +33,12 @@ const Options = ({ minLvl, maxLvl, currentLvl }) => {
                 name="tooltips"
             />
             <label
-                className="settings__bar__options--right settings__bar__options__tooltip__lbl"
+                className="settings__bar__options--right settings__bar__options__tooltip__lbl settings__bar__options__form"
                 htmlFor="tooltip"
             >
-                {/* need to overwork this (find solution for customizable checkbox) */}
+                {
+                    //TODO: need to overwork this (find solution for customizable checkbox)
+                }
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -66,7 +66,15 @@ Options.defaultProps = {
     minLvl: 1,
     maxLvl: 130,
     currentLvl: 130,
+    lang: [
+        {
+            langCode: 'EN',
+            short: 'ENG',
+            long: 'English',
+        },
+    ],
 }
+
 Options.propTypes = {
     minLvl: PropTypes.number.isRequired,
     maxLvl: PropTypes.number.isRequired,

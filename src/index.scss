@@ -127,6 +127,10 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.noselect {
+    user-select: none;
+}
+
 //Fix for Firefox
 
 input[type='number'] {
@@ -201,29 +205,46 @@ input[type='number'] {
 
 .content {
     position: relative;
+    //TODO Styling for Trait Tree
 }
 
-//Navigation
+//Sidebars
 
-.nav {
+.sb {
     position: absolute;
     z-index: 5;
     display: block;
     top: 0;
-    left: 0;
     width: 100vw;
     height: 100vh;
     &__bar {
         display: grid;
         position: relative;
-        grid-template-columns: minmax(min-content, 25vw);
-        grid-template-rows: 85fr 15fr;
+        grid-template-columns: minmax(max-content, 30vw);
         align-items: center;
-        justify-items: left;
         padding: 0 2vh;
         z-index: 6;
         height: 100%;
         top: 0;
+        right: 0;
+    }
+    &__bg {
+        display: grid;
+        position: absolute;
+        z-index: 5;
+        top: 50%;
+        height: 100%;
+        background-color: color(txt);
+    }
+}
+
+//Navigation
+
+.nav {
+    left: 0;
+    &__bar {
+        grid-template-rows: 85fr 15fr;
+        justify-items: stretch;
         right: 0;
         &__links {
             display: grid;
@@ -271,13 +292,7 @@ input[type='number'] {
         }
     }
     &__bg {
-        display: grid;
-        position: absolute;
         justify-items: left;
-        z-index: 5;
-        top: 50%;
-        height: 100%;
-        background-color: color(txt);
         &::before {
             content: '';
             position: absolute;
@@ -292,27 +307,11 @@ input[type='number'] {
 //Settings
 
 .settings {
-    position: absolute;
-    z-index: 5;
-    display: block;
-    top: 0;
     right: 0;
-    width: 100vw;
-    height: 100vh;
     &__bar {
-        display: grid;
-        position: absolute;
-        grid-template-columns: auto auto;
-        grid-template-rows: 90fr 10fr;
-        align-items: center;
-        justify-items: right;
-        gap: size(reg);
-        padding: 0 2.5vw;
-        z-index: 6;
-        top: 0;
-        right: 0;
-        width: 25vw;
-        height: 100%;
+        justify-items: stretch;
+        left: 0;
+        grid-template-rows: 85fr 15fr;
         * {
             font-family: 'Rubik', sans-serif;
         }
@@ -339,12 +338,10 @@ input[type='number'] {
             display: grid;
             position: relative;
             align-items: center;
-            grid-template-columns: auto auto;
+            grid-template-columns: minmax(min-content, max-content) max-content;
             grid-template-rows: 1fr 1fr 1fr;
-            grid-area: 3 / 1 / 4 / 3;
             row-gap: size(larg);
             column-gap: size(reg);
-            padding: 2vh 0;
             &--left {
                 justify-self: end;
                 text-align: right;
@@ -360,34 +357,31 @@ input[type='number'] {
                 border-radius: size(small);
                 height: size(popup-txt);
             }
-            &__lang {
-                line-height: size(popup-txt);
+            &__form {
                 height: auto;
-                padding: calc(3px + 0.5vh + 0.25vw);
+                appearance: none;
                 box-sizing: border-box;
+                padding: 0.4em;
+            }
+            &__lang {
                 > option {
-                    height: size(popup-txt-small);
-                    font-size: size(popup-txt-small);
                     background-color: color(bg-highlight);
                 }
             }
-            &__lvl {
-                padding: calc(3px + 0.5vh + 0.25vw) 0;
-                height: size(popup-txt);
-                appearance: none;
-                width: auto;
-            }
             &__tooltip {
-                position: relative;
-                height: size(popup-txt);
-                width: size(popup-txt);
+                position: absolute;
+                display: none;
+                height: auto;
+                width: auto;
                 @include no-focus-outline;
                 &__lbl {
+                    position: relative;
                     color: color(txt);
                     background-color: color(bg-highlight);
                     height: size(popup-txt);
                     width: size(popup-txt);
                     padding: calc(3px + 0.5vh + 0.25vw);
+                    overflow: hidden;
                     > * {
                         opacity: 0;
                     }
@@ -401,19 +395,32 @@ input[type='number'] {
                 }
             }
         }
-        &__reset {
-        }
-        &__save {
+        &__buttons {
+            display: grid;
+            position: relative;
+            align-items: stretch;
+            justify-items: stretch;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 size(reg);
+            & button {
+            }
+            &__reset {
+                //TODO Styling
+            }
+            &__save {
+                //TODO Styling
+            }
         }
     }
     &__bg {
-        display: block;
-        position: absolute;
-        z-index: 5;
-        top: 50%;
-        right: -90vw;
-        width: 70vw;
-        height: 100%;
-        background-color: color(txt);
+        justify-items: right;
+        &::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 20vw;
+            background-color: color(txt);
+            left: 99%;
+        }
     }
 }

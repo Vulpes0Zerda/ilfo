@@ -82,9 +82,9 @@ const Menu = () => {
             ></motion.div>
             <AnimatePresence>
                 {menuState === 'CLICK' && (
-                    <div className="nav">
+                    <div className="nav sb">
                         <motion.div
-                            className="nav__bg"
+                            className="nav__bg sb__bg"
                             key="navBg"
                             variants={menuBg}
                             animate={menuState}
@@ -92,7 +92,7 @@ const Menu = () => {
                             exit="HOVER"
                         >
                             <motion.nav
-                                className="nav__bar"
+                                className="nav__bar sb__bar"
                                 key="navBar"
                                 variants={dialog}
                                 animate={menuState}
