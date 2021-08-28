@@ -72,17 +72,17 @@ button:focus {
   outline: 0px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .noselect {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type='number'] {
@@ -177,6 +177,78 @@ input[type='number'] {
 
 .content {
   position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  justify-items: stretch;
+  gap: 1vw;
+  padding: 1vw;
+}
+
+.tree {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  height: 100%;
+  -ms-grid-rows: max-content auto;
+      grid-template-rows: -webkit-max-content auto;
+      grid-template-rows: max-content auto;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  justify-items: stretch;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+}
+
+.tree__header {
+  position: relative;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+  white-space: pre-wrap;
+}
+
+.tree__body {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 4fr;
+      grid-template-columns: 1fr 4fr;
+  -ms-grid-row-align: stretch;
+      align-self: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  justify-items: stretch;
+  white-space: pre-wrap;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+}
+
+.tree__body__traits {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[7];
+      grid-template-rows: repeat(7, 1fr);
+}
+
+.tree__body__traits--passiv {
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.tree__body__traits--activ {
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
 }
 
 .sb {
@@ -198,11 +270,11 @@ input[type='number'] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  justify-items: stretch;
   padding: 0 2vh;
   z-index: 6;
   height: 100%;
   top: 0;
-  right: 0;
 }
 
 .sb__bg {
@@ -222,7 +294,6 @@ input[type='number'] {
 .nav__bar {
   -ms-grid-rows: 85fr 15fr;
       grid-template-rows: 85fr 15fr;
-  justify-items: stretch;
   right: 0;
 }
 
@@ -305,7 +376,6 @@ input[type='number'] {
 }
 
 .settings__bar {
-  justify-items: stretch;
   left: 0;
   -ms-grid-rows: 85fr 15fr;
       grid-template-rows: 85fr 15fr;
@@ -346,17 +416,15 @@ input[type='number'] {
   display: -ms-grid;
   display: grid;
   position: relative;
+  -ms-grid-columns: auto max-content;
+      grid-template-columns: auto -webkit-max-content;
+      grid-template-columns: auto max-content;
+  gap: 3vh;
+  justify-items: right;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-grid-columns: minmax(min-content, max-content) max-content;
-      grid-template-columns: minmax(-webkit-min-content, -webkit-max-content) -webkit-max-content;
-      grid-template-columns: minmax(min-content, max-content) max-content;
-  -ms-grid-rows: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-  row-gap: calc(10px + 1.5vh + 0.75vw);
-  -webkit-column-gap: calc(7px + 1vh + 0.5vw);
-          column-gap: calc(7px + 1vh + 0.5vw);
+  width: 100%;
 }
 
 .settings__bar__options--left {
@@ -385,6 +453,10 @@ input[type='number'] {
           appearance: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  padding: 0.4em 0;
+}
+
+.settings__bar__options__lang {
   padding: 0.4em;
 }
 
@@ -430,12 +502,17 @@ input[type='number'] {
   display: -ms-grid;
   display: grid;
   position: relative;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
   justify-items: stretch;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
+  -ms-grid-column-align: center;
+      justify-self: center;
   gap: 0 calc(7px + 1vh + 0.5vw);
 }
 

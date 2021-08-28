@@ -20,6 +20,7 @@ $sizes: (
     popup-header: calc(14px + 2.5vh + 0.75vw),
     popup-button: calc(8px + 1.8vh + 0.4vw),
     sizing-header: calc(8px + 1.5vh + 0.5vw),
+    content-space: 1vw,
 );
 
 //
@@ -121,14 +122,17 @@ button {
     margin: 0;
     @include no-focus-outline();
 }
+
+.noselect {
+    user-select: none;
+}
+
+//Fix for Chromium
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-.noselect {
-    user-select: none;
 }
 
 //Fix for Firefox
@@ -205,7 +209,56 @@ input[type='number'] {
 
 .content {
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: stretch;
+    justify-items: stretch;
+    gap: size(content-space);
+    padding: size(content-space);
     //TODO Styling for Trait Tree
+}
+
+.tree {
+    position: relative;
+    display: grid;
+    height: 100%;
+    grid-template-rows: max-content auto;
+    align-items: stretch;
+    justify-items: stretch;
+    align-content: stretch;
+    &__b {
+    }
+    &__r {
+    }
+    &__y {
+    }
+    &__header {
+        position: relative;
+        align-self: start;
+        white-space: pre-wrap;
+    }
+    &__body {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        align-self: stretch;
+        align-items: stretch;
+        justify-items: stretch;
+        white-space: pre-wrap;
+        justify-content: stretch;
+        align-content: stretch;
+        &__traits {
+            position: relative;
+            display: grid;
+            grid-template-rows: repeat(7, 1fr);
+            &--passiv {
+                grid-template-columns: 1fr;
+            }
+            &--activ {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    }
 }
 
 //Sidebars
@@ -222,11 +275,11 @@ input[type='number'] {
         position: relative;
         grid-template-columns: minmax(max-content, 30vw);
         align-items: center;
+        justify-items: stretch;
         padding: 0 2vh;
         z-index: 6;
         height: 100%;
         top: 0;
-        right: 0;
     }
     &__bg {
         display: grid;
@@ -244,7 +297,6 @@ input[type='number'] {
     left: 0;
     &__bar {
         grid-template-rows: 85fr 15fr;
-        justify-items: stretch;
         right: 0;
         &__links {
             display: grid;
@@ -309,7 +361,6 @@ input[type='number'] {
 .settings {
     right: 0;
     &__bar {
-        justify-items: stretch;
         left: 0;
         grid-template-rows: 85fr 15fr;
         * {
@@ -337,11 +388,11 @@ input[type='number'] {
         &__options {
             display: grid;
             position: relative;
+            grid-template-columns: auto max-content;
+            gap: 3vh;
+            justify-items: right;
             align-items: center;
-            grid-template-columns: minmax(min-content, max-content) max-content;
-            grid-template-rows: 1fr 1fr 1fr;
-            row-gap: size(larg);
-            column-gap: size(reg);
+            width: 100%;
             &--left {
                 justify-self: end;
                 text-align: right;
@@ -361,9 +412,10 @@ input[type='number'] {
                 height: auto;
                 appearance: none;
                 box-sizing: border-box;
-                padding: 0.4em;
+                padding: 0.4em 0;
             }
             &__lang {
+                padding: 0.4em;
                 > option {
                     background-color: color(bg-highlight);
                 }
@@ -398,9 +450,11 @@ input[type='number'] {
         &__buttons {
             display: grid;
             position: relative;
+            width: min-content;
             align-items: stretch;
             justify-items: stretch;
             grid-template-columns: 1fr 1fr;
+            justify-self: center;
             gap: 0 size(reg);
             & button {
             }
