@@ -39,6 +39,13 @@ body {
       align-content: stretch;
 }
 
+p {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
 h1 {
   font-family: 'Rubik', sans-serif;
   font-size: 2.4rem;
@@ -185,8 +192,8 @@ input[type='number'] {
       -ms-flex-align: stretch;
           align-items: stretch;
   justify-items: stretch;
-  gap: 1vw;
-  padding: 1vw;
+  gap: 1rem;
+  padding: 3rem 1rem;
 }
 
 .tree {
@@ -194,23 +201,49 @@ input[type='number'] {
   display: -ms-grid;
   display: grid;
   height: 100%;
-  -ms-grid-rows: max-content auto;
-      grid-template-rows: -webkit-max-content auto;
-      grid-template-rows: max-content auto;
+  -ms-grid-rows: 40vh auto;
+      grid-template-rows: 40vh auto;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
   justify-items: stretch;
   -ms-flex-line-pack: stretch;
       align-content: stretch;
+  border-width: 0.2vh;
+  border-style: solid;
+  color: #dddddd;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.tree__b {
+  border-color: blue;
+}
+
+.tree__r {
+  border-color: red;
+}
+
+.tree__y {
+  border-color: yellow;
 }
 
 .tree__header {
   position: relative;
-  -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
-      align-self: start;
+  display: -ms-grid;
+  display: grid;
+  /* prettier-ignore */
+  -ms-grid-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+      grid-template-rows: minmax(-webkit-min-content, -webkit-max-content) minmax(-webkit-min-content, -webkit-max-content);
+      grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
   white-space: pre-wrap;
+  text-align: center;
+  overflow: hidden;
+  gap: 1rem;
 }
 
 .tree__body {
@@ -231,6 +264,7 @@ input[type='number'] {
           justify-content: stretch;
   -ms-flex-line-pack: stretch;
       align-content: stretch;
+  gap: 1rem;
 }
 
 .tree__body__traits {
@@ -239,6 +273,7 @@ input[type='number'] {
   display: grid;
   -ms-grid-rows: (1fr)[7];
       grid-template-rows: repeat(7, 1fr);
+  gap: 1rem;
 }
 
 .tree__body__traits--passiv {
@@ -249,6 +284,57 @@ input[type='number'] {
 .tree__body__traits--activ {
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
+}
+
+.tree__body__trait {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  text-align: center;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+}
+
+.tree__body__trait__imgSizing {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  font-size: 100%;
+  width: 4vh;
+  height: 4vh;
+}
+
+.tree__body__trait__imgSizing::after {
+  content: '';
+  position: absolute;
+  display: block;
+  -webkit-box-shadow: inset 0 0 0.15em 0.07em #161616;
+          box-shadow: inset 0 0 0.15em 0.07em #161616;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  border-collapse: separate;
+  border-radius: 0.3rem;
+}
+
+.tree__body__trait__img {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  border-radius: 0.3rem;
 }
 
 .sb {
