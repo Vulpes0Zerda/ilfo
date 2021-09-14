@@ -230,7 +230,7 @@ input[type='number'] {
     position: relative;
     display: grid;
     height: 100%;
-    grid-template-rows: 40vh auto;
+    grid-template-rows: 70vh auto;
     align-items: stretch;
     justify-items: stretch;
     align-content: stretch;
@@ -253,15 +253,34 @@ input[type='number'] {
         display: grid;
         /* prettier-ignore */
         grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+        grid-template-columns: auto;
         align-items: center;
-        justify-items: center;
+        justify-items: stretch;
         white-space: pre-wrap;
         text-align: center;
-        overflow: hidden;
         gap: size(tree-gap);
         &__titel {
         }
         &__content {
+            display: grid;
+            gap: size(tree-gap);
+            align-content: stretch;
+            justify-content: stretch;
+        }
+        &__traits {
+            display: grid;
+            grid-auto-flow: row;
+            gap: size(tree-gap);
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-rows: minmax(0, 1fr);
+            grid-template-columns: minmax(0, min-content);
+            &__titel {
+                position: relative;
+            }
+        }
+        &__trait {
+            justify-items: center;
+            justify-content: center;
         }
     }
     &__body {
@@ -292,7 +311,7 @@ input[type='number'] {
             display: grid;
             text-align: center;
             justify-items: center;
-            align-items: center;
+            align-items: start;
             align-content: stretch;
 
             &__imgSizing {
