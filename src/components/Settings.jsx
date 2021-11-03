@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContext } from 'react'
-import { AnimationContext } from '../GlobalHooks'
+import { AnimationContext } from '../GlobalContext'
 import Options from './settings/Options'
 import ResetButton from './settings/ResetButton'
 import SaveButton from './settings/SaveButton'

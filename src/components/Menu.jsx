@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContext } from 'react'
-import { AnimationContext } from '../GlobalHooks'
+import { AnimationContext } from '../GlobalContext'
 import Navigation from './menu/Navigation'
 import UpToDate from './menu/UpToDate'
 

@@ -1,62 +1,68 @@
-import { PropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 
-const clientMaxSize = (object, boolWidth, boolHeight, boolDiameter) => {
+const clientMaxSize = (object, boolHeight, boolWidth, boolDiameter) => {
     try {
         const obj = object
-        if (!obj.length || !obj[0]) {
-            throw new Error(
-                'Path is either undefined or not a valid path for this operation.',
-            )
-        } else {
-            let result = []
-            let width
-            let height
-            if (boolWidth || boolDiameter) {
-                if (!isNaN(obj[0].clientWidth)) {
-                    for (let i = 0; i < obj.length; i++) {
-                        if (width < obj[i].clientWidth || !width) {
-                            width = obj[i].clientWidth
-                        }
+        let result = { height: null, width: null, diameter: null }
+        let height
+        let width
+        if (boolHeight || boolDiameter) {
+            if (!isNaN(obj[0].clientHeight)) {
+                for (let i = 0; i < obj.length; i++) {
+                    if (height < parseFloat(getComputedStyle(obj[i]).height, 10) || !height) {
+                        height = parseFloat(getComputedStyle(obj[i]).height, 10)
                     }
-                    result.push(width)
-                } else {
-                    throw new Error(`${obj}[0].clientWidth is NaN`)
                 }
-            }
-            if (boolHeight || boolDiameter) {
-                if (!isNaN(obj[0].clientHeight)) {
-                    for (let i = 0; i < obj.length; i++) {
-                        if (height < obj[i].clientHeight || !height) {
-                            height = obj[i].clientHeight
-                        }
-                    }
-                    result.push(height)
-                } else {
-                    throw new Error(`${obj}[0].clientHeight is NaN`)
+                result = {
+                    ...result,
+                    height: height,
                 }
+            } else {
+                throw Error(`${obj}[0].clientHeight is NaN or undefined`)
             }
-            if (boolDiameter) {
-                if (!isNaN(width) || !isNaN(height)) {
-                    const diameter = Math.sqrt(height ** 2 + width ** 2)
-                    result.push(diameter)
-                } else {
-                    throw new Error(
-                        `Internal function error: width or height are NaN`,
-                    )
-                }
-            }
-            return result
         }
-    } catch (e) {
-        console.log(e)
+        if (boolWidth || boolDiameter) {
+            if (!isNaN(obj[0].clientWidth)) {
+                for (let i = 0; i < obj.length; i++) {
+                    if (width < parseFloat(getComputedStyle(obj[i]).width, 10) || !width) {
+                        width = parseFloat(getComputedStyle(obj[i]).width, 10)
+                    }
+                }
+                result = {
+                    ...result,
+                    width: width,
+                }
+            } else {
+                throw Error(`${obj}[0].clientWidth is NaN or undefined`)
+            }
+        }
+        if (boolDiameter) {
+            if (!isNaN(width) || !isNaN(height)) {
+                const diameter = Math.sqrt(height ** 2 + width ** 2)
+                result = {
+                    ...result,
+                    diameter: diameter,
+                }
+            } else {
+                throw Error(`Internal function error: width or height are NaN or undefined`)
+            }
+        }
+        return result
+    } catch (err) {
+        console.log(err)
     }
 }
 
 clientMaxSize.propTypes = {
     object: PropTypes.object.isRequired,
-    boolWidth: PropTypes.bool,
     boolHeight: PropTypes.bool,
+    boolWidth: PropTypes.bool,
     boolDiameter: PropTypes.bool,
+}
+clientMaxSize.defaultProps = {
+    boolHeight: false,
+    boolWidth: false,
+    boolDiameter: false,
 }
 
 export default clientMaxSize

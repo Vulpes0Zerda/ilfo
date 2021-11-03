@@ -124,15 +124,11 @@ input {
 
 button {
     border: none;
-    padding: 1vh;
+    padding: 0;
+    margin: 0;
     background-color: transparent;
     color: color(txt);
-    margin: 0;
     @include no-focus-outline();
-}
-
-.noselect {
-    user-select: none;
 }
 
 //Fix for Chromium
@@ -259,6 +255,7 @@ input[type='number'] {
         white-space: pre-wrap;
         text-align: center;
         gap: size(tree-gap);
+        overflow: hidden;
         &__titel {
         }
         &__content {
@@ -270,16 +267,17 @@ input[type='number'] {
         &__traits {
             display: grid;
             grid-auto-flow: row;
+            justify-content: center !important; /* important for calculation: DON'T CHANGE! */
+            justify-items: center;
             gap: size(tree-gap);
             grid-auto-columns: minmax(0, 1fr);
             grid-auto-rows: minmax(0, 1fr);
-            grid-template-columns: minmax(0, min-content);
+            grid-template-columns: repeat(4, min-content);
             &__titel {
                 position: relative;
             }
         }
         &__trait {
-            justify-items: center;
             justify-content: center;
         }
     }

@@ -1,0 +1,38 @@
+{
+    "initialState": {
+        "menuState": "NONE",
+        "menuHoverState": false,
+        "menuClickState": false,
+        "menuPressState": false,
+        "menuFocusState": false,
+        "settingsState": "NONE",
+        "settingsHoverState": false,
+        "settingsClickState": false,
+        "settingsPressState": false,
+        "settingsFocusState": false
+    },
+    "dialog": {
+        "NONE": { "opacity": 0 },
+        "HOVER": { "opacity": 0 },
+        "CLICK": { "opacity": 1 }
+    },
+    "iconFill": {
+        "NONE": {
+            "fill": "#dedede",
+            "transition": {
+                "duration": 0.2,
+                "type": "linear"
+            }
+        },
+        "HOVER": {
+            "fill": "#161616",
+            "transition": {
+                "duration": 0.25,
+                "type": "linear"
+            }
+        },
+        "CLICK": {
+            "fill": "#161616"
+        }
+    }
+}

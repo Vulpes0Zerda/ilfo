@@ -65,7 +65,6 @@ const Options = ({ minLvl, maxLvl, currentLvl, lang }) => {
 Options.defaultProps = {
     minLvl: 1,
     maxLvl: 130,
-    currentLvl: 130,
     lang: [
         {
             langCode: 'EN',

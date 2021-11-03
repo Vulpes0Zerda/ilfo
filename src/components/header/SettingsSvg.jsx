@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { AnimationContext } from '../../GlobalHooks'
+import { AnimationContext } from '../../GlobalContext'
 import { motion } from 'framer-motion'
 
 const SvgComponent = () => {

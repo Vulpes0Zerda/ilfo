@@ -3,45 +3,8 @@ import Content from './components/Content'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
 import { useReducer } from 'react'
-import { AnimationContext } from './GlobalHooks'
-
-const initialState = {
-    menuState: 'NONE',
-    menuHoverState: false,
-    menuClickState: false,
-    menuPressState: false,
-    menuFocusState: false,
-    settingsState: 'NONE',
-    settingsHoverState: false,
-    settingsClickState: false,
-    settingsPressState: false,
-    settingsFocusState: false,
-}
-
-const dialog = {
-    NONE: { opacity: 0 },
-    HOVER: { opacity: 0 },
-    CLICK: { opacity: 1 },
-}
-const iconFill = {
-    NONE: {
-        fill: '#dedede',
-        transition: {
-            duration: 0.2,
-            type: 'linear',
-        },
-    },
-    HOVER: {
-        fill: '#161616',
-        transition: {
-            duration: 0.25,
-            type: 'linear',
-        },
-    },
-    CLICK: {
-        fill: '#161616',
-    },
-}
+import { AnimationContext } from './GlobalContext'
+import { initialState, dialog, iconFill } from './variables/AnimationVars'
 
 function animationReducer(state, action) {
     switch (action.type) {

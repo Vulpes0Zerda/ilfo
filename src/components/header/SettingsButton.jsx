@@ -1,7 +1,7 @@
 import SettingsSvg from './SettingsSvg'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
-import { AnimationContext } from '../../GlobalHooks'
+import { AnimationContext } from '../../GlobalContext'
 
 const SettingsButton = () => {
     const { dispatch } = useContext(AnimationContext)

@@ -1,7 +1,7 @@
 import MenuLogo from './MenuLogo'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
-import { AnimationContext } from '../../GlobalHooks'
+import { AnimationContext } from '../../GlobalContext'
 
 const MenuButton = () => {
     const { dispatch } = useContext(AnimationContext)
