@@ -13,53 +13,57 @@ const Content = () => {
 
     const refTreeTraits = { b: refHeaderTraitsB, r: refHeaderTraitsR, y: refHeaderTraitsY }
     const treeClass = Beorning
-    const [countState, setCountState] = useEventState(0)
-    //!rerenders too much. Check rerender cycle
+    const [dimensions, setDimensions] = useState(0)
+    //*function for checking how many Traits (same size) fit into the
+    function handleResize() {
+        try {
+            const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, true, true)
+            const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, true, true)
+            const maxSizeY = clientMaxSize(refHeaderTraitsY.current.children, true, true)
+            const sizeHeaderTraits = {
+                b: { ...maxSizeB },
+                r: { ...maxSizeR },
+                y: { ...maxSizeY },
+            }
+            const sizeTree = {
+                height: refTree.current.clientHeight,
+                width: refTree.current.clientWidth,
+            }
+            for (let idx in sizeHeaderTraits) {
+                const widthRes =
+                    sizeTree.width -
+                    parseFloat(getComputedStyle(refTree.current).padding, 10) * 2 -
+                    parseFloat(getComputedStyle(refTree.current).borderWidth, 10) * 2
+                let floorRes = Math.floor(widthRes / sizeHeaderTraits[idx].width)
+                if (
+                    //prettier-ignore
+                    (floorRes - 1) * parseFloat(getComputedStyle(refTreeTraits[idx].current).gap, 10) + floorRes * sizeHeaderTraits[idx].width >= widthRes
+                ) {
+                    floorRes -= 1
+                }
+                if (floorRes < 1) {
+                    floorRes = 1
+                }
+                setDimensions(floorRes)
+                console.log(dimensions)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    useLayoutEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    })
 
     useLayoutEffect(() => {
-        const fireThis = () => {
-            //! Ref sometimes just is undefined (ask SO about it)
-            //Changed createRef to useRef (probably fixed it)
-            try {
-                const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, true, true)
-                const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, true, true)
-                const maxSizeY = clientMaxSize(refHeaderTraitsY.current.children, true, true)
-                const sizeHeaderTraits = {
-                    b: { ...maxSizeB },
-                    r: { ...maxSizeR },
-                    y: { ...maxSizeY },
-                }
-                const sizeTree = {
-                    height: refTree.current.clientHeight,
-                    width: refTree.current.clientWidth,
-                }
-                for (let idx in sizeHeaderTraits) {
-                    const widthRes =
-                        sizeTree.width -
-                        parseFloat(getComputedStyle(refTree.current).padding, 10) * 2 -
-                        parseFloat(getComputedStyle(refTree.current).borderWidth, 10) * 2
-                    let floorRes = Math.floor(widthRes / sizeHeaderTraits[idx].width)
-                    if (
-                        //prettier-ignore
-                        (floorRes - 1) * parseFloat(getComputedStyle(refTreeTraits[idx].current).gap, 10) + floorRes * sizeHeaderTraits[idx].width >= widthRes
-                    ) {
-                        floorRes -= 1
-                    }
-                    if (floorRes < 1) {
-                        floorRes = 1
-                    }
-                    setCountState(++countState)
-                }
-                console.log(countState)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fireThis()
-        window.addEventListener('resize', fireThis)
-        return window.addEventListener('resize', fireThis)
+        setTimeout(() => {
+            handleResize()
+        }, 100)
     }, [])
-
+    //!does not trigger after loading and is bcs of that allways 0
     return (
         <RefContext.Provider
             value={{
