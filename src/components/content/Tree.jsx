@@ -3,7 +3,7 @@ import TreeBody from './TreeBody'
 import { useContext } from 'react'
 import { RefContext } from '../../GlobalContext'
 
-const Tree = ({ treeClass, treeColor, treeRef }) => {
+const Tree = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
     const { refTree } = useContext(RefContext)
     //TODO 9 Programming logic for Trait tree for Left/Right Click [+/- Points to traits]
     //TODO 6 Programming logic for Trait tree for Touch/- Button under tree for Mobile [+/- Points to traits]
@@ -16,6 +16,7 @@ const Tree = ({ treeClass, treeColor, treeRef }) => {
                 treeClass={treeClass}
                 treeColor={treeColor}
                 treeRef={treeRef}
+                treeTraitStyle={treeTraitStyle}
             />
             <TreeBody treeClass={treeClass} treeColor={treeColor} />
         </div>

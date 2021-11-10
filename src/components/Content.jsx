@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect, useState, useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import Tree from './content/Tree'
 import Beorning from '../classes/Beorning.json'
 import { RefContext } from '../GlobalContext'
@@ -10,12 +10,12 @@ const Content = () => {
     const refHeaderTraitsB = useRef(null)
     const refHeaderTraitsR = useRef(null)
     const refHeaderTraitsY = useRef(null)
-
     const refTreeTraits = { b: refHeaderTraitsB, r: refHeaderTraitsR, y: refHeaderTraitsY }
     const treeClass = Beorning
-    const [dimensions, setDimensions] = useState(0)
-    //*function for checking how many Traits (same size) fit into the
-    function handleResize() {
+    const [treeTraitStyle, setTreeTraitStyle] = useEventState(0)
+
+    //*function for checking how many Traits (same size) fit into the trait tree header
+    function getSize() {
         try {
             const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, true, true)
             const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, true, true)
@@ -44,26 +44,25 @@ const Content = () => {
                 if (floorRes < 1) {
                     floorRes = 1
                 }
-                setDimensions(floorRes)
-                console.log(dimensions)
+                setTreeTraitStyle({ ...treeTraitStyle.current, [idx]: floorRes })
             }
+            console.log(treeTraitStyle.current)
         } catch (err) {
             console.log(err)
         }
     }
+
     useLayoutEffect(() => {
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', getSize)
         return () => {
-            window.removeEventListener('resize', handleResize)
+            window.removeEventListener('resize', getSize)
         }
     })
 
     useLayoutEffect(() => {
-        setTimeout(() => {
-            handleResize()
-        }, 100)
+        getSize()
     }, [])
-    //!does not trigger after loading and is bcs of that allways 0
+
     return (
         <RefContext.Provider
             value={{
@@ -71,9 +70,24 @@ const Content = () => {
             }}
         >
             <div className="content">
-                <Tree treeClass={treeClass} treeColor="b" treeRef={refHeaderTraitsB} />
-                <Tree treeClass={treeClass} treeColor="r" treeRef={refHeaderTraitsR} />
-                <Tree treeClass={treeClass} treeColor="y" treeRef={refHeaderTraitsY} />
+                <Tree
+                    treeClass={treeClass}
+                    treeColor="b"
+                    treeRef={refHeaderTraitsB}
+                    treeTraitStyle={treeTraitStyle.current.b}
+                />
+                <Tree
+                    treeClass={treeClass}
+                    treeColor="r"
+                    treeRef={refHeaderTraitsR}
+                    treeTraitStyle={treeTraitStyle.current.r}
+                />
+                <Tree
+                    treeClass={treeClass}
+                    treeColor="y"
+                    treeRef={refHeaderTraitsY}
+                    treeTraitStyle={treeTraitStyle.current.y}
+                />
             </div>
         </RefContext.Provider>
     )
