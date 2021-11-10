@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 
+//*Gets the max Height/Width/Diameter from a array of DOMElements
 const clientMaxSize = (object, boolHeight, boolWidth, boolDiameter) => {
     try {
         const obj = object
