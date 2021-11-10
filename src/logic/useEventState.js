@@ -1,14 +1,16 @@
 import { useState, useRef } from 'react'
 
-/* doesn't do anything if you setEventState inside of the eventhandler (bcs the event handler can't talk to the function outside of itself)*/
+//*Keeps track of the state of a function called from a eventhandler or other non
 const useEventState = (initState) => {
     const [_eventState, _setEventState] = useState(initState)
     const eventState = useRef(_eventState)
-    const setEventState = (newState) => {
-        eventState.current = newState
-        _setEventState(newState)
+    const setEventState = (updatedState) => {
+        eventState.current = updatedState
+        _setEventState(updatedState)
     }
-    return [eventState.current, setEventState]
+    //User needs to call eventState.current bcs current has to be called live to get newest result
+    //TODO: Figure out a way to get .current called live without having to call a function
+    return [eventState, setEventState]
 }
 
 export default useEventState
