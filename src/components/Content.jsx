@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import Tree from './content/Tree'
 import Beorning from '../classes/Beorning.json'
 import { RefContext } from '../GlobalContext'
@@ -12,14 +12,14 @@ const Content = () => {
     const refHeaderTraitsY = useRef(null)
     const refTreeTraits = { b: refHeaderTraitsB, r: refHeaderTraitsR, y: refHeaderTraitsY }
     const treeClass = Beorning
-    const [treeTraitStyle, setTreeTraitStyle] = useEventState(0)
+    const [treeTraitStyle, setTreeTraitStyle] = useState(0)
 
     //*function for checking how many Traits (same size) fit into the trait tree header
     function getSize() {
         try {
-            const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, true, true)
-            const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, true, true)
-            const maxSizeY = clientMaxSize(refHeaderTraitsY.current.children, true, true)
+            const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, false, true)
+            const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, false, true)
+            const maxSizeY = clientMaxSize(refHeaderTraitsY.current.children, false, true)
             const sizeHeaderTraits = {
                 b: { ...maxSizeB },
                 r: { ...maxSizeR },
@@ -29,7 +29,9 @@ const Content = () => {
                 height: refTree.current.clientHeight,
                 width: refTree.current.clientWidth,
             }
+            let gridReps = {}
             for (let idx in sizeHeaderTraits) {
+                let arr = []
                 const widthRes =
                     sizeTree.width -
                     parseFloat(getComputedStyle(refTree.current).padding, 10) * 2 -
@@ -44,9 +46,16 @@ const Content = () => {
                 if (floorRes < 1) {
                     floorRes = 1
                 }
-                setTreeTraitStyle({ ...treeTraitStyle.current, [idx]: floorRes })
+                if (floorRes > refTreeTraits[idx].current.children.length) {
+                    floorRes = refTreeTraits[idx].current.children.length
+                }
+                for (let i = 0; i < floorRes; i++) {
+                    arr.push('1fr')
+                }
+                gridReps = { ...gridReps, [idx]: { gridTemplateColumns: arr.join(' ') } }
+                console.log(refTreeTraits[idx].current.children.length)
             }
-            console.log(treeTraitStyle.current)
+            setTreeTraitStyle(gridReps)
         } catch (err) {
             console.log(err)
         }
@@ -74,19 +83,19 @@ const Content = () => {
                     treeClass={treeClass}
                     treeColor="b"
                     treeRef={refHeaderTraitsB}
-                    treeTraitStyle={treeTraitStyle.current.b}
+                    treeTraitStyle={treeTraitStyle}
                 />
                 <Tree
                     treeClass={treeClass}
                     treeColor="r"
                     treeRef={refHeaderTraitsR}
-                    treeTraitStyle={treeTraitStyle.current.r}
+                    treeTraitStyle={treeTraitStyle}
                 />
                 <Tree
                     treeClass={treeClass}
                     treeColor="y"
                     treeRef={refHeaderTraitsY}
-                    treeTraitStyle={treeTraitStyle.current.y}
+                    treeTraitStyle={treeTraitStyle}
                 />
             </div>
         </RefContext.Provider>

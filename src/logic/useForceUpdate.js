@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 //*Force Rerender on Component
-function useForceUpdate() {
+const useForceUpdate = () => {
     const [state, setState] = useState(0)
     function Update() {
         setState(state + 1)

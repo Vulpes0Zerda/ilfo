@@ -1,11 +1,13 @@
-const TreeHeader = ({ treeClass, treeColor, treeRef }) => {
-    const mapHeaderText = (
+import { useState, useLayoutEffect } from 'react'
+
+const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
+    function mapHeaderText(
         mapPath,
         textElement,
         breakElement,
         //TODO 0 work {argsName, argsValue} in so that you can pass an Array in and it renders out a argsName and Value pair (prob. with map((value,index)=>`${value} ${argsValue[index]}` or something like that))
-    ) =>
-        Array.isArray(mapPath)
+    ) {
+        return Array.isArray(mapPath)
             ? mapPath
                   .map((currentItem, idx) =>
                       currentItem !== ''
@@ -16,6 +18,10 @@ const TreeHeader = ({ treeClass, treeColor, treeRef }) => {
                   )
                   .join('')
             : `<${textElement}>${mapPath}</${textElement}>`
+    }
+    useLayoutEffect(() => {
+        console.log(treeTraitStyle[treeColor])
+    }, [treeTraitStyle])
     return (
         <div className="tree__header">
             <div className="tree__header__titel">
@@ -45,7 +51,11 @@ const TreeHeader = ({ treeClass, treeColor, treeRef }) => {
                 ) : (
                     <></>
                 )}
-                <div className="tree__header__traits" ref={treeRef}>
+                <div
+                    className="tree__header__traits"
+                    ref={treeRef}
+                    style={treeTraitStyle[treeColor]}
+                >
                     {Array.isArray(treeClass[treeColor].header.treeSkill) ? (
                         treeClass[treeColor].header.treeSkill.map((currentItem, idx) => (
                             <div className="tree__body__trait tree__header__trait" key={idx}>
