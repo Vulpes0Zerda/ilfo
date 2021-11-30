@@ -2,9 +2,11 @@ import Header from './components/Header'
 import Content from './components/Content'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
+import Tooltip from './components/Tooltip'
 import { useReducer } from 'react'
 import { AnimationContext } from './GlobalContext'
 import { initialState, dialog, iconFill } from './variables/AnimationVars'
+import { isHover, hoverTarget } from './variables/TooltipVars'
 
 function animationReducer(state, action) {
     switch (action.type) {
@@ -81,6 +83,7 @@ const App = () => {
                 <Settings />
                 <Header />
                 <Content />
+                {isHover && <Tooltip hoverTarget={hoverTarget} />}
             </AnimationContext.Provider>
         </div>
     )
