@@ -53,7 +53,6 @@ const Content = () => {
                     arr.push('1fr')
                 }
                 gridReps = { ...gridReps, [idx]: { gridTemplateColumns: arr.join(' ') } }
-                console.log(refTreeTraits[idx].current.children.length)
             }
             setTreeTraitStyle(gridReps)
         } catch (err) {
