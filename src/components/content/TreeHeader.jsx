@@ -1,5 +1,3 @@
-import { useState, useLayoutEffect } from 'react'
-
 const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
     function mapHeaderText(
         mapPath,
@@ -19,9 +17,39 @@ const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
                   .join('')
             : `<${textElement}>${mapPath}</${textElement}>`
     }
-    useLayoutEffect(() => {
-        console.log(treeTraitStyle[treeColor])
-    }, [treeTraitStyle])
+    function mapHeaderTraits() {
+        if (Array.isArray(treeClass[treeColor].header.treeSkill)) {
+            return treeClass[treeColor].header.treeSkill.map((currentItem, idx) => (
+                <div className="tree__body__trait tree__header__trait" key={idx}>
+                    <div className="tree__body__trait__imgSizing">
+                        <img
+                            className="tree__body__trait__img"
+                            src={currentItem.treeSkillPicture}
+                            alt={currentItem.treeSkillName}
+                        />
+                    </div>
+                    <div className="tree__body__trait__name">{currentItem.treeSkillName}</div>
+                </div>
+            ))
+        } else if (treeClass[treeColor].header.treeSkill !== '') {
+            return (
+                <div className="tree__body__trait tree__header__trait">
+                    <div className="tree__body__trait__imgSizing">
+                        <img
+                            className="tree__body__trait__img"
+                            src={treeClass[treeColor].header.treeSkill.treeSkillPicture}
+                            alt={treeClass[treeColor].header.treeSkill.treeSkillName}
+                        />
+                    </div>
+                    <div className="tree__body__trait__name">
+                        {treeClass[treeColor].header.treeSkill.treeSkillName}
+                    </div>
+                </div>
+            )
+        } else {
+            return <div className="tree__body__trait tree__header__trait"></div>
+        }
+    }
     return (
         <div className="tree__header">
             <div className="tree__header__titel">
@@ -56,35 +84,7 @@ const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
                     ref={treeRef}
                     style={treeTraitStyle[treeColor]}
                 >
-                    {Array.isArray(treeClass[treeColor].header.treeSkill) ? (
-                        treeClass[treeColor].header.treeSkill.map((currentItem, idx) => (
-                            <div className="tree__body__trait tree__header__trait" key={idx}>
-                                <div className="tree__body__trait__imgSizing">
-                                    <img
-                                        className="tree__body__trait__img"
-                                        src={currentItem.treeSkillPicture}
-                                        alt={currentItem.treeSkillName}
-                                    />
-                                </div>
-                                <div className="tree__body__trait__name">
-                                    {currentItem.treeSkillName}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="tree__body__trait tree__header__trait">
-                            <div className="tree__body__trait__imgSizing">
-                                <img
-                                    className="tree__body__trait__img"
-                                    src={treeClass[treeColor].header.treeSkill.treeSkillPicture}
-                                    alt={treeClass[treeColor].header.treeSkill.treeSkillName}
-                                />
-                            </div>
-                            <div className="tree__body__trait__name">
-                                {treeClass[treeColor].header.treeSkill.treeSkillName}
-                            </div>
-                        </div>
-                    )}
+                    {mapHeaderTraits()}
                 </div>
             </div>
         </div>
