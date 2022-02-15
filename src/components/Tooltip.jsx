@@ -2,20 +2,21 @@ import React from 'react'
 
 const Tooltip = ({ hoverTarget }) => {
     const t = hoverTarget
-    function mapTooltip(params) {}
+    function mapTooltip(t) {
+        let tooltipBody = []
+
+        for (let i = 0; i < i; i++) {}
+        return tooltipBody
+    }
     return (
         <div className="tooltip">
             <div className="tooltip__header">
-                <div className="tooltip__header__trait__imgSizing">
-                    <img
-                        className="tooltip__header__trait__img"
-                        src={t.traitPicture}
-                        alt={t.traitName}
-                    />
+                <div className="tooltip__header__imgSizing">
+                    <img className="tooltip__header__img" src={t.picture} alt={t.name} />
                 </div>
-                <div className="tooltip__header__trait__name">{t.traitName}</div>
+                <div className="tooltip__header__name">{t.name}</div>
             </div>
-            <div className="tooltip__body"></div>
+            <div className="tooltip__body">{mapTooltip(t)}</div>
         </div>
     )
 }

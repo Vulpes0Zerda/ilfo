@@ -2,6 +2,7 @@ import TreeHeader from './TreeHeader'
 import TreeBody from './TreeBody'
 import { useContext } from 'react'
 import { RefContext } from '../../GlobalContext'
+import ErrorBoundary from '../../errorHandling/ErrorBoundry'
 
 const Tree = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
     const { refTree } = useContext(RefContext)
@@ -12,13 +13,17 @@ const Tree = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
 
     return (
         <div className={`tree__${treeColor} tree`} ref={refTree}>
-            <TreeHeader
-                treeClass={treeClass}
-                treeColor={treeColor}
-                treeRef={treeRef}
-                treeTraitStyle={treeTraitStyle}
-            />
-            <TreeBody treeClass={treeClass} treeColor={treeColor} />
+            <ErrorBoundary>
+                <TreeHeader
+                    treeClass={treeClass}
+                    treeColor={treeColor}
+                    treeRef={treeRef}
+                    treeTraitStyle={treeTraitStyle /* rename this variable */}
+                />
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <TreeBody treeClass={treeClass} treeColor={treeColor} />
+            </ErrorBoundary>
         </div>
     )
 }

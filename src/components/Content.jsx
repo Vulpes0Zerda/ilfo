@@ -3,20 +3,28 @@ import Tree from './content/Tree'
 import Beorning from '../classes/Beorning.json'
 import { RefContext } from '../GlobalContext'
 import clientMaxSize from '../logic/clientMaxSize'
-import useEventState from '../logic/useEventState'
+import Tooltip from '../components/Tooltip'
+import ErrorBoundary from '../errorHandling/ErrorBoundry'
 
 const Content = () => {
     const refTree = useRef(null)
     const refHeaderTraitsB = useRef(null)
     const refHeaderTraitsR = useRef(null)
     const refHeaderTraitsY = useRef(null)
+    //TODO: Clean this up: refHeaderTraits = useRef({b:{}, r:{}, y:{}})
     const refTreeTraits = { b: refHeaderTraitsB, r: refHeaderTraitsR, y: refHeaderTraitsY }
     const treeClass = Beorning
     const [treeTraitStyle, setTreeTraitStyle] = useState(0)
+    const [traitHover, setTraitHover] = useState({
+        isHover: true,
+        hoverTarget: treeClass.b.traits.passiv[0],
+    })
 
     //*function for checking how many Traits (same size) fit into the trait tree header
+    //Output: A string which can be inserted into a react style attribute
     function getSize() {
         try {
+            //TODO: Loop this when refHeaderTraits is cleaned up
             const maxSizeB = clientMaxSize(refHeaderTraitsB.current.children, false, true)
             const maxSizeR = clientMaxSize(refHeaderTraitsR.current.children, false, true)
             const maxSizeY = clientMaxSize(refHeaderTraitsY.current.children, false, true)
@@ -52,6 +60,7 @@ const Content = () => {
                 for (let i = 0; i < floorRes; i++) {
                     arr.push('1fr')
                 }
+                //TODO: fill in padding if maxWidth * refTree.length < width is
                 gridReps = { ...gridReps, [idx]: { gridTemplateColumns: arr.join(' ') } }
             }
             setTreeTraitStyle(gridReps)
@@ -78,24 +87,33 @@ const Content = () => {
             }}
         >
             <div className="content">
-                <Tree
-                    treeClass={treeClass}
-                    treeColor="b"
-                    treeRef={refHeaderTraitsB}
-                    treeTraitStyle={treeTraitStyle}
-                />
-                <Tree
-                    treeClass={treeClass}
-                    treeColor="r"
-                    treeRef={refHeaderTraitsR}
-                    treeTraitStyle={treeTraitStyle}
-                />
-                <Tree
-                    treeClass={treeClass}
-                    treeColor="y"
-                    treeRef={refHeaderTraitsY}
-                    treeTraitStyle={treeTraitStyle}
-                />
+                <ErrorBoundary>
+                    <Tree
+                        treeClass={treeClass}
+                        treeColor="b"
+                        treeRef={refHeaderTraitsB}
+                        treeTraitStyle={treeTraitStyle}
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <Tree
+                        treeClass={treeClass}
+                        treeColor="r"
+                        treeRef={refHeaderTraitsR}
+                        treeTraitStyle={treeTraitStyle}
+                    />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <Tree
+                        treeClass={treeClass}
+                        treeColor="y"
+                        treeRef={refHeaderTraitsY}
+                        treeTraitStyle={treeTraitStyle}
+                    />
+                </ErrorBoundary>
+                {/* <ErrorBoundary>
+                    {traitHover.isHover && <Tooltip hoverTarget={traitHover.hoverTarget} />}
+                </ErrorBoundary> */}
             </div>
         </RefContext.Provider>
     )

@@ -2,73 +2,75 @@ import Header from './components/Header'
 import Content from './components/Content'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
-import Tooltip from './components/Tooltip'
+
 import { useReducer } from 'react'
 import { AnimationContext } from './GlobalContext'
-import { initialState, dialog, iconFill } from './variables/AnimationVars'
-import { isHover, hoverTarget } from './variables/TooltipVars'
-
-function animationReducer(state, action) {
-    switch (action.type) {
-        case 'MENU-HOVER-TOGGLE':
-            return {
-                ...state,
-                menuHoverState: !state.menuHoverState,
-                menuState: !state.menuClickState
-                    ? state.menuHoverState
-                        ? (state.menuState = 'NONE')
-                        : (state.menuState = 'HOVER')
-                    : state.menuState,
-            }
-        case 'MENU-PRESS-TOGGLE':
-            return {
-                ...state,
-                menuHoverState: !state.menuHoverState,
-                menuState: !state.menuClickState
-                    ? state.menuHoverState
-                        ? (state.menuState = 'NONE')
-                        : (state.menuState = 'HOVER')
-                    : state.menuState,
-            }
-        case 'MENU-CLICK-TOGGLE':
-            return {
-                ...state,
-                menuClickState: !state.menuClickState,
-                menuState: !state.menuClickState
-                    ? (state.menuState = 'CLICK')
-                    : state.menuHoverState
-                    ? (state.menuState = 'HOVER')
-                    : (state.menuState = 'NONE'),
-            }
-        case 'SETTINGS-HOVER-TOGGLE':
-            return {
-                ...state,
-                settingsHoverState: !state.settingsHoverState,
-                settingsState: !state.settingsClickState
-                    ? state.settingsHoverState
-                        ? (state.settingsState = 'NONE')
-                        : (state.settingsState = 'HOVER')
-                    : state.settingsState,
-            }
-        case 'SETTINGS-CLICK-TOGGLE':
-            return {
-                ...state,
-                settingsClickState: !state.settingsClickState,
-                settingsState: !state.settingsClickState
-                    ? (state.settingsState = 'CLICK')
-                    : state.settingsHoverState
-                    ? (state.settingsState = 'HOVER')
-                    : (state.settingsState = 'NONE'),
-            }
-        default:
-            return state
-    }
-    //TODO Still needs Focus state
-    //With case 'XYZ-FOCUS-TOGGLE'%
-}
+import AnimationVars from './variables/AnimationVars'
 
 const App = () => {
+    const initialState = AnimationVars.initialState
+    const dialog = AnimationVars.dialog
+    const iconFill = AnimationVars.iconFill
     const [state, dispatch] = useReducer(animationReducer, initialState)
+
+    function animationReducer(state, action) {
+        switch (action.type) {
+            case 'MENU-HOVER-TOGGLE':
+                return {
+                    ...state,
+                    menuHoverState: !state.menuHoverState,
+                    menuState: !state.menuClickState
+                        ? state.menuHoverState
+                            ? (state.menuState = 'NONE')
+                            : (state.menuState = 'HOVER')
+                        : state.menuState,
+                }
+            case 'MENU-PRESS-TOGGLE':
+                return {
+                    ...state,
+                    menuHoverState: !state.menuHoverState,
+                    menuState: !state.menuClickState
+                        ? state.menuHoverState
+                            ? (state.menuState = 'NONE')
+                            : (state.menuState = 'HOVER')
+                        : state.menuState,
+                }
+            case 'MENU-CLICK-TOGGLE':
+                return {
+                    ...state,
+                    menuClickState: !state.menuClickState,
+                    menuState: !state.menuClickState
+                        ? (state.menuState = 'CLICK')
+                        : state.menuHoverState
+                        ? (state.menuState = 'HOVER')
+                        : (state.menuState = 'NONE'),
+                }
+            case 'SETTINGS-HOVER-TOGGLE':
+                return {
+                    ...state,
+                    settingsHoverState: !state.settingsHoverState,
+                    settingsState: !state.settingsClickState
+                        ? state.settingsHoverState
+                            ? (state.settingsState = 'NONE')
+                            : (state.settingsState = 'HOVER')
+                        : state.settingsState,
+                }
+            case 'SETTINGS-CLICK-TOGGLE':
+                return {
+                    ...state,
+                    settingsClickState: !state.settingsClickState,
+                    settingsState: !state.settingsClickState
+                        ? (state.settingsState = 'CLICK')
+                        : state.settingsHoverState
+                        ? (state.settingsState = 'HOVER')
+                        : (state.settingsState = 'NONE'),
+                }
+            default:
+                return state
+        }
+        //TODO Still needs Focus state
+        //With case 'XYZ-FOCUS-TOGGLE'%
+    }
     return (
         <div className="App">
             <AnimationContext.Provider
@@ -83,7 +85,6 @@ const App = () => {
                 <Settings />
                 <Header />
                 <Content />
-                {isHover && <Tooltip hoverTarget={hoverTarget} />}
             </AnimationContext.Provider>
         </div>
     )

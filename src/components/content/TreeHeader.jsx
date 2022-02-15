@@ -1,94 +1,70 @@
-const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
-    function mapHeaderText(
-        mapPath,
-        textElement,
-        breakElement,
-        //TODO 0 work {argsName, argsValue} in so that you can pass an Array in and it renders out a argsName and Value pair (prob. with map((value,index)=>`${value} ${argsValue[index]}` or something like that))
-    ) {
-        return Array.isArray(mapPath)
-            ? mapPath
-                  .map((currentItem, idx) =>
-                      currentItem !== ''
-                          ? `<${textElement} key=${idx}>${currentItem}</${textElement}>`
-                          : breakElement
-                          ? `<${breakElement} />`
-                          : ``,
-                  )
-                  .join('')
-            : `<${textElement}>${mapPath}</${textElement}>`
-    }
-    function mapHeaderTraits() {
-        if (Array.isArray(treeClass[treeColor].header.treeSkill)) {
-            return treeClass[treeColor].header.treeSkill.map((currentItem, idx) => (
-                <div className="tree__body__trait tree__header__trait" key={idx}>
-                    <div className="tree__body__trait__imgSizing">
-                        <img
-                            className="tree__body__trait__img"
-                            src={currentItem.treeSkillPicture}
-                            alt={currentItem.treeSkillName}
-                        />
-                    </div>
-                    <div className="tree__body__trait__name">{currentItem.treeSkillName}</div>
-                </div>
-            ))
-        } else if (treeClass[treeColor].header.treeSkill !== '') {
-            return (
-                <div className="tree__body__trait tree__header__trait">
-                    <div className="tree__body__trait__imgSizing">
-                        <img
-                            className="tree__body__trait__img"
-                            src={treeClass[treeColor].header.treeSkill.treeSkillPicture}
-                            alt={treeClass[treeColor].header.treeSkill.treeSkillName}
-                        />
-                    </div>
-                    <div className="tree__body__trait__name">
-                        {treeClass[treeColor].header.treeSkill.treeSkillName}
-                    </div>
-                </div>
-            )
-        } else {
-            return <div className="tree__body__trait tree__header__trait"></div>
+import React from 'react'
+import Traits from './Traits'
+import PrintElement from './PrintElement'
+import MapElement from './MapElement'
+
+class TreeHeader extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            treeClass: props.treeClass,
+            treeColor: props.treeColor,
+            treeRef: props.treeRef,
+            treeTraitStyle: props.treeTraitStyle,
         }
     }
-    return (
-        <div className="tree__header">
-            <div className="tree__header__titel">
-                <p>{treeClass[treeColor].header.treeName}</p>
-                <p>{`(${treeClass[treeColor].header.treeRole})`}</p>
-            </div>
-            <div className="tree__header__content">
-                <div>{treeClass[treeColor].header.treeExplanation.short}</div>
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: mapHeaderText(
-                            treeClass[treeColor].header.treeExplanation.long,
-                            'p',
-                            'br',
-                        ),
-                    }}
-                />
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: mapHeaderText(treeClass[treeColor].header.treeInfo, 'p', 'br'),
-                    }}
-                />
-                {treeClass[treeColor].header.treeSkill ? (
-                    <div className="tree__header__traits__titel">
-                        You will gain these skills by specialising in this tree:
+
+    render() {
+        return (
+            <div className="tree__header">
+                <div className="tree__header__titel">
+                    <PrintElement
+                        path={this.state.treeClass[this.state.treeColor].information.header.name}
+                        tag={'p'}
+                    />
+                    <MapElement
+                        path={this.state.treeClass[this.state.treeColor].information.header.role}
+                        tag={'p'}
+                    />
+                </div>
+                <div className="tree__header__content">
+                    <MapElement
+                        path={
+                            this.state.treeClass[this.state.treeColor].information.header
+                                .explanation.short
+                        }
+                        tag={'p'}
+                    />
+                    <MapElement
+                        path={
+                            this.state.treeClass[this.state.treeColor].information.header
+                                .explanation.long
+                        }
+                        tag={'p'}
+                    />
+                    <MapElement
+                        path={this.state.treeClass[this.state.treeColor].information.header.passiv}
+                        tag={'p'}
+                    />
+                    {this.state.treeClass[this.state.treeColor].traits.header.name ||
+                    this.state.treeClass[this.state.treeColor].traits.header[0].name ? (
+                        <div className="tree__header__traits__titel">
+                            You will gain these skills by specialising in this tree:
+                        </div>
+                    ) : (
+                        ''
+                    )}
+                    <div
+                        className="tree__header__traits"
+                        ref={this.state.treeRef}
+                        style={this.state.treeTraitStyle[this.state.treeColor]}
+                    >
+                        <Traits path={this.state.treeClass[this.state.treeColor].traits.header} />
                     </div>
-                ) : (
-                    <></>
-                )}
-                <div
-                    className="tree__header__traits"
-                    ref={treeRef}
-                    style={treeTraitStyle[treeColor]}
-                >
-                    {mapHeaderTraits()}
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default TreeHeader

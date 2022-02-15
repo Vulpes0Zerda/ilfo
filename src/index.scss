@@ -250,12 +250,13 @@ input[type='number'] {
         /* prettier-ignore */
         grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
         grid-template-columns: 1fr;
-        align-items: center;
+        align-items: start;
         justify-items: stretch;
         white-space: pre-wrap;
         text-align: center;
         gap: size(tree-gap);
         overflow: hidden;
+        height: fit-content;
         &__titel {
         }
         &__content {
@@ -339,6 +340,56 @@ input[type='number'] {
             &__name {
             }
         }
+    }
+}
+
+//Tooltip
+
+.tooltip {
+    position: fixed;
+    display: grid;
+    width: 20rem;
+    height: 40rem;
+    bottom: 0;
+    right: 0;
+    background-color: color(bg);
+    color: color(txt);
+    overflow: hidden;
+    padding: size(tree-gap);
+    margin: 0;
+    &__header {
+        display: grid;
+        grid-template-columns: auto auto;
+        &__imgSizing {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-size: 100%;
+            margin: 0;
+            width: 4vh;
+            height: 4vh;
+            &::after {
+                content: '';
+                position: absolute;
+                display: block;
+                box-shadow: inset 0 0 0.15em 0.07em #161616;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                border-collapse: separate;
+                border-radius: size(border-radius);
+            }
+        }
+        &__img {
+            flex-shrink: 0;
+            min-width: 100%;
+            min-height: 100%;
+            border-radius: size(border-radius);
+        }
+    }
+    &__body {
     }
 }
 

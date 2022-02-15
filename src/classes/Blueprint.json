@@ -1,0 +1,97 @@
+{
+    "b": {
+        "information": {
+            "header": {
+                "name": "",
+                "role": "",
+                "explanation": {
+                    "short": "",
+                    "long": ""
+                },
+                "passiv": []
+            }
+        },
+        "traits": {
+            "header": [
+                {
+                    "id": 0,
+                    "name": "",
+                    "picture": ""
+                }
+            ],
+            "passiv": [
+                {
+                    "id": 0,
+                    "name": "",
+                    "picture": "",
+                    "pointActivation": 0,
+                    "trait": {
+                        "effect": [],
+                        "description": ""
+                    },
+                    "skill": {
+                        "name": "",
+                        "picture": "",
+                        "attributesLeft": [],
+                        "attributesRight": [],
+                        "info": "",
+                        "explanation": [],
+                        "buff": "",
+                        "damageInfo": "",
+                        "damage": "",
+                        "primaryResorce": "",
+                        "secondaryResorce": "",
+                        "duration": "",
+                        "cooldown": "",
+                        "ranks": "",
+                        "effekts": "",
+                        "treeRequirementInfo": "",
+                        "skillRequirementInfo": ""
+                    }
+                },
+                { "id": 1 },
+                { "id": 2 },
+                { "id": 3 },
+                { "id": 4 },
+                { "id": 5 },
+                { "id": 6 }
+            ],
+            "activ": [
+                {
+                    "id": 0,
+                    "name": "",
+                    "picture": "",
+                    "ranks": 1,
+                    "pointRequirement": 0,
+                    "skillRequirement": "",
+                    "treeRequirement": "",
+                    "trait": {
+                        "effect": [],
+                        "description": ""
+                    },
+                    "skill": {
+                        "name": "",
+                        "picture": "",
+                        "attributesLeft": [],
+                        "attributesRight": [],
+                        "info": "",
+                        "explanation": [],
+                        "buff": "",
+                        "damageInfo": "",
+                        "damage": "",
+                        "primaryResorce": "",
+                        "secondaryResorce": "",
+                        "duration": "",
+                        "cooldown": "",
+                        "ranks": "",
+                        "effekts": "",
+                        "treeRequirementInfo": "",
+                        "skillRequirementInfo": ""
+                    }
+                }
+            ]
+        }
+    },
+    "r": {},
+    "y": {}
+}
