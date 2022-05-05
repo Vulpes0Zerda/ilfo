@@ -1,0 +1,17 @@
+[
+    {
+        "langCode": "en",
+        "short": "En",
+        "long": "English"
+    },
+    {
+        "langCode": "de",
+        "short": "De",
+        "long": "Deutsch"
+    },
+    {
+        "langCode": "fr",
+        "short": "Fr",
+        "long": "Français"
+    }
+]

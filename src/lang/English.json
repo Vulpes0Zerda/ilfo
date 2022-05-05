@@ -1,0 +1,32 @@
+{
+    "header": {},
+    "options": {
+        "language": "Language",
+        "level": "Character Level",
+        "tooltips": "Skill Tooltips"
+    },
+    "tree": {
+        "header": {
+            "showDesc": "Show Description",
+            "hideDesc": "Hide Description",
+            "ranksEarned": "Ranks Earned",
+            "gainTheseSkillsBySpecialising": "You will gain these skills by specialising in this tree"
+        },
+        "tooltip": {
+            "skill": {
+                "animationTime": "Animation Time",
+                "skill": "Skill",
+                "maxTargets": "Max Targets",
+                "radius": "Radius",
+                "induction": "Induction",
+                "channelDuration": "Channel Duration",
+                "resistance": "Resistance",
+                "skillType": "Skill Type",
+                "range": "Range"
+            },
+            "trait": {
+                "rank": "Rank"
+            }
+        }
+    }
+}

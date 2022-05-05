@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useContext } from 'react'
 import { AnimationContext } from '../GlobalContext'
+import animationLookup from '../lookup/animation.json'
 import Navigation from './menu/Navigation'
 import UpToDate from './menu/UpToDate'
 
@@ -68,34 +69,31 @@ const menuBtnBg = {
 }
 
 const Menu = () => {
-    const {
-        state: { menuState },
-        dialog,
-    } = useContext(AnimationContext)
+    const { menuAnimation } = useContext(AnimationContext)
     return (
         <>
             <motion.div
                 className="header__btn__bg header__btn__bg--left"
                 variants={menuBtnBg}
-                animate={menuState}
+                animate={menuAnimation.current}
                 initial="NONE"
             ></motion.div>
             <AnimatePresence>
-                {menuState === 'CLICK' && (
+                {menuAnimation.click && (
                     <div className="nav sb">
                         <motion.div
                             className="nav__bg sb__bg"
                             key="navBg"
                             variants={menuBg}
-                            animate={menuState}
+                            animate={menuAnimation.current}
                             initial="NONE"
                             exit="HOVER"
                         >
                             <motion.nav
                                 className="nav__bar sb__bar"
                                 key="navBar"
-                                variants={dialog}
-                                animate={menuState}
+                                variants={animationLookup.dialog}
+                                animate={menuAnimation.current}
                                 initial={false}
                                 exit="NONE"
                             >

@@ -1,12 +1,10 @@
 import { useContext } from 'react'
 import { AnimationContext } from '../../GlobalContext'
 import { motion } from 'framer-motion'
+import animationLookup from '../../lookup/animation.json'
 
 const SvgComponent = () => {
-    const {
-        state: { settingsState },
-        iconFill,
-    } = useContext(AnimationContext)
+    const { settingsAnimation } = useContext(AnimationContext)
     return (
         <motion.svg
             className="header__settingsButton__icon"
@@ -17,8 +15,8 @@ const SvgComponent = () => {
             clipRule="evenodd"
             strokeLinejoin="round"
             strokeMiterlimit={2}
-            animate={settingsState}
-            variants={iconFill}
+            animate={settingsAnimation.current}
+            variants={animationLookup.iconFill}
         >
             <g transform="matrix(1.4822,0,0,1.4822,-361.652,-361.651)">
                 <path

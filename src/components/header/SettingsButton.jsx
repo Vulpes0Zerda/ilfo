@@ -4,20 +4,26 @@ import { useContext } from 'react'
 import { AnimationContext } from '../../GlobalContext'
 
 const SettingsButton = () => {
-    const { dispatch } = useContext(AnimationContext)
+    const { dispatchSettingsAnimation } = useContext(AnimationContext)
     return (
         <motion.button
             type="button"
             className="header__btn"
             onClick={() => {
-                dispatch({ type: 'SETTINGS-CLICK-TOGGLE' })
+                dispatchSettingsAnimation({ type: 'CLICK-TOGGLE' })
             }}
             onHoverStart={() => {
-                dispatch({ type: 'SETTINGS-HOVER-TOGGLE' })
+                dispatchSettingsAnimation({ type: 'HOVER-TOGGLE' })
             }}
             onHoverEnd={() => {
-                dispatch({ type: 'SETTINGS-HOVER-TOGGLE' })
+                dispatchSettingsAnimation({ type: 'HOVER-TOGGLE' })
             }}
+            /* onPointerDown={() => {
+                dispatchSettingsAnimation({ type: 'PRESS-TOGGLE' })
+            }}
+            onPointerUp={() => {
+                dispatchSettingsAnimation({ type: 'PRESS-TOGGLE' })
+            }} */
         >
             <SettingsSvg />
         </motion.button>

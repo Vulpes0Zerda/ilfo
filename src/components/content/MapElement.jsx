@@ -1,21 +1,21 @@
-import PrintElement from './PrintElement'
+import React from 'react'
 
-class MapElement extends PrintElement {
+class MapElement extends React.Component {
     constructor(props) {
         super(props)
     }
     render() {
-        const Tag = this.state.tag
-        if (Array.isArray(this.state.path)) {
+        const Tag = this.props.tag
+        if (Array.isArray(this.props.path)) {
             return (
                 <div>
-                    {this.state.path.map((p, idx) =>
+                    {this.props.path.map((p, idx) =>
                         p ? <Tag key={idx}>{p}</Tag> : <br key={idx} />,
                     )}
                 </div>
             )
-        } else if (this.state.path) {
-            return <Tag>{this.state.path}</Tag>
+        } else if (this.props.path) {
+            return <Tag>{this.props.path}</Tag>
         } else {
             return <></>
         }

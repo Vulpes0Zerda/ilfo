@@ -2,90 +2,116 @@ import Header from './components/Header'
 import Content from './components/Content'
 import Menu from './components/Menu'
 import Settings from './components/Settings'
-
-import { useReducer } from 'react'
-import { AnimationContext } from './GlobalContext'
-import AnimationVars from './variables/AnimationVars'
+import Tooltip from './components/Tooltip'
+import Warning from './components/Warning'
+import Notification from './components/Notification'
+import { useReducer, useEffect } from 'react'
+import {
+    AnimationContext,
+    LanguageContext,
+    PointContext,
+    LevelContext,
+    TooltipContext,
+    PopUpContext,
+} from './GlobalContext'
+import pointsLookup from './lookup/points.json'
+import languagesLookup from './lookup/languages.json'
+import translation from './lang/English.json'
+import {
+    handleCurrentPoints,
+    handleMaxPoints,
+    handleLevel,
+    handleLanguage,
+    handleAnimation,
+    handleTooltip,
+    handleWarning,
+    handleError,
+} from './logic/reducer/handlers'
+import {
+    maxPointsBlueprint,
+    currentPointsBlueprint,
+    languageBlueprint,
+    levelBlueprint,
+    animationBlueprint,
+    warningBlueprint,
+    errorBlueprint,
+} from './logic/reducer/blueprints'
 
 const App = () => {
-    const initialState = AnimationVars.initialState
-    const dialog = AnimationVars.dialog
-    const iconFill = AnimationVars.iconFill
-    const [state, dispatch] = useReducer(animationReducer, initialState)
-
-    function animationReducer(state, action) {
-        switch (action.type) {
-            case 'MENU-HOVER-TOGGLE':
-                return {
-                    ...state,
-                    menuHoverState: !state.menuHoverState,
-                    menuState: !state.menuClickState
-                        ? state.menuHoverState
-                            ? (state.menuState = 'NONE')
-                            : (state.menuState = 'HOVER')
-                        : state.menuState,
-                }
-            case 'MENU-PRESS-TOGGLE':
-                return {
-                    ...state,
-                    menuHoverState: !state.menuHoverState,
-                    menuState: !state.menuClickState
-                        ? state.menuHoverState
-                            ? (state.menuState = 'NONE')
-                            : (state.menuState = 'HOVER')
-                        : state.menuState,
-                }
-            case 'MENU-CLICK-TOGGLE':
-                return {
-                    ...state,
-                    menuClickState: !state.menuClickState,
-                    menuState: !state.menuClickState
-                        ? (state.menuState = 'CLICK')
-                        : state.menuHoverState
-                        ? (state.menuState = 'HOVER')
-                        : (state.menuState = 'NONE'),
-                }
-            case 'SETTINGS-HOVER-TOGGLE':
-                return {
-                    ...state,
-                    settingsHoverState: !state.settingsHoverState,
-                    settingsState: !state.settingsClickState
-                        ? state.settingsHoverState
-                            ? (state.settingsState = 'NONE')
-                            : (state.settingsState = 'HOVER')
-                        : state.settingsState,
-                }
-            case 'SETTINGS-CLICK-TOGGLE':
-                return {
-                    ...state,
-                    settingsClickState: !state.settingsClickState,
-                    settingsState: !state.settingsClickState
-                        ? (state.settingsState = 'CLICK')
-                        : state.settingsHoverState
-                        ? (state.settingsState = 'HOVER')
-                        : (state.settingsState = 'NONE'),
-                }
-            default:
-                return state
-        }
-        //TODO Still needs Focus state
-        //With case 'XYZ-FOCUS-TOGGLE'%
-    }
+    const [menuAnimation, dispatchMenuAnimation] = useReducer(handleAnimation, animationBlueprint)
+    const [settingsAnimation, dispatchSettingsAnimation] = useReducer(
+        handleAnimation,
+        animationBlueprint,
+    )
+    const [language, dispatchLanguage] = useReducer(handleLanguage, languageBlueprint())
+    const [level, dispatchLevel] = useReducer(handleLevel, levelBlueprint())
+    const [maxPoints, dispatchMaxPoints] = useReducer(handleMaxPoints, maxPointsBlueprint())
+    const [currentPoints, dispatchCurrentPoints] = useReducer(
+        handleCurrentPoints,
+        currentPointsBlueprint(),
+    )
+    const [tooltip, dispatchTooltip] = useReducer(handleTooltip, null)
+    const [warning, dispatchWarning] = useReducer(handleWarning, warningBlueprint)
+    const [error, dispatchError] = useReducer(handleError, errorBlueprint)
+    useEffect(() => {
+        localStorage.setItem('language', language)
+    }, [language])
+    useEffect(() => {
+        localStorage.setItem('level', level.set)
+    }, [level.set])
+    useEffect(() => {
+        localStorage.setItem('maxPoints', maxPoints.set)
+    }, [maxPoints.set])
+    useEffect(() => {
+        localStorage.setItem('currentPoints', JSON.stringify(currentPoints))
+    }, [currentPoints])
+    useEffect(() => {
+        dispatchMaxPoints({ type: 'INITIALIZE', payload: { lvl: level.set } })
+    }, [])
     return (
         <div className="App">
-            <AnimationContext.Provider
-                value={{
-                    state,
-                    dispatch,
-                    dialog,
-                    iconFill,
-                }}
-            >
-                <Menu />
-                <Settings />
-                <Header />
-                <Content />
-            </AnimationContext.Provider>
+            <LevelContext.Provider value={{ level, dispatchLevel }}>
+                <PointContext.Provider
+                    value={{
+                        currentPoints,
+                        dispatchCurrentPoints,
+                        maxPoints,
+                        dispatchMaxPoints,
+                        pointsLookup,
+                    }}
+                >
+                    <PopUpContext.Provider
+                        value={{ warning, dispatchWarning, error, dispatchError }}
+                    >
+                        <LanguageContext.Provider
+                            value={{ language, languagesLookup, dispatchLanguage, translation }}
+                        >
+                            <AnimationContext.Provider
+                                value={{
+                                    menuAnimation,
+                                    dispatchMenuAnimation,
+                                    settingsAnimation,
+                                    dispatchSettingsAnimation,
+                                }}
+                            >
+                                <Menu />
+                                <Settings />
+                                <Header />
+                            </AnimationContext.Provider>
+                            <TooltipContext.Provider value={{ tooltip, dispatchTooltip }}>
+                                <Content />
+                                {(tooltip &&
+                                ((tooltip.trait && tooltip.trait.effect[0]) ||
+                                    (tooltip.skill && tooltip.skill.name))
+                                    ? true
+                                    : false) && <Tooltip path={tooltip} />}
+                            </TooltipContext.Provider>
+                            <Notification />
+                            <Warning />
+                        </LanguageContext.Provider>
+                    </PopUpContext.Provider>
+                </PointContext.Provider>
+            </LevelContext.Provider>
         </div>
     )
 }

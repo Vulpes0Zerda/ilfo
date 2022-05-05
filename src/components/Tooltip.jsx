@@ -1,22 +1,11 @@
-import React from 'react'
+import SkillTooltip from './tooltip/SkillTooltip'
+import TraitTooltip from './tooltip/TraitTooltip'
 
-const Tooltip = ({ hoverTarget }) => {
-    const t = hoverTarget
-    function mapTooltip(t) {
-        let tooltipBody = []
-
-        for (let i = 0; i < i; i++) {}
-        return tooltipBody
-    }
+const Tooltip = ({ path }) => {
     return (
         <div className="tooltip">
-            <div className="tooltip__header">
-                <div className="tooltip__header__imgSizing">
-                    <img className="tooltip__header__img" src={t.picture} alt={t.name} />
-                </div>
-                <div className="tooltip__header__name">{t.name}</div>
-            </div>
-            <div className="tooltip__body">{mapTooltip(t)}</div>
+            {path.trait && path.trait.effect[0] && <TraitTooltip path={path} />}
+            {path.skill && path.skill.name && <SkillTooltip path={path} />}
         </div>
     )
 }

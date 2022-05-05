@@ -1,70 +1,44 @@
-import React from 'react'
 import Traits from './Traits'
-import PrintElement from './PrintElement'
 import MapElement from './MapElement'
+import { useContext } from 'react'
+import { LanguageContext } from '../../GlobalContext'
 
-class TreeHeader extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            treeClass: props.treeClass,
-            treeColor: props.treeColor,
-            treeRef: props.treeRef,
-            treeTraitStyle: props.treeTraitStyle,
-        }
-    }
-
-    render() {
-        return (
-            <div className="tree__header">
-                <div className="tree__header__titel">
-                    <PrintElement
-                        path={this.state.treeClass[this.state.treeColor].information.header.name}
-                        tag={'p'}
-                    />
-                    <MapElement
-                        path={this.state.treeClass[this.state.treeColor].information.header.role}
-                        tag={'p'}
-                    />
-                </div>
-                <div className="tree__header__content">
-                    <MapElement
-                        path={
-                            this.state.treeClass[this.state.treeColor].information.header
-                                .explanation.short
-                        }
-                        tag={'p'}
-                    />
-                    <MapElement
-                        path={
-                            this.state.treeClass[this.state.treeColor].information.header
-                                .explanation.long
-                        }
-                        tag={'p'}
-                    />
-                    <MapElement
-                        path={this.state.treeClass[this.state.treeColor].information.header.passiv}
-                        tag={'p'}
-                    />
-                    {this.state.treeClass[this.state.treeColor].traits.header.name ||
-                    this.state.treeClass[this.state.treeColor].traits.header[0].name ? (
-                        <div className="tree__header__traits__titel">
-                            You will gain these skills by specialising in this tree:
-                        </div>
-                    ) : (
-                        ''
-                    )}
-                    <div
-                        className="tree__header__traits"
-                        ref={this.state.treeRef}
-                        style={this.state.treeTraitStyle[this.state.treeColor]}
-                    >
-                        <Traits path={this.state.treeClass[this.state.treeColor].traits.header} />
+const TreeHeader = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
+    const informationPath = treeClass.tree[treeColor].information.header
+    const traitsPath = treeClass.tree[treeColor].traits.header
+    const { translation } = useContext(LanguageContext)
+    return (
+        <div className="tree__header">
+            <div className="tree__header__titel">
+                <p>{informationPath.name}</p>
+                <MapElement path={informationPath.role} tag={'p'} />
+            </div>
+            <div className="tree__header__content">
+                <MapElement path={informationPath.explanation.short} tag={'p'} />
+                <MapElement path={informationPath.explanation.long} tag={'p'} />
+                <MapElement path={informationPath.passiv} tag={'p'} />
+                {traitsPath.name || traitsPath[0].name ? (
+                    <div className="tree__header__traits__titel">
+                        {`${translation.tree.header.gainTheseSkillsBySpecialising}:`}
                     </div>
+                ) : (
+                    <></>
+                )}
+                <div
+                    className="tree__header__traits"
+                    ref={(el) => {
+                        treeRef.current[treeColor] = el
+                    }}
+                    style={treeTraitStyle[treeColor]}
+                    onContextMenu={(e) => {
+                        e.preventDefault()
+                    }}
+                >
+                    <Traits path={traitsPath} color={treeColor} />
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default TreeHeader

@@ -1,0 +1,9 @@
+{
+    "class": "beorning",
+    "version": 1,
+    "tree": {
+        "b": { "sum": 0, "arr": [] },
+        "r": { "sum": 0, "arr": [] },
+        "y": { "sum": 0, "arr": [] }
+    }
+}

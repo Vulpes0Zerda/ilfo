@@ -4,31 +4,25 @@ import { useContext } from 'react'
 import { AnimationContext } from '../../GlobalContext'
 
 const MenuButton = () => {
-    const { dispatch } = useContext(AnimationContext)
+    const { dispatchMenuAnimation } = useContext(AnimationContext)
     return (
         <motion.button
             type="button"
             className="header__btn"
             onClick={() => {
-                dispatch({ type: 'MENU-CLICK-TOGGLE' })
+                dispatchMenuAnimation({ type: 'CLICK-TOGGLE' })
             }}
             onHoverStart={() => {
-                dispatch({ type: 'MENU-HOVER-TOGGLE' })
+                dispatchMenuAnimation({ type: 'HOVER-TOGGLE' })
             }}
             onHoverEnd={() => {
-                dispatch({ type: 'MENU-HOVER-TOGGLE' })
+                dispatchMenuAnimation({ type: 'HOVER-TOGGLE' })
             }}
-            onMouseDown={() => {
-                dispatch({ type: 'MENU-PRESS-SET-ON' })
+            /* onPointerDown={() => {
+                dispatchMenuAnimation({ type: 'PRESS-TOGGLE' })
             }}
-            onMouseUp={() => {
-                dispatch({ type: 'MENU-PRESS-SET-OFF' })
-            }}
-            /* onFocus={() => {
-                dispatch({ type: 'MENU-FOCUS-SET-ON' })
-            }}
-            onBlur={() => {
-                dispatch({ type: 'MENU-FOCUS-SET-OFF' })
+            onPointerUp={() => {
+                dispatchMenuAnimation({ type: 'PRESS-TOGGLE' })
             }}
             !Later for A11y*/
         >

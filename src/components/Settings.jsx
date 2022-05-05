@@ -4,6 +4,7 @@ import { AnimationContext } from '../GlobalContext'
 import Options from './settings/Options'
 import ResetButton from './settings/ResetButton'
 import SaveButton from './settings/SaveButton'
+import animationLookup from '../lookup/animation.json'
 
 const settingsBg = {
     NONE: {
@@ -68,44 +69,38 @@ const settingsBtnBg = {
 }
 
 const Settings = () => {
-    const {
-        state: { settingsState },
-        dialog,
-    } = useContext(AnimationContext)
+    const { settingsAnimation } = useContext(AnimationContext)
     return (
         <>
             <motion.div
                 className="header__btn__bg header__btn__bg--right"
                 key="headerBtnSettings"
                 variants={settingsBtnBg}
-                animate={settingsState}
+                animate={settingsAnimation.current}
                 initial="NONE"
                 exit="CLICK"
             ></motion.div>
             <AnimatePresence>
-                {settingsState === 'CLICK' && (
+                {settingsAnimation.click && (
                     <div className="settings sb">
                         <motion.div
                             className="settings__bg sb__bg"
                             key="settingsBg"
                             variants={settingsBg}
-                            animate={settingsState}
+                            animate={settingsAnimation.current}
                             initial="NONE"
                             exit="NONE"
                         >
                             <motion.div
                                 key="settingsBar"
                                 className="settings__bar sb__bar noselect"
-                                variants={dialog}
-                                animate={settingsState}
+                                variants={animationLookup.dialog}
+                                animate={settingsAnimation.current}
                                 initial="NONE"
                                 exit="NONE"
                             >
                                 <Options />
-                                <div
-                                    key="settingsBarButtons"
-                                    className="settings__bar__buttons"
-                                >
+                                <div key="settingsBarButtons" className="settings__bar__buttons">
                                     <SaveButton />
                                     <ResetButton />
                                 </div>

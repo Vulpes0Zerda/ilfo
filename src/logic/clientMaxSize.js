@@ -5,47 +5,36 @@ const clientMaxSize = (object, boolHeight, boolWidth, boolDiameter) => {
     try {
         const obj = object
         let result = { height: null, width: null, diameter: null }
-        let height
-        let width
         if (boolHeight || boolDiameter) {
-            if (!isNaN(obj[0].clientHeight)) {
+            if (!isNaN(obj[0].clientHeight) || typeof obj[0] !== undefined) {
                 for (let i = 0; i < obj.length; i++) {
-                    if (height < parseFloat(getComputedStyle(obj[i]).height, 10) || !height) {
-                        height = parseFloat(getComputedStyle(obj[i]).height, 10)
+                    if (result.height < obj[i].clientHeight || !result.height) {
+                        result = { ...result, height: obj[i].clientHeight }
                     }
                 }
-                result = {
-                    ...result,
-                    height: height,
-                }
             } else {
-                throw Error(`getComputedStyle(${obj}[0]) is NaN or undefined`)
+                throw new Error(`getComputedStyle(${obj}[0]) is NaN or undefined`)
             }
         }
         if (boolWidth || boolDiameter) {
-            if (!isNaN(obj[0].clientWidth)) {
+            if (!isNaN(obj[0].clientWidth) || typeof obj[0] !== undefined) {
                 for (let i = 0; i < obj.length; i++) {
-                    if (width < parseFloat(getComputedStyle(obj[i]).width, 10) || !width) {
-                        width = parseFloat(getComputedStyle(obj[i]).width, 10)
+                    if (result.width < obj[i].clientWidth || !result.width) {
+                        result = { ...result, width: obj[i].clientWidth }
                     }
                 }
-                result = {
-                    ...result,
-                    width: width,
-                }
             } else {
-                throw Error(`getComputedStyle(${obj}[0]) is NaN or undefined`)
+                throw new Error(`getComputedStyle(${obj}[0]) is NaN or undefined`)
             }
         }
         if (boolDiameter) {
-            if (!isNaN(width) || !isNaN(height)) {
-                const diameter = Math.sqrt(height ** 2 + width ** 2)
+            if (!isNaN(result.width) || !isNaN(result.height) || typeof obj[0] !== undefined) {
                 result = {
                     ...result,
-                    diameter: diameter,
+                    diameter: Math.sqrt(result.height ** 2 + result.width ** 2),
                 }
             } else {
-                throw Error(`Internal function error: width or height are NaN or undefined`)
+                throw new Error(`Internal function error: width or height are NaN or undefined`)
             }
         }
         return result
@@ -56,14 +45,6 @@ const clientMaxSize = (object, boolHeight, boolWidth, boolDiameter) => {
 
 clientMaxSize.propTypes = {
     object: PropTypes.object.isRequired,
-    boolHeight: PropTypes.bool,
-    boolWidth: PropTypes.bool,
-    boolDiameter: PropTypes.bool,
-}
-clientMaxSize.defaultProps = {
-    boolHeight: false,
-    boolWidth: false,
-    boolDiameter: false,
 }
 
 export default clientMaxSize

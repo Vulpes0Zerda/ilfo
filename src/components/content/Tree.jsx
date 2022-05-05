@@ -1,16 +1,15 @@
 import TreeHeader from './TreeHeader'
 import TreeBody from './TreeBody'
 import { useContext } from 'react'
-import { RefContext } from '../../GlobalContext'
+import { TooltipContext } from '../../GlobalContext'
 import ErrorBoundary from '../../errorHandling/ErrorBoundry'
 
 const Tree = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
-    const { refTree } = useContext(RefContext)
+    const { refTree } = useContext(TooltipContext)
     //TODO 9 Programming logic for Trait tree for Left/Right Click [+/- Points to traits]
     //TODO 6 Programming logic for Trait tree for Touch/- Button under tree for Mobile [+/- Points to traits]
     //TODO 10 Programming logic for JSON compiling
     //TODO 6 Programming logic for trait tree swap for mobile
-
     return (
         <div className={`tree__${treeColor} tree`} ref={refTree}>
             <ErrorBoundary>
@@ -18,7 +17,7 @@ const Tree = ({ treeClass, treeColor, treeRef, treeTraitStyle }) => {
                     treeClass={treeClass}
                     treeColor={treeColor}
                     treeRef={treeRef}
-                    treeTraitStyle={treeTraitStyle /* rename this variable */}
+                    treeTraitStyle={treeTraitStyle}
                 />
             </ErrorBoundary>
             <ErrorBoundary>

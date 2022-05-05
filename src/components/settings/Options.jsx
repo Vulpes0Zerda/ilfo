@@ -1,30 +1,57 @@
 import PropTypes from 'prop-types'
-const Options = ({ minLvl, maxLvl, currentLvl, lang }) => {
+import { LanguageContext, LevelContext, PointContext, PopUpContext } from '../../GlobalContext'
+import { useContext } from 'react'
+
+const Options = () => {
+    const { language, dispatchLanguage, languagesLookup, translation } = useContext(LanguageContext)
+    const { level, dispatchLevel } = useContext(LevelContext)
+    const { dispatchMaxPoints, dispatchCurrentPoints } = useContext(PointContext)
+    const { dispatchWarning } = useContext(PopUpContext)
     return (
         <div className="settings__bar__options">
-            <label className="settings__bar__options--left">Language</label>
+            <label className="settings__bar__options--left">{translation.options.language}</label>
             <select
                 className="settings__bar__options--right settings__bar__options__lang settings__bar__options__form"
-                name="lang"
+                value={language}
+                onChange={(e) => {
+                    dispatchLanguage({
+                        type: 'SET',
+                        payload: e,
+                    })
+                }}
             >
-                {lang.map((language) => (
+                {languagesLookup.map((language) => (
                     <option value={language.langCode} key={language.langCode}>
-                        {language.short}
+                        {language.long}
                     </option>
                 ))}
             </select>
-            <label className="settings__bar__options--left">
-                Character Level
-            </label>
+            <label className="settings__bar__options--left">{translation.options.level}</label>
             <input
-                type="number"
+                value={level.change}
+                type={'string'}
+                onChange={(e) => {
+                    dispatchLevel({ type: 'CHANGE', payload: { e: e } })
+                }}
+                onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                        e.target.blur()
+                    }
+                }}
+                onBlur={(e) => {
+                    dispatchLevel({
+                        type: 'SET',
+                        payload: {
+                            dispatchMaxPoints: dispatchMaxPoints,
+                            dispatchCurrentPoints: dispatchCurrentPoints,
+                            dispatchWarning: dispatchWarning,
+                        },
+                    })
+                }}
                 name="level"
                 className="settings__bar__options--right settings__bar__options__lvl settings__bar__options__form"
-                min={minLvl}
-                max={maxLvl}
-                defaultValue={currentLvl}
             />
-            <span className="settings__bar__options--left">Skill Tooltips</span>
+            <span className="settings__bar__options--left">{translation.options.tooltips}</span>
             <input
                 type="checkbox"
                 id="tooltip"
@@ -60,24 +87,6 @@ const Options = ({ minLvl, maxLvl, currentLvl, lang }) => {
             </label>
         </div>
     )
-}
-
-Options.defaultProps = {
-    minLvl: 1,
-    maxLvl: 130,
-    lang: [
-        {
-            langCode: 'EN',
-            short: 'Eng',
-            long: 'English',
-        },
-    ],
-}
-
-Options.propTypes = {
-    minLvl: PropTypes.number.isRequired,
-    maxLvl: PropTypes.number.isRequired,
-    currentLvl: PropTypes.number.isRequired,
 }
 
 export default Options
