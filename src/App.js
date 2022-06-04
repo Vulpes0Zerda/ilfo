@@ -36,6 +36,8 @@ import {
     warningBlueprint,
     errorBlueprint,
 } from './logic/reducer/blueprints'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 const App = () => {
     const [menuAnimation, dispatchMenuAnimation] = useReducer(handleAnimation, animationBlueprint)
@@ -70,48 +72,50 @@ const App = () => {
     }, [])
     return (
         <div className="App">
-            <LevelContext.Provider value={{ level, dispatchLevel }}>
-                <PointContext.Provider
-                    value={{
-                        currentPoints,
-                        dispatchCurrentPoints,
-                        maxPoints,
-                        dispatchMaxPoints,
-                        pointsLookup,
-                    }}
-                >
-                    <PopUpContext.Provider
-                        value={{ warning, dispatchWarning, error, dispatchError }}
+            <Provider store={store}>
+                <LevelContext.Provider value={{ level, dispatchLevel }}>
+                    <PointContext.Provider
+                        value={{
+                            currentPoints,
+                            dispatchCurrentPoints,
+                            maxPoints,
+                            dispatchMaxPoints,
+                            pointsLookup,
+                        }}
                     >
-                        <LanguageContext.Provider
-                            value={{ language, languagesLookup, dispatchLanguage, translation }}
+                        <PopUpContext.Provider
+                            value={{ warning, dispatchWarning, error, dispatchError }}
                         >
-                            <AnimationContext.Provider
-                                value={{
-                                    menuAnimation,
-                                    dispatchMenuAnimation,
-                                    settingsAnimation,
-                                    dispatchSettingsAnimation,
-                                }}
+                            <LanguageContext.Provider
+                                value={{ language, languagesLookup, dispatchLanguage, translation }}
                             >
-                                <Menu />
-                                <Settings />
-                                <Header />
-                            </AnimationContext.Provider>
-                            <TooltipContext.Provider value={{ tooltip, dispatchTooltip }}>
-                                <Content />
-                                {(tooltip &&
-                                ((tooltip.trait && tooltip.trait.effect[0]) ||
-                                    (tooltip.skill && tooltip.skill.name))
-                                    ? true
-                                    : false) && <Tooltip path={tooltip} />}
-                            </TooltipContext.Provider>
-                            <Notification />
-                            <Warning />
-                        </LanguageContext.Provider>
-                    </PopUpContext.Provider>
-                </PointContext.Provider>
-            </LevelContext.Provider>
+                                <AnimationContext.Provider
+                                    value={{
+                                        menuAnimation,
+                                        dispatchMenuAnimation,
+                                        settingsAnimation,
+                                        dispatchSettingsAnimation,
+                                    }}
+                                >
+                                    <Menu />
+                                    <Settings />
+                                    <Header />
+                                </AnimationContext.Provider>
+                                <TooltipContext.Provider value={{ tooltip, dispatchTooltip }}>
+                                    <Content />
+                                    {(tooltip &&
+                                    ((tooltip.trait && tooltip.trait.effect[0]) ||
+                                        (tooltip.skill && tooltip.skill.name))
+                                        ? true
+                                        : false) && <Tooltip path={tooltip} />}
+                                </TooltipContext.Provider>
+                                <Notification />
+                                <Warning />
+                            </LanguageContext.Provider>
+                        </PopUpContext.Provider>
+                    </PointContext.Provider>
+                </LevelContext.Provider>
+            </Provider>
         </div>
     )
 }
