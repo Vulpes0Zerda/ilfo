@@ -1,0 +1,30 @@
+<div class="skill-tree" [ngClass]="{'active': this.d.tree_chosen && this.d.chosen_tree_id == this.tree.id}">
+  <div class="header">
+    <h3 *ngIf="this.d.tree_chosen">{{tree.name}} ({{tree.role}})</h3>
+    <button *ngIf="!this.d.tree_chosen" (click)="activate()">{{tree.name}} ({{tree.role}})</button>
+    <br>
+    <br>
+    <ng-container *ngFor="let content of tree.explanation.short">{{content}}<br></ng-container>
+    <ng-container *ngIf="this.show_desc">
+      <br>
+      <ng-container *ngFor="let content of tree.explanation.long">{{content}}<br></ng-container>
+      <br>
+      <ng-container *ngFor="let content of tree.passive">{{content}}<br></ng-container>
+      <br>
+      <p>You will gain these skills by specialising in this tree:</p>
+      <div class="implicits">
+        <skill *ngFor="let skill of tree.implicits" [d]="d" [skill]="skill"></skill>
+      </div>
+    </ng-container>
+    <p><button (click)="toggle_desc()">{{show_desc ? "less" : "more"}}</button></p>
+  </div>
+  <hr>
+  <div class="traits">
+    <div class="passives">
+      <div passive-trait class="trait" *ngFor="let trait of tree.passives" [d]="d" [trait]="trait"></div>
+    </div>
+    <div class="actives">
+      <div active-trait class="trait" *ngFor="let trait of tree.actives" [d]="d" [trait]="trait"></div>
+    </div>
+  </div>
+</div>

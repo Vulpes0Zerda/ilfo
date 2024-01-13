@@ -1,0 +1,65 @@
+.trait-planner {
+    margin: 5em;
+    display: flex;
+}
+
+.trait-planner > div {
+    flex-grow: 1;
+    max-width: 33%;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(1) .skill-tree {
+    border: solid 2px blue;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(1) .skill-tree.active {
+    box-shadow: blue 0 0 3em inset, #777777 0 0 2em;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(2) .skill-tree {
+    border: solid 2px red;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(2) .skill-tree.active {
+    box-shadow: red 0 0 3em inset, #777777 0 0 2em;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(3) .skill-tree {
+    border: solid 2px yellow;
+}
+
+.trait-planner .skill-tree-wrapper:nth-child(3) .skill-tree.active {
+    box-shadow: yellow 0 0 3em inset, #777777 0 0 2em;
+}
+
+
+.skill-tree .header{
+    text-align: center;
+}
+
+.implicits {
+    display: flex;
+    justify-content: space-around;
+}
+
+.skill {
+    text-align: center;
+}
+
+.traits {
+    display: flex;
+}
+
+.traits .passives {
+    width: 20%;
+    border-right: solid 1px #777777;
+}
+
+.traits .actives {
+    display: flex;
+    width: 80%;
+}
+
+.traits .actives .trait {
+    width: 25%;
+}
