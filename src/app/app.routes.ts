@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { TraitPlannerComponent } from './trait-planner/trait-planner.component';
+import { PlannerComponent } from './planner/planner.component';
 
 export const routes: Routes = [
-    {path: "traits", component: TraitPlannerComponent},
+    {path: "traits", component: PlannerComponent},
 ];

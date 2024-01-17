@@ -63,7 +63,12 @@ interface JsonInput {
     trees: SkillTree[];
 }
 
-export class PlannerData {
+/**
+ * The planner's state
+ * An object of this type is used as shared information for almost all
+ * components in the planner.
+ * */
+export class State {
     trees: SkillTree[];
     tree_chosen: boolean = false;
     chosen_tree_id: string = "";
