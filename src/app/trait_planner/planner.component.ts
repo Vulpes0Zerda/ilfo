@@ -1,15 +1,15 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
-
-
+import { Component, Input } from '@angular/core';
+import { TreeDataService } from '../data/planner.service';
+import { TreeComponent } from './tree.component';
 
 @Component({
-  selector: 'app-planner',
+  selector: 'planner',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, TreeComponent],
   templateUrl: './planner.component.html',
-  styleUrl: './planner.component.css'
+  styleUrl: './planner.component.css',
 })
 export class PlannerComponent {
-
+  lotroClassData = TreeDataService.rawJson;
 }

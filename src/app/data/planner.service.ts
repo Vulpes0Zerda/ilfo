@@ -1,11 +1,21 @@
-import { Injectable } from '@angular/core';
-import data from "./beorning.json";
-import { trees} from "../data/interfaces";
+import { Injectable, OnInit } from '@angular/core';
+import { Trees } from "./interfaces";
+import data from './beorning.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PlannerService {
-  private TraitTrees: trees = data;
-  constructor() { }
+export class TreeDataService implements OnInit {
+  lotroClass: ;
+  json: Trees;
+  ngOnInit(lotroClass): void {
+    this.lotroClass= lotroClass
+  }
+
+  get rawJson() {
+    return this.json;
+  }
+  set rawJson(lotroClass) {
+    this.lotroClass = lotroClass;
+  }
 }
