@@ -1,1 +1,3 @@
-<tree *ngFor="let Tree of lotroClassData" [TreeObject]="Tree"></tree>
+@for(tree of trees; track tree.name){
+<tree [tree]="tree" (toggleExplaination)="toggleExplanation()"></tree>
+}

@@ -1,4 +1,5 @@
 {
+  "lotroClassName": "Beorning",
   "trees": [
     {
       "name": "The Hide",
@@ -14,10 +15,11 @@
         [
           "Vexation:",
           "Upon taking damage in Man form (20% chance in bear form):",
-          "This effect can only occur once every 8 seconds.",
-          "+5 Wrath"
+          "+5 Wrath",
+          "This effect can only occur once every 8 seconds."
         ],
-        ["You may block incoming attacks."]
+        ["You may block incoming attacks."],
+        ["-5 Cleanse Cooldown"]
       ],
       "implicits": [
         {
@@ -91,14 +93,14 @@
       ]
     },
     {
-      "name": "The Hide",
-      "role": "Tank",
-      "color": "blue"
+      "name": "The Claw",
+      "role": "DPS",
+      "color": "red"
     },
     {
-      "name": "The Hide",
-      "role": "Tank",
-      "color": "blue"
+      "name": "The Roar",
+      "role": "Heal/Support",
+      "color": "yellow"
     }
   ]
 }

@@ -1,3 +1,32 @@
 <section>
-  <div></div>
+  <div>{{ tree.name }} ({{ tree.role }})</div>
+  <div (click)="service.showExplanation = !service.showExplanation">
+    @if(service.showExplanation){&#11165;}@else{&#11167;}
+  </div>
+  @if(service.showExplanation){
+  <div>
+    <div>
+      @for(short of tree.explanation?.short; track short) {
+      <p>{{ short }}</p>
+      } @for(long of tree.explanation?.long; track long) {
+      <p>{{ long }}</p>
+      }
+    </div>
+    @for (bonus of tree.bonuses; track bonus) {
+    <div>
+      @for (line of bonus; track line) {
+      <p>{{ line }}</p>
+      }
+    </div>
+    }
+    <div>
+      @for (implicitSkill of tree.implicits; track implicitSkill) {
+      <div>
+        <img src="{{ implicitSkill.picture }}" />
+        <p>{{ implicitSkill.name }}</p>
+      </div>
+      }
+    </div>
+  </div>
+  }
 </section>

@@ -11,5 +11,20 @@ import { TreeComponent } from './tree.component';
   styleUrl: './planner.component.css',
 })
 export class PlannerComponent {
-  lotroClassData = TreeDataService.rawJson;
+  private service: TreeDataService;
+  //public showExplanation: boolean = false;
+  constructor(service: TreeDataService) {
+    this.service = service;
+  }
+  get trees() {
+    return this.service.trees.trees;
+  }
+  toggleExplanation() {
+    for (let tree of this.trees) {
+      if (!tree.explanation) {
+        tree.explanation = {};
+      }
+      tree.explanation.show = !tree.explanation.show;
+    }
+  }
 }

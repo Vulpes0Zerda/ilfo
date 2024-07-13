@@ -1,21 +1,27 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Trees } from "./interfaces";
-import data from './beorning.json';
+import { Injectable } from '@angular/core';
+import { LotroClass, Trees } from './interfaces';
+import { JsonRetrivalService } from './json_retrival.service';
+import { RetrivalService } from './retrival.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TreeDataService implements OnInit {
-  lotroClass: ;
-  json: Trees;
-  ngOnInit(lotroClass): void {
-    this.lotroClass= lotroClass
+export class TreeDataService {
+  public lotroClass: LotroClass = LotroClass.Beorning;
+  private retrivalService: RetrivalService;
+  public showExplanation: boolean = false;
+  public currentTrees: Trees;
+  constructor(retrivalService: JsonRetrivalService) {
+    this.retrivalService = retrivalService;
+    this.currentTrees = this.retrivalService.data(this.lotroClass);
+    for (let tree of this.currentTrees.trees) {
+      if (!tree.explanation) {
+        tree.explanation = {};
+      }
+      tree.explanation.show = false;
+    }
   }
-
-  get rawJson() {
-    return this.json;
-  }
-  set rawJson(lotroClass) {
-    this.lotroClass = lotroClass;
+  get trees(): Trees {
+    return this.currentTrees;
   }
 }

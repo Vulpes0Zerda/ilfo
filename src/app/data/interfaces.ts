@@ -1,5 +1,12 @@
 export interface Trees {
+  lotroClassName: string;
   trees: Array<Tree>;
+}
+
+export enum LotroClass {
+  Beorning,
+  Brawler,
+  Burglar,
 }
 
 export interface Tree {
@@ -7,6 +14,7 @@ export interface Tree {
   role?: string;
   color: string;
   explanation?: {
+    show?: boolean;
     short?: string | Array<string>;
     long?: string | Array<string>;
   };
