@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { LotroClass, Trees } from './interfaces';
+import {
+  ActiveTrait,
+  LotroClass,
+  PassiveTrait,
+  Trait,
+  Tree,
+  Trees,
+} from './interfaces';
 import { JsonRetrivalService } from './json_retrival.service';
 import { RetrivalService } from './retrival.service';
 
@@ -10,18 +17,18 @@ export class TreeDataService {
   public lotroClass: LotroClass = LotroClass.Beorning;
   private retrivalService: RetrivalService;
   public showExplanation: boolean = false;
+  public choosenTree: string = '';
+  public currentHover: Trait | PassiveTrait | ActiveTrait | undefined =
+    undefined;
   public currentTrees: Trees;
   constructor(retrivalService: JsonRetrivalService) {
     this.retrivalService = retrivalService;
     this.currentTrees = this.retrivalService.data(this.lotroClass);
-    for (let tree of this.currentTrees.trees) {
-      if (!tree.explanation) {
-        tree.explanation = {};
-      }
-      tree.explanation.show = false;
-    }
   }
   get trees(): Trees {
     return this.currentTrees;
+  }
+  setHover(trait: Trait | PassiveTrait | ActiveTrait | undefined = undefined) {
+    this.currentHover = trait;
   }
 }

@@ -1,0 +1,20 @@
+.active {
+  border: solid 4px;
+}
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+.blue {
+  background: rgba(87, 87, 199, 0.5);
+  border-color: rgba(0, 0, 255, 0.8);
+}
+.red {
+  background: rgba(255, 38, 0, 0.5);
+  border-color: rgba(255, 0, 0, 0.8);
+}
+.yellow {
+  background: rgba(255, 255, 0, 0.5);
+  border-color: rgba(255, 255, 0, 0.9);
+}

@@ -8,7 +8,7 @@ import { PlannerComponent } from './trait_planner/planner.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, PlannerComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'ilfo';

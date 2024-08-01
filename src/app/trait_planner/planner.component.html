@@ -1,3 +1,7 @@
 @for(tree of trees; track tree.name){
-<tree [tree]="tree" (toggleExplaination)="toggleExplanation()"></tree>
+<tree
+  [tree]="tree"
+  [class]="tree.color"
+  [class.active]="service.choosenTree == tree.name"
+/>
 }
