@@ -13,6 +13,7 @@ import { RetrivalService } from './retrival.service';
 @Injectable({
   providedIn: 'root',
 })
+//Service that holds all the data for the tree and the class
 export class TreeDataService {
   public lotroClass: LotroClass = LotroClass.Beorning;
   private retrivalService: RetrivalService;
@@ -21,6 +22,8 @@ export class TreeDataService {
   public currentHover: Trait | PassiveTrait | ActiveTrait | undefined =
     undefined;
   public currentTrees: Trees;
+  public pointsSpend: Number = 0;
+  public pointsTotal: Number = 98;
   constructor(retrivalService: JsonRetrivalService) {
     this.retrivalService = retrivalService;
     this.currentTrees = this.retrivalService.data(this.lotroClass);
@@ -28,7 +31,10 @@ export class TreeDataService {
   get trees(): Trees {
     return this.currentTrees;
   }
-  setHover(trait: Trait | PassiveTrait | ActiveTrait | undefined = undefined) {
+  set Hover(trait: typeof this.currentHover) {
     this.currentHover = trait;
+  }
+  get Hover(): typeof this.currentHover {
+    return this.currentHover;
   }
 }

@@ -1,14 +1,14 @@
-<section>
+<section [ngClass]="'header'">
   @if(service.choosenTree){
-  <div>{{ tree.name }} ({{ tree.role }})</div>
+  <h1>{{ tree.name }} ({{ tree.role }})</h1>
   }@else {
   <button (click)="service.choosenTree = tree.name">
-    {{ tree.name }} ({{ tree.role }})
+    <h1>{{ tree.name }} ({{ tree.role }})</h1>
   </button>
   }
-  <div (click)="service.showExplanation = !service.showExplanation">
+  <button (click)="service.showExplanation = !service.showExplanation">
     @if(service.showExplanation){&#11165;}@else{&#11167;}
-  </div>
+  </button>
   @if(service.showExplanation){
   <div>
     <div>
@@ -39,7 +39,11 @@
 <section [ngClass]="'body'">
   <div [ngClass]="'passive'">
     @for (trait of tree.passives; track trait.name) {
-    <passive-trait [trait]="trait" />}
+    <passive-trait
+      [trait]="trait"
+      [ngClass]="'trait'"
+      [style]="'grid-row:' + ($index * 3 + 1) + ' / ' + ($index * 3 + 4)"
+    />}
   </div>
   <div [ngClass]="'active'">
     @for (trait of tree.actives; track trait.name) {
@@ -50,7 +54,10 @@
         'grid-column:' +
         (trait.position.x + 1) +
         '; grid-row:' +
-        (trait.position.y + 1)
+        trait.position.y * 3 +
+        1 +
+        ' / ' +
+        (trait.position.y * 3 + 4)
       "
     />
     }
