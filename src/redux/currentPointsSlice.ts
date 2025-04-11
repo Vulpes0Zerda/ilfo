@@ -9,19 +9,21 @@ type currentPointsType = {
     y: currentPointsColorType,
 }
 
-const initialState : currentPointsType = {
-    b: [] ,
-    r: [] ,
-    y: [] 
-}
+type currentPathType = typeof currentClass["tree"][keyof currentPointsType]
 
 type currentPointsActionType = {
-    path: typeof currentClass.tree[keyof typeof currentClass.tree]["traits"][keyof typeof currentClass.tree[keyof typeof currentClass.tree]["traits"]],
+    path: currentPathType,
     color: keyof currentPointsType,
     idx: number
 }
 
 //! CONTINUE HERE: make add work with defined types
+
+const initialState : currentPointsType = {
+    b: [] ,
+    r: [] ,
+    y: [] 
+}
 
 export const currentPointsSlice = createSlice({
     name: 'currentPoints',
@@ -48,6 +50,6 @@ export const currentPointsSlice = createSlice({
     }
 })
 
-export const {add, sub, addAll,subAll} = currentPointsSlice.actions
+export const {add, sub, addAll, subAll} = currentPointsSlice.actions
 
 export default currentPointsSlice.reducer
